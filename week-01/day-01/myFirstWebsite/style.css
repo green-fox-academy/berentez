@@ -1,0 +1,95 @@
+
+html, body{
+    margin: 0;
+    padding: 0;
+    background-image: url(assets/topography/topography.png); 
+    background-size: 30%;
+    font-family: 'Courier Prime', monospace;
+    max-width: 2500 px;
+    
+}
+
+.main{
+    padding: 0 10%;
+    margin: auto;
+}
+
+
+body{
+    font-weight: 100;
+    width: auto;
+}
+
+
+.header{
+    margin: 0 auto;
+    padding: 0 auto;
+    background: #333333;
+    height: 60px;
+    width: 100%
+
+}
+
+.svg{
+    padding: 15px 10%;
+    float: left;
+}
+
+.nav ul{
+    height: 60xp;
+    list-style: none;
+    margin: 0 auto;
+    padding: 0;
+    color: #ff0099;  
+    padding: 20px 10%;
+
+}
+
+.nav ul li{
+    display: inline-block;
+    padding: 0 15px;
+    text-decoration: underline;
+    font-family: 'Courier New', Courier, monospace;
+    float: right;
+}
+
+a{
+    color: #ff0099;
+    letter-spacing: -3;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.dash p{
+    text-align: center;
+    margin: 40px auto;
+    padding: 20px;
+
+}
+
+h3{
+    text-align: center;
+    letter-spacing: -3px;
+    font-size: 30px;
+}
+
+.title{
+    color:#ff0099;
+
+}
+
+.name h1{
+    font-size: 60px;
+    padding-top: 60px;
+    letter-spacing: -5px;
+}
+
+.wiki p{
+    font-size: 12px;
+    line-height: 28px;
+}
+
+.wiki-definition{
+    font-size: 25px;
+    letter-spacing: -2px;
+}
