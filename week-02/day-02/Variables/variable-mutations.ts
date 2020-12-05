@@ -58,7 +58,7 @@ let i1: number = 10;
 let i2: number = 3;
 // tell if i1 is higher than i2 squared and smaller than i2 cubed (as a boolean)
 
-console.log(Math.pow(i2, 2) < i1 && i1 < Math.pow(i2, 3));
+console.log((i2**2) < i1 && i1 < (i2**3));
 
 
 
