@@ -19,19 +19,22 @@ function drawCheckBoard(x: number, y: number){
 
 let x: number = 0;
 let y: number = 0;
+let rows: number = canvas.height / 50;
+let columns: number = canvas.width / 50
+
 
 //if statement for the two kind of lines
 
-for (let i: number = 1; i <= 8; i++){
+for (let i: number = 1; i <= rows; i++){
   if (i % 2 !== 0){
-      for (let j: number = 0; j < 4; j++){
+      for (let j: number = 0; j < columns; j++){
       drawCheckBoard(x, y);
     x += 100;
 }
     x = 50;
     y += 50;
   } else if ( i % 2 ===0){
-      for( let h: number = 0; h < 4; h++){
+      for( let h: number = 0; h < columns; h++){
         
         drawCheckBoard(x, y);
         x += 100;
