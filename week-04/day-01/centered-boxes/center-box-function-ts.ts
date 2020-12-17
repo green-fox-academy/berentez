@@ -14,7 +14,7 @@ export {};
 
 
 
-function drawSquare(x: number){
+function drawSquareToCenter(x: number){
     return ctx.fillRect(canvas.width / 2 - x/2, canvas.height / 2- x/2, x, x )
 }
 
@@ -23,7 +23,7 @@ let x: number = 300;
 
 for ( let i: number = 0; i < boxNumber; i++){
     ctx.fillStyle = getRandomColor();
-    drawSquare(x);
+    drawSquareToCenter(x);
     x -= 50;
     
 }
