@@ -8,5 +8,10 @@ export {};
 
 // Draw a green 10x10 square to the center of the canvas.
 
+
+let a: number = 10;
+
 ctx.fillStyle = "green";
-ctx.fillRect(300, 200, 10, 10);
+ctx.fillRect(canvas.width / 2 - a/2, canvas.height / 2 - a/2, a, a);
+
+
