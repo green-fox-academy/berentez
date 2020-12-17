@@ -12,15 +12,14 @@ export {};
 
 
 function drawCheckBoard(x: number, y: number){
-    ctx.fillRect(x, y, 50, 50)
+    ctx.fillRect(x, y, 50, 50);
 }
-
 
 
 let x: number = 0;
 let y: number = 0;
 let rows: number = canvas.height / 50;
-let columns: number = canvas.width / 50
+let columns: number = canvas.width / 50;
 
 
 //if statement for the two kind of lines
@@ -42,9 +41,5 @@ for (let i: number = 1; i <= rows; i++){
       x = 0;
       y += 50
   }
-    
-    
-    
-    
     
 }
