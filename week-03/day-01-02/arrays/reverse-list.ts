@@ -5,6 +5,7 @@
 //	   -  do it with creating a new temp array and a loop
 // -  Print the elements of the reversed `numbers`
 
+export {};
 
 const numbers: number[] = [3, 4, 5, 6, 7];
 
