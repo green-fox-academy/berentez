@@ -14,8 +14,8 @@ export {};
 
 function drawLine(x: number, y: number){
     ctx.beginPath();
-    ctx.moveTo(300, 200);
-    ctx.lineTo(x, y);
+    ctx.moveTo(x, y);
+    ctx.lineTo(canvas.width / 2, canvas.height / 2);
     return ctx.stroke();
 }
 
