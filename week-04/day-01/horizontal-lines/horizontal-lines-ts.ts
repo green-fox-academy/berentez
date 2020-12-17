@@ -16,7 +16,6 @@ function drawLine(x: number, y: number){
     ctx.beginPath();
     ctx.moveTo(x, y);
     ctx.lineTo(x+50, y);
-    ctx.closePath()
     return ctx.stroke();
 }
 
@@ -28,7 +27,7 @@ let numberOfLines: number = 16;
 
 for ( let i:number = 1; i <= numberOfLines; i++ ){
     let x: number = Math.random() * 550;
-    let y: number = Math.random() * 400;
+    let y: number = Math.random() * 350;
     drawLine(x, y)
 }
     
