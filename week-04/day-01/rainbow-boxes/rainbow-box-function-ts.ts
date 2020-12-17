@@ -21,7 +21,7 @@ function rainbowSquare(x: number, color: string){
 
 
 let color: string[] = ['#FF0000', '#FF7F00', '#FFFF00',  '#00FF00', '#0000FF', '#2E2B5F', '#8B00FF' ];
-let x: number = 400;
+let x: number = canvas.width;
 
 for (let i: number = 0; i < color.length; i++){
     rainbowSquare(x, color[i]);
