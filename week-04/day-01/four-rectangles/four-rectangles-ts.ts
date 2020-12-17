@@ -12,18 +12,31 @@ export {};
 
 // https://stackoverflow.com/questions/1484506/random-color-generator
 
-function getRandomColor() {
-    let letters: string = '0123456789ABCDEF';
-    let color: string = '#';
-    for (let i:number = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
+
+// function getRandomColor() {
+//     let letters: string = '0123456789ABCDEF';
+//     let color: string = '#';
+//     for (let i:number = 0; i < 6; i++) {
+//       color += letters[Math.floor(Math.random() * 16)];
+//     }
+//     return color;
+//   }
 
 let rectNumber: number = 4;
 
+// for ( let i: number = 0; i < rectNumber; i++){
+//     ctx.fillStyle = getRandomColor();
+//     ctx.fillRect(Math.random() * 600, Math.random() * 400, Math.random() * 200, Math.random() * 100 );
+// }
+
+
+// With an array as colors option: 
+
+let colors: string[] = [ 'Tomato', 'Steelblue', 'Gold', 'Darkgreen', 'Blue', 'Red', 'Yellow', 'Violet'];
+
 for ( let i: number = 0; i < rectNumber; i++){
-    ctx.fillStyle = getRandomColor();
-    ctx.fillRect(Math.random() * 600, Math.random() * 400, Math.random() * 200, Math.random() * 100 );
+  ctx.fillStyle = colors[i];
+  ctx.fillRect(Math.random() * 500, Math.random() * 300, Math.random() * 200, Math.random() * 100 );
 }
+
+
