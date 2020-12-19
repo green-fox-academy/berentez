@@ -9,9 +9,9 @@ let expenses: number[] = [500, 1000, 1250, 175, 800, 120];
 // Create an application which solves the following problems.
 //How much did we spend?
 
-let total: number = 0;
 
 function calculateTotal(expenses: number[]){
+    let total: number = 0;    
     for( let i:number = 0; i < expenses.length; i++){
     total += expenses[i];
 
@@ -22,9 +22,9 @@ function calculateTotal(expenses: number[]){
 
 // Which was our greatest expense?
 
-let great: number = 0;
 
 function calculateGreatest( num: number[]){
+    let great: number = 0;
     for(let i: number = 0; i < num.length; i++) {
         if (great < num[i]){
             great = num[i];
@@ -35,12 +35,12 @@ function calculateGreatest( num: number[]){
 }
 
 
-
 // Which was our cheapest spending?
 
-let cheapest: number = great
+
 
 function calculateCheapest( num: number[]){
+    let cheapest: number = calculateGreatest(expenses);
     for(let i: number = 0; i < num.length; i++) {
         if (cheapest > num[i]){
             cheapest = num[i];
@@ -53,19 +53,18 @@ function calculateCheapest( num: number[]){
 
 // What was the average amount of our spendings?
 
-let average: number = 0;
 
 
 function calculateAverage(num: number[]){
+    let average: number = 0;
     for( let i: number = 0; i < num.length; i++){
     average += expenses[i] / num.length;
-
     }   
     return Math.round(average);
 
 }
 
-// console.log(calculateAverage(expenses))      ///////////////////Ha itt console.logozom az average calculatort duplázza az appban a következő lehívásnál. 
+    
 
 
 // The application 
@@ -83,7 +82,7 @@ let personalFinanceApp = {
 
     cheapest: calculateCheapest(data), 
 
-    average: calculateAverage(expenses), 
+    average: calculateAverage(data), 
 
 }
 
