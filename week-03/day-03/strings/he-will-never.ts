@@ -11,7 +11,7 @@ Never gonna make you cry Never gonna say goodbye\n
 Never gonna tell a lie and hurt you\n */
 
 
-let out: string = '';
+
 let notSoCrypticMessage: number[] = [1, 12, 1, 2, 11, 1, 7, 11, 1, 49, 1, 3, 11, 1, 50, 11];
 // console.log(notSoCrypticMessage)
 
@@ -28,23 +28,21 @@ let hashmap = {
   3: 'say goodbye '
 };
 
-let outArray: string[] = [];
+let out: string = '';
 
+function decoding(array: number[], object: object) {
+    for (let i: number = 0; i < array.length; i++){
+        let keys: string [] = Object.keys(object);
+        if ( keys.indexOf(array[i].toString()) >= 0){       
+            let keyOfstring = keys.indexOf(array[i].toString())
+            out += Object.values(object)[keyOfstring];
 
-// function decoding(){
-    for (let i: number = 0; i < notSoCrypticMessage.length; i++){
-        let keys: string [] = Object.keys(hashmap);
-        if ( keys.indexOf(notSoCrypticMessage[i].toString()) >= 0){       
-            let keyOfstring = keys.indexOf(notSoCrypticMessage[i].toString())
-            // console.log(keyOfstring);
-            out += Object.values(hashmap)[keyOfstring];
         }
-        
-            
-        }
+               
+    }
+    return out;
+}
 
-// console.log(Object.keys(hashmap));
-// console.log(Object.values(hashmap));
+console.log(decoding(notSoCrypticMessage, hashmap));
 
-console.log(out)
 
