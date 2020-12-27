@@ -12,13 +12,13 @@ function unique(arr: number[]) {
     let newArray: number[] = [];
     for (let i: number = 0; i < arr.length; i++){
         if ( newArray.indexOf(arr[i]) === -1){
-            newArray.push(arr[i])
+            newArray.push(arr[i]);
 
         }
 
     }
     return newArray;
-    
+
 }
 
 //  should print: `[1, 11, 34, 52, 61]`
