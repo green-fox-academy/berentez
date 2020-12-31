@@ -56,10 +56,6 @@ function calculatingPrice(amount: object, price: object) {
 
 }
 
-console.log( calculatingPrice(bob, product));
-console.log(calculatingPrice(alice, product));
-
-
 
 // Who buys more Rice?
 // Who buys more Potato? /////////////////////////////////////////////
@@ -87,10 +83,60 @@ function whoBuysMore(producto: string){
 
 
 
-console.log(whoBuysMore('Rice'));
-console.log(whoBuysMore('Potato'));
-
-
 
 // Who buys more different products?
+
+function countProductType(players: object){
+    let array: number[] = [];
+    let output: string = '';
+    for (let i: number = 0 ; i < Object.keys(players).length; i++){
+        array.push(Object.keys(players[i]).length)
+    }
+    if (array[0] > array[1]){
+        output = 'Bob buys more different type of products.' + ' (' + array[0] + ')'
+    } else {
+        output = 'Alice buys more different type of products.' + ' (' + array[1] + ')'
+    }
+
+    return output;
+}
+
+
+
 // Who buys more products? (piece)
+
+function countProductAmount(players: object){
+    let array: number[] = [];
+    let output: string = '';
+    let sum: any = 0;
+    for (let i: number = 0 ; i < Object.keys(players).length; i++){
+        for (let n: number = 0; n < Object.keys(players[i]).length; n++){
+           sum = sum + Object.values(players[i])[n]
+        }
+        array.push(sum);
+        sum = 0;
+    }
+    if (array[0] > array[1]){
+        output = 'Bob buys more products.' + ' (' + array[0] + ')'
+    } else {
+        output = 'Alice buys more products.' + ' (' + array[1] + ')'
+    }
+    return output;
+}
+
+
+//application
+
+let app = {
+    'Bob\'s expense': calculatingPrice(bob, product),
+    'Alice\'expense': calculatingPrice(alice, product),
+    'Rice king': whoBuysMore('Rice'),
+    'Potato king': whoBuysMore('Potato'), 
+    'More type': countProductType(participants), 
+    'More amount': countProductAmount(participants)
+    
+}
+
+
+
+console.log(app);
