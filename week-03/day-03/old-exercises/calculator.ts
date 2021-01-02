@@ -51,4 +51,4 @@ function calculate(operation: Function, operand0: number, operand1: number){
 
 console.log(process.argv)
 console.log('Input params are', args);
-// console.log(calculate(operators[args[0]], parseInt(args[1]), parseInt(args[2])))
+console.log(calculate(operators[args[0]], parseInt(args[1]), parseInt(args[2])))
