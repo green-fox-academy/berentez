@@ -12,41 +12,52 @@ let rate: number = canvas.width / (Math.sqrt(quarter) * lineCount);
 
 let x: number = rate;
 let y: number = rate + rate / 2;
+let line: number = 0;
 
 
 function draw( x: number, y: number, quarterNum: number){
-    for (let i: number = 0; i <= Math.sqrt(quarter); i++){
-        for (let n: number = 0; n < lineCount ; n ++){
-            ctx.strokeStyle = 'purple';
-            ctx.beginPath();
-            ctx.moveTo(x, 0);
-            ctx.lineTo((i + 1)  * (canvas.width / Math.sqrt(quarter)) , y);
-            ctx.stroke();
+    for (let k: number = 0; k < Math.sqrt(quarter); k++){
+        for (let i: number = 0; i <= Math.sqrt(quarter); i++){
+            for (let n: number = 0; n < lineCount ; n ++){
+                ctx.strokeStyle = 'purple';
+                ctx.beginPath();
+                ctx.moveTo(x, line);
+                ctx.lineTo((i + 1)  * (canvas.width / Math.sqrt(quarter)) , y);
+                ctx.stroke();
 
-            x += rate;
-            y += rate;
+                x += rate;
+                y += rate;
 
-        }
+            }
 
+            x = rate + i * (canvas.width / Math.sqrt(quarter));
+            y = rate + rate / 2 + k * (canvas.width / Math.sqrt(quarter));
+
+            for (let n: number = 0; n < lineCount ; n ++){
+                ctx.strokeStyle = 'green';
+                ctx.beginPath();
+                ctx.moveTo(line, x);
+                ctx.lineTo(y, (i+1) * (canvas.height / Math.sqrt(quarter)));
+                ctx.stroke();
+
+                x += rate;
+                y += rate;
+            }
+    
         x = rate + i * (canvas.width / Math.sqrt(quarter));
-        y = rate + rate / 2;
-
-        for (let n: number = 0; n < lineCount ; n ++){
-            ctx.strokeStyle = 'green';
-            ctx.beginPath();
-            ctx.moveTo(0, x);
-            ctx.lineTo(y, (i+1) * (canvas.height / Math.sqrt(quarter)));
-            ctx.stroke();
-
-            x += rate;
-            y += rate;
-        }
+        x = x + (canvas.width / Math.sqrt(quarter)) ;
+        y = k * (canvas.height / Math.sqrt(quarter)) + (rate + rate / 2);
     
-    x = rate + i * (canvas.width / Math.sqrt(quarter));
-    x = x + (canvas.width / Math.sqrt(quarter)) ;
-    y = rate + rate / 2;
-    
- }    
+        }  
+        // y = rate + rate / 2 + (i * (canvas.width / Math.sqrt(quarter)))
+        x = rate
+        // y = rate + rate / 2;
+        y = y + (rate + rate / 2) + (canvas.width / Math.sqrt(quarter));
+        line = line + (canvas.height / Math.sqrt(quarter));
+        
+
+    }
+
 }
 
 
