@@ -7,8 +7,9 @@ export{}
 
 const fs = require('fs');
 
+//1. 
 
-fs.readFile('my-file.txt', 'utf-8', (err, data) => {
+fs.readFile('my-file1.txt', 'utf-8', (err, data) => {
     if (data){
         console.log(data);
     } else if (err.code === 'ENOENT') { 
@@ -18,3 +19,22 @@ fs.readFile('my-file.txt', 'utf-8', (err, data) => {
     }
 });
 
+//2.  this prints undefined too
+
+fs.readFile('my-file1.txt', 'utf-8', (err, data) =>{
+    if (err) {
+        console.error("Unable to read file: my-file.txt");
+    }   
+    console.log(data)
+})
+
+
+
+//3. with try - catch - used https://nodejs.dev/learn/reading-files-with-nodejs
+
+try {
+    const data = fs.readFileSync('my-file.txt', 'utf8');
+    console.log(data)
+} catch (err) { 
+    console.error("Unable to read file: my-file.txt");
+}
