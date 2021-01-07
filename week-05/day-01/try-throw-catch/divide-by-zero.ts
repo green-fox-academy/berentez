@@ -3,20 +3,18 @@
 // and prints the result.
 // It should print 'Cannot divide by zero!' if the parameter is 0
 
-function divideByTen (x: number) {
-    let output: number = 0
-
-    try{
-        if (x === 0) {
-            throw('Cannot divide by zero!');
-        } else {
-            output = x / 10;
-        }
+function divideTen (x: number) {
+    if (x === 0){
+        throw new Error('Cannot divide by zero!');
     }
-    catch (e) {
-        console.log('Error: ' + e);
-    }
-    return output;
+    
+    return 10 / x;
 }
 
-console.log(divideByTen(0));
+try { 
+    divideTen(0);
+}
+catch(err) {
+    console.log(err.message);
+}
+
