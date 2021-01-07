@@ -1,25 +1,24 @@
-export {}
+export{};
+
 
 // Write a function that takes a filename as string,
 // then returns the number of lines the file contains.
 // It should return zero if it can't open the file, and
 // should not raise any error.
 
-declare function require(name:string);
 const fs = require('fs');
 
-function countLines (file: string){
-    let lines: number = 0
-    fs.readFile(file, 'utf-8', (err, data) =>{
-        if (err){
-           console.error(err); 
-           
-        } else {
-            lines =  fs.readFile(file.split(/\r\n|\r|\n/).length);
-            }
-        });
-        return lines;
-    }
+function countLines(filename: string){
+    const txt = fs.readFileSync(filename, 'utf-8');
+    return txt.split(/\r\n|\r|\n/).length;
     
+}
 
-console.log(countLines('lyrics.txt'))
+
+try {
+    countLines('lyrics.txt')
+    console.log(countLines('lyrics.txt'))
+}
+catch (err) {
+    console.log(0);
+}
