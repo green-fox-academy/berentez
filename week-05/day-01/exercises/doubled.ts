@@ -4,7 +4,7 @@
 import * as fs from 'fs';
 
 function encrypt(file: string) {
-    let doubledMessage = (fs.readFileSync(file, 'utf-8'));
+    let doubledMessage = fs.readFileSync(file, 'utf-8');
     let splitedMessage = doubledMessage.split('');
     let cryptedMessage: string[] = [];
     for (let i: number = 1; i <= splitedMessage.length; i++) {
