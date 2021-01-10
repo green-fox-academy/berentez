@@ -5,6 +5,7 @@ import * as fs from 'fs';
 function reverseLine(file: string) {
     let readFile = fs.readFileSync(file, 'utf-8');
     let lineSplit: string[] = readFile.split('\r');
+    console.log(lineSplit)
     let lineArray: string[] = [];
     for (let i: number = 0; i < lineSplit.length; i++) {
         let line: string = lineSplit[i];
