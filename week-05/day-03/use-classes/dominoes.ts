@@ -26,8 +26,8 @@ let dominoes = initializeDominoes();
 for (let i: number = 0; i < dominoes.length - 1; i++) {
   for (let n: number = 1; n < dominoes.length; n++) {
     if (dominoes[i].values[1] === dominoes[n].values[0]) {
-      [dominoes[i+1], dominoes[n]] = [dominoes[n], dominoes[i+1]];
+      [dominoes[i + 1], dominoes[n]] = [dominoes[n], dominoes[i + 1]];
+    }
   }
-}
 }
 print(dominoes);
