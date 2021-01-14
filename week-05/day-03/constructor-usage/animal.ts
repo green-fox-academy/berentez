@@ -7,26 +7,31 @@
 //  Every animal can play() which increases both by one
 
 export class Animal {
-	hunger: number = 50;
-	thirst: number = 50;
+  hunger: number = 50;
+  thirst: number = 50;
 
-	eat(): void {
-		this.hunger--;
-	}
+  constructor() {
+    this.hunger = 50;
+    this.thirst = 50;
+  }
 
-	drink(): void {
-		this.thirst--;
-	}
+  eat(): void {
+    this.hunger--;
+  }
 
-	play(): void {
-		this.hunger++;
-		this.thirst++;
-	}
+  drink(): void {
+    this.thirst--;
+  }
+
+  play(): void {
+    this.hunger++;
+    this.thirst++;
+  }
 }
 
 //Test
 let dog = new Animal();
-dog.eat()
-dog.eat()
-dog.play()
-console.log(dog)
+dog.eat();
+dog.eat();
+dog.play();
+console.log(dog);
