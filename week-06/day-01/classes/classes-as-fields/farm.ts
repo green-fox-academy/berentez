@@ -5,28 +5,8 @@
 // breed() -> creates a new animal if there's place for it
 // slaughter() -> removes the least hungry animal
 
-class Animal {
-  hunger: number;
-  thirst: number;
+import {Animal} from '../../../../week-05/day-03/constructor-usage/animal'
 
-  constructor() {
-    this.hunger = 50;
-    this.thirst = 50;
-  }
-
-  eat(): void {
-    this.hunger--;
-  }
-
-  drink(): void {
-    this.thirst--;
-  }
-
-  play(): void {
-    this.hunger++;
-    this.thirst++;
-  }
-}
 
 class Farm {
   animals: Animal[];
