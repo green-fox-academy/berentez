@@ -5,8 +5,6 @@
 // breed() -> creates a new animal if there's place for it
 // slaughter() -> removes the least hungry animal
 
-import { timingSafeEqual } from 'crypto';
-
 class Animal {
   hunger: number;
   thirst: number;
