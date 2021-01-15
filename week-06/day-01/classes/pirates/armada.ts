@@ -31,12 +31,17 @@ class Armada {
   }
 
   war(enemy: Armada): boolean[] {
-		let array: boolean[] = []
+		let array: boolean[] = [];
     for (let i: number = 0; i < enemy.armada.length; i++) {
       array.push(this.armada[i].battle(enemy.armada[i]));
 		}
+		this.sink()
 		return array;
-  }
+	}
+	
+	sink(){
+		
+	}
 }
 
 let armada = new Armada();
