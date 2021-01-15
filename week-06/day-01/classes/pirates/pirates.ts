@@ -80,8 +80,3 @@ export class Pirate {
 }
 
 //////////////////////////////////////////////////////
-
-let bred = new Pirate
-console.log(bred);
-console.log(bred.howsItGoingMate())
-console.log(bred)

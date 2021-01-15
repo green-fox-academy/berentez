@@ -18,15 +18,15 @@
 
 import { Pirate } from './pirates';
 
-class Ship {
+export class Ship {
 	crew: Pirate[];
 	captain: Pirate;
-  
   battleScour: number;
 
   constructor() {
     this.captain = undefined;
-    this.crew = [];
+		this.crew = [];
+		this.fillShip();
   }
 
   fillShip(): void {
@@ -36,6 +36,7 @@ class Ship {
 		this.captain = new Pirate();
 		this.captain.parrot = true;
 		this.calculateScore();
+		this.crewData();
   }
 
   crewData() {
@@ -61,15 +62,15 @@ class Ship {
     return this.battleScour;
   }
 
-  battle(ship: Ship): void {
+  battle(ship: Ship): boolean {
     if (this.battleScour > ship.battleScour) {
-      console.log(true);
 			ship.loss();
 			this.party();
+			return true;
     } else {
-      console.log(false);
 			this.loss();
 			ship.party();
+			return false;
     }
   }
 
@@ -101,12 +102,3 @@ class Ship {
     }
   }
 }
-let queenAnnesRevenge = new Ship();
-let royalFortune = new Ship();
-queenAnnesRevenge.fillShip();
-royalFortune.fillShip();
-console.log(queenAnnesRevenge);
-console.log(royalFortune);
-queenAnnesRevenge.battle(royalFortune);
-console.log(queenAnnesRevenge);
-console.log(royalFortune);
