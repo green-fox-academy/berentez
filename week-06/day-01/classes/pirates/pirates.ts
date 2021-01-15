@@ -81,22 +81,6 @@ export class Pirate {
 
 //////////////////////////////////////////////////////
 
-//Test
-
-// let jack = new Pirate();
-// let ed = new Pirate();
-// let mckein = new Pirate();
-
-// jack.brawl(ed);
-// ed.brawl(mckein);
-// mckein.brawl(jack);
-
-// console.log(jack);
-// console.log(mckein);
-// console.log(ed);
-// ed.howsItGoingMate();
-// ed.addParrot();
-
 // BattleApp
 // Create a BattleApp class, where you can fight with ships
 // Create 2 ships, fill them with pirates
