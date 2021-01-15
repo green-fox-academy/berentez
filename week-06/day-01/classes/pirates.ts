@@ -8,34 +8,78 @@
 
 class Pirate {
   private intoxication: number;
+  private status: string;
 
   constructor() {
     this.intoxication = 0;
+    this.status = 'alive';
   }
 
   drinkSomeRum(): void {
-    this.intoxication++;
+    if (this.status !== 'dead') {
+      this.intoxication++;
+    } else {
+      console.log("he's dead");
+    }
   }
 
-  howsItGoingMate() {
-    if (this.intoxication < 4) {
-      console.log('Pour me anudder!');
-      this.drinkSomeRum();
+  howsItGoingMate(): void {
+    if (this.status !== 'dead') {
+      if (this.intoxication < 4 && this.status === 'alive') {
+        console.log('Pour me anudder!');
+        // this.drinkSomeRum();
+      } else {
+        console.log("Arghh, I'ma Pirate. How d'ya d'ink its goin?");
+        this.passOut();
+      }
     } else {
-      console.log("Arghh, I'ma Pirate. How d'ya d'ink its goin?");
-      this.passOut();
+      console.error("he's dead");
     }
   }
 
   private passOut(): void {
     this.intoxication = 0;
+    this.status = 'passed out';
+  }
+
+  private die(): string {
+    return (this.status = 'dead');
+  }
+
+  brawl(pirate: Pirate): void {
+    if (pirate.status === 'alive') {
+      let chance: number = Math.round(Math.random() * 3);
+      if (chance === 1) {
+        this.die();
+      } else if (chance === 2) {
+        pirate.die();
+      } else {
+        this.status = 'passed out';
+        pirate.status = 'passed out';
+      }
+    } else if ( pirate.status === 'passed out') {
+      console.log('I\m passed out, mate!');
+    } else {
+			console.log("he's dead");
+		}
   }
 }
 
-
 // die() - this kills off the pirate, in which case, DrinkSomeRum, etc. just result in he's dead.
 // brawl(x) - where pirate fights another pirate (if that other pirate is alive) and there's a 1/3 chance, 1 dies, the other dies or they both pass out.
-// And... if you get that far...
+
+let jack = new Pirate();
+let ed = new Pirate();
+let mckein = new Pirate();
+
+jack.brawl(ed);
+ed.brawl(mckein);
+mckein.brawl(jack);
+
+console.log(jack);
+console.log(mckein);
+console.log(ed);
+ed.howsItGoingMate()
 
 // Add a parrot.
 
