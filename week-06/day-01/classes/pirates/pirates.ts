@@ -29,14 +29,14 @@ export class Pirate {
     }
   }
 
-  howsItGoingMate(): void {
-    if (this.status !== 'dead') {
+  howsItGoingMate(): string {                                               //console.log would be better, but later on the terminal would be unreadable
+    if (this.status !== 'dead') {                                           //so I changed it to return
       if (this.intoxication < 4) {
-        console.log('Pour me anudder!');
         this.drinkSomeRum();
+        return 'Pour me anudder!';
       } else {
-        console.log("Arghh, I'ma Pirate. How d'ya d'ink its goin?");
         this.passOut();
+        return "Arghh, I'ma Pirate. How d'ya d'ink its goin?";
       }
     } else {
       console.log("he's dead");
@@ -81,20 +81,7 @@ export class Pirate {
 
 //////////////////////////////////////////////////////
 
-// BattleApp
-// Create a BattleApp class, where you can fight with ships
-// Create 2 ships, fill them with pirates
-// Have a battle!
-// Armada
-// Create an Armada class
-// Contains Ship-s as a list
-// Have a armada.war(otherArmada) method where two armada can engage in war
-// it should work like merge sort
-// first ship from the first armada battles the first of the other
-// the loser gets deleted so the next ship comes in play from that armada
-// whichever armada gets to the end of its ships loses the war
-// return true if this is the winner
-// WarApp
-// Create a WarApp class, where you can fight with armadas
-// Create 2 armadas, fill them with ships
-// Have a war!
+let bred = new Pirate
+console.log(bred);
+console.log(bred.howsItGoingMate())
+console.log(bred)
