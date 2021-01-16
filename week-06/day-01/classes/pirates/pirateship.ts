@@ -25,12 +25,12 @@ export class Ship {
 
   constructor() {
     this.captain = undefined;
-		this.crew = [];
-		this.fillShip();
+    this.crew = [];
+    this.fillShip();
   }
 
   fillShip(): void {
-    for (let i: number = 0; i < Math.round(Math.random() * 10); i++) {
+    for (let i: number = 0; i < Math.round(Math.random() * 10 - 1); i++) {
       this.crew.push(new Pirate());
     }
 		this.captain = new Pirate();
@@ -41,7 +41,8 @@ export class Ship {
 
   crewData() {
     console.log('Captain: Rum consumed: ' + this.captain.intoxication + ', State: ' + this.captain.status);
-    console.log(this.aliveMates());
+    console.log('crew: ' + this.aliveMates());
+    console.log('Ship\'s battlescore: '+ this.battleScour);
   }
 
   aliveMates(): number {
