@@ -21,5 +21,3 @@ export class BattleApp {
 }
 
 console.log(new BattleApp());
-
-

@@ -29,8 +29,10 @@ export class Pirate {
     }
   }
 
-  howsItGoingMate(): string {                                               //console.log would be better, but later on the terminal would be unreadable
-    if (this.status !== 'dead') {                                           //so I changed it to return
+  howsItGoingMate(): string {
+    //console.log would be better, but later on the terminal would be unreadable
+    if (this.status !== 'dead') {
+      //so I changed it to return
       if (this.intoxication < 4) {
         this.drinkSomeRum();
         return 'Pour me anudder!';

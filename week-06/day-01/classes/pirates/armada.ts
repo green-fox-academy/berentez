@@ -17,56 +17,46 @@ import { Ship } from './pirateship';
 
 export class Armada {
   armada: Ship[];
+  shipsNumber: number;
 
   constructor() {
     this.armada = [];
+    this.shipsNumber = 10;
     this.recruit();
   }
 
   recruit(): void {
-    for (let i: number = 0; i < 5; i++) {
+    for (let i: number = 0; i < this.shipsNumber; i++) {
       this.armada.push(new Ship());
     }
   }
-  //2 function getresult
-  war(enemy: Armada): boolean {
-    let war: boolean[] = [];
-    while (enemy.armada.length === 0 || this.armada.length === 0) {
-      for (let i: number = 0; i < this.armada.length; i++) {
-        war.push(this.armada[i].battle(enemy.armada[i]));
-      }
-      this.sink(war, enemy);
-      war = [];
-    }
-    return this.getResult(this.armada, enemy.armada);
-  }
 
-  sink(warResult: boolean[], enemy: Armada): void {
-     for (let i: number = 0; i < warResult.length; i) {
-        if (warResult[i] === false) {
-          this.armada.splice(i, 1);
-          warResult.splice(i, 1);
-        } else {
-          enemy.armada.splice(i, 1);
-          warResult.splice(i, 1);
-        }
+  war(enemy: Armada): boolean {
+    let i: number = 0;
+    let n: number = 0;
+    let battle: boolean;
+    while (n !== enemy.armada.length && i !== this.armada.length) {
+      battle = this.armada[i].battle(enemy.armada[n]);
+      if (battle === true) {
+        n++;
+      } else {
+        i++;
       }
-  }
-  getResult(ship: Ship[], galley: Ship[]){
-    if (ship.length === 0){
-      return false;
-    } else if (galley.length === 0) {
-      return true;
+      if (n === enemy.armada.length) {
+        return true;
+      } else if (i === this.armada.length) {
+        return false;
+      }
     }
   }
 }
 
+////////////////////////////////////////////////
+
+//Test
 
 let armada = new Armada();
 let armada2 = new Armada();
-// console.log(armada)
-// console.log(armada2)
-console.log('England : ', armada.armada);
+console.log('England : ', armada);
 console.log('Spain: ', armada2);
-console.log(armada.war(armada2));
-
+console.log('war: ', armada.war(armada2));
