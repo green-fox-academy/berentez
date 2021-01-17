@@ -55,8 +55,8 @@ export class Armada {
 
 //Test
 
-let armada = new Armada();
-let armada2 = new Armada();
-console.log('England : ', armada);
-console.log('Spain: ', armada2);
-console.log('war: ', armada.war(armada2));
+// let armada = new Armada();
+// let armada2 = new Armada();
+// console.log('England : ', armada);
+// console.log('Spain: ', armada2);
+// console.log('war: ', armada.war(armada2));
