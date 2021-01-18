@@ -10,7 +10,6 @@
 //// - Person(name, age, gender)
 //// - Person(): sets name to Jane Doe, age to 30, gender to female
 
-
 export {};
 
 export class Person {
@@ -19,13 +18,15 @@ export class Person {
   gender: string = 'male' || 'female';
 
   constructor(name: string = 'Jane Doe', age: number = 30, gender: string = 'female') {
-    this.name = name;{}
+    this.name = name;
+    {
+    }
     this.age = age;
     this.gender = gender;
   }
 
   introduce(): void {
-    console.log("Hi, I'm " + this.name + ', a ' + this.age + ' years old ' + this.gender + '.');
+    console.log(`Hi, I'm ${this.name}, a ${this.age} years old ${this.gender}.`);
   }
 
   getGoal(): void {

@@ -11,30 +11,31 @@
 //// - The Cohort class has the following constructors:
 ////// - Cohort(name): beside the given parameter, it sets students and mentors as empty lists
 
-import {Student} from './student';
-import {Mentor} from './mentor';
-
+import { Student } from './student';
+import { Mentor } from './mentor';
 
 export class Cohort {
-	name: string;
-	students: Student[];
-	mentors: Mentor[];
+  name: string;
+  students: Student[];
+  mentors: Mentor[];
 
-	constructor(name: string){
-		this.name = name;
-		this.students = [];
-		this.mentors = [];
-	}
+  constructor(name: string) {
+    this.name = name;
+    this.students = [];
+    this.mentors = [];
+  }
 
-	addStudent(student: Student): void {
-		this.students.push(student);
-	}
+  addStudent(student: Student): void {
+    this.students.push(student);
+  }
 
-	addMentor(mentor: Mentor): void {
-		this.mentors.push(mentor);
-	}
+  addMentor(mentor: Mentor): void {
+    this.mentors.push(mentor);
+  }
 
-	info(): void{
-		console.log('The ' + this.name + ' cohort has size of ' + this.students.length + ' students and '+ this.mentors.length + ' mentors.')
-	}
+  info(): void {
+    console.log(
+      `The ${this.name} cohort has size of ${this.students.length} students and ${this.mentors.length} mentors.`
+    );
+  }
 }
