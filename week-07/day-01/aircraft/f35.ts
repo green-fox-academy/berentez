@@ -16,9 +16,9 @@ export class F35 extends Aircraft {
   }
 }
 
-let jet = new F35();
-jet.ammunition = 10;
-console.log(jet);
-console.log(jet.refill(200));
-console.log(jet.getType());
-console.log(jet.getStatus());
+// let jet = new F35();
+// jet.ammunition = 10;
+// console.log(jet);
+// console.log(jet.refill(200));
+// console.log(jet.getType());
+// console.log(jet.getStatus());

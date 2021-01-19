@@ -73,6 +73,10 @@ export class Aircraft {
       return false;
     }
   }
+
+  ammoNeeded(): number {
+    return this.maxAmmo - this.ammunition;
+  }
 }
 
 // let jet = new Aircraft();
