@@ -18,9 +18,9 @@ export class Student extends Person {
   skippedDays: number;
 
   constructor(
-    name: string = 'Jane Doe',
-    age: number = 30,
-    gender: string = 'female',
+    name?: string,
+    age?: number,
+    gender?: 'male' | 'female',
     previousOrganization: string = 'The School of Life'
   ) {
     super(name, age, gender);
@@ -41,3 +41,8 @@ export class Student extends Person {
     this.skippedDays += n;
   }
 }
+
+let Jane = new Student();
+let john = new Student('John Doe', 20, 'male', 'BME');
+console.log(Jane);
+console.log(john);

@@ -17,7 +17,7 @@ export class Sponsor extends Person {
   company: string;
   private hiredStudents: number;
 
-  constructor(name: string = 'Jane Doe', age: number = 30, gender: string = 'female', company: string = 'Google') {
+  constructor(name?: string, age?: number, gender?: 'male' | 'female', company: string = 'Google') {
     super(name, age, gender);
     this.company = company;
     this.hiredStudents = 0;
@@ -37,5 +37,3 @@ export class Sponsor extends Person {
     console.log('My goal is: Hire brilliant junior software developers.');
   }
 }
-
-export let jane = new Sponsor('Jane Doe', 30, 'female', 'Bosch');

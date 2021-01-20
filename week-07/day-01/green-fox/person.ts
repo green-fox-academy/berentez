@@ -13,14 +13,12 @@
 export {};
 
 export class Person {
-  name: string = 'Jane Doe';
-  age: number = 30;
-  gender: string = 'male' || 'female';
+  name: string;
+  age: number;
+  gender: 'male' | 'female';
 
-  constructor(name: string = 'Jane Doe', age: number = 30, gender: string = 'female') {
+  constructor(name: string = 'Jane Doe', age: number = 30, gender: 'male' | 'female' = 'female') {
     this.name = name;
-    {
-    }
     this.age = age;
     this.gender = gender;
   }
