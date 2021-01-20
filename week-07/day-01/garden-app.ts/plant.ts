@@ -4,6 +4,7 @@ export class Plant {
   needsWater: boolean;
   absorb: number = 0;
   type: string = 'Plant';
+  thirstyAt: number;
 
   constructor(color: string) {
     this.color = color;
@@ -17,10 +18,12 @@ export class Plant {
   }
 
   checkWaterLevel(): void {
-    if (this.waterLevel < 5) {
+    if (this.waterLevel < this.thirstyAt) {
       console.log(`The ${this.color} ${this.type} needs water`);
+      this.needsWater = true;
     } else {
       console.log(`The ${this.color} ${this.type} doesnt need water `);
+      this.needsWater = false;
     }
   }
 }

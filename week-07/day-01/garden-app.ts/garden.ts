@@ -1,5 +1,4 @@
 import { Plant } from './plant';
-import { Flower } from './flower';
 
 export class Garden {
   plants: Plant[];
@@ -9,8 +8,8 @@ export class Garden {
     this.plants = [];
   }
 
-  plant(flower: Flower, ...rest): void {
-    this.plants.push(flower);
+  plant(plant: Plant, ...rest): void {
+    this.plants.push(plant);
     this.plants.push(...rest);
   }
 
@@ -22,8 +21,7 @@ export class Garden {
 
   watering(waterAmount: number): void {
     console.log(`Watering with ${waterAmount}`);
-    let waterForOnePlant: number = 0;
-    waterForOnePlant = waterAmount / this.countThirstyPlants();
+    let waterForOnePlant: number = this.estimateWaterForOne(waterAmount);
     for (let plant of this.plants) {
       if (plant.needsWater === true) {
         plant.drink(waterForOnePlant);
@@ -31,6 +29,12 @@ export class Garden {
         plant.checkWaterLevel();
       }
     }
+  }
+
+  estimateWaterForOne(waterAmount: number): number {
+    let waterForOnePlant: number = 0;
+    waterForOnePlant = waterAmount / this.countThirstyPlants();
+    return waterForOnePlant;
   }
 
   countThirstyPlants(): number {
