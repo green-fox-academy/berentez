@@ -11,8 +11,10 @@
 // It should fill all the aircraft with ammo and subtract the needed ammo from the ammo storage
 // If there is not enough ammo then it should start to fill the aircrafts with priority first
 // If there is no ammo when this method is called, it should throw an exception
+// getStatus();
+// It should return a string about itself and all of its aircrafts' statuses in the following format:
+// If the health points are 0 then it should return: It's dead Jim :(
 
-import { generateKeyPairSync } from 'crypto';
 import { Aircraft } from './aircraft';
 import { F16 } from './f16';
 import { F35 } from './f35';
@@ -55,22 +57,56 @@ class Carrier {
         this.jets[i].refill(this.jets[i].ammoNeeded());
         this.ammoStore -= minusAmmo;
       } else if (this.ammoStore === 0) {
-        console.log('No more ammunition');
+        console.log('No more ammunition!');
       } else {
         this.jets[i].refill(this.ammoStore);
         this.ammoStore = 0;
-        console.log('Out of ammunition');
+        console.log("Couldn't finsish refill!");
       }
+    }
+  }
+  calculateCarrierDps(): number {
+    let dps: number = 0;
+    for (let i: number = 0; i < this.jets.length; i++) {
+      dps += this.jets[i].calculateHighestDamage();
+    }
+    return dps;
+  }
+
+  aircraftStatus(): string {
+    let aircraftData: string = '';
+    for (let i: number = 0; i < this.jets.length; i++) {
+      aircraftData += `\nType ${this.jets[i].type}, Ammo: ${this.jets[i].ammunition}, Base Damage: ${
+        this.jets[i].baseDamage
+      }, All Damage: ${this.jets[i].calculateHighestDamage()}`;
+    }
+    return aircraftData;
+  }
+
+  getStatus(): void {
+    if (this.healthPoint > 0) {
+      console.log(
+        `HP: ${this.healthPoint}, Aircraft count: ${this.jets.length}, Ammo storage: ${
+          this.ammoStore
+        }, Total.damage: ${this.calculateCarrierDps()}`
+      );
+      console.log(`Aircrafts: ${this.aircraftStatus()}`);
+    } else {
+      console.error("It's dead Jim :(");
     }
   }
 }
 
-let queen = new Carrier(40, 2000);
-queen.add(new F16());
-queen.add(new F16());
-queen.add(new F35());
-queen.add(new F35());
-queen.add(new F35());
-console.log(queen);
-queen.fill();
-console.log(queen);
+//Test
+//The carrier:
+let queenMary = new Carrier(40, 2000);
+//Adding airplanes:
+queenMary.add(new F16());
+queenMary.add(new F16());
+queenMary.add(new F35());
+queenMary.add(new F35());
+queenMary.add(new F35());
+//Adding ammo:
+queenMary.fill();
+//Status:
+queenMary.getStatus();

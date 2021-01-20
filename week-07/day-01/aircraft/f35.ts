@@ -15,10 +15,3 @@ export class F35 extends Aircraft {
     this.baseDamage = 50;
   }
 }
-
-// let jet = new F35();
-// jet.ammunition = 10;
-// console.log(jet);
-// console.log(jet.refill(200));
-// console.log(jet.getType());
-// console.log(jet.getStatus());

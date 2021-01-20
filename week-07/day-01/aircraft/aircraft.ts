@@ -62,8 +62,8 @@ export class Aircraft {
     }, All Damage: ${this.calculateHighestDamage()}`;
   }
 
-  private calculateHighestDamage(): number {
-    return this.maxAmmo * this.baseDamage;
+  calculateHighestDamage(): number {
+    return this.ammunition * this.baseDamage;
   }
 
   isPriority(): boolean {
@@ -78,9 +78,3 @@ export class Aircraft {
     return this.maxAmmo - this.ammunition;
   }
 }
-
-// let jet = new Aircraft();
-// jet.ammunition = 10;
-// jet.maxAmmo = 12;
-// console.log(jet);
-// console.log(jet.refill(5));
