@@ -30,9 +30,9 @@ function circlePlay(n: number, parameters): Circle {
   if (n === 0) {
     return new Circle(parameters);
   } else {
-    (parameters[0] = (parameters[0] / Math.sin(60)) * 200),
-      (parameters[1] = (parameters[1] / Math.cos(60)) * 200),
-      (parameters[2] = parameters[2] / (n * 2));
+    // (parameters[0] = (parameters[0] / Math.sin(60)) * 200),
+    //   (parameters[1] = (parameters[1] / Math.cos(60)) * 200),
+    //   (parameters[2] = parameters[2] / (n * 2));
     new Circle(parameters);
 
     return circlePlay(n - 1, parameters);
