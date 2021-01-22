@@ -3,7 +3,6 @@
 // create a list of integers
 // use the t.equal to test the result of the created sum method
 // Run it
-
 // Create different tests where you test your method with:
 // an empty list
 // a list that has one element in it
@@ -16,12 +15,13 @@ const test = require('tape');
 
 test('Sum of integers', (t) => {
   const sum = new Sum();
-  sum.randomNumber();
+  sum.numberList = [];
+
   let expected = 0;
   for (let number of sum.numberList) {
     expected += number;
   }
-
+  console.log(sum.numberList);
   t.equal(sum.sum(), expected);
   t.end();
 });

@@ -25,7 +25,7 @@ export class Sum {
   }
 
   sum(): number {
-    if (this.numberList === []) {
+    if (this.numberList === undefined || []) {
       this.throwError();
     }
     let sum: number = 0;
