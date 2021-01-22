@@ -7,7 +7,6 @@ export class Sum {
 
   constructor() {
     this.numberList = [];
-    this.randomNumber();
   }
 
   randomNumber(): void {
@@ -26,13 +25,17 @@ export class Sum {
   }
 
   sum(): number {
+    if (this.numberList === []) {
+      this.throwError();
+    }
     let sum: number = 0;
     for (let numbers of this.numberList) {
       sum += numbers;
     }
     return sum;
   }
-}
 
-let sum1 = new Sum();
-console.log(sum1);
+  throwError() {
+    throw new Error('List of numbers is empty');
+  }
+}
