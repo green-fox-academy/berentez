@@ -13,6 +13,15 @@
 import { Sum } from './sum';
 const test = require('tape');
 
-let sum1 = new Sum();
-console.log(sum1);
-console.log(sum1.sum());
+const sum = new Sum();
+
+test('Sum of integers', (t) => {
+  const sum = new Sum();
+  let expected = 0;
+  for (let number of sum.numberList) {
+    expected += number;
+  }
+
+  t.equal(sum.sum(), expected);
+  t.end();
+});
