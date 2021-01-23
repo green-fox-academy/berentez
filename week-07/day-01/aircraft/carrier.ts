@@ -11,6 +11,9 @@
 // It should fill all the aircraft with ammo and subtract the needed ammo from the ammo storage
 // If there is not enough ammo then it should start to fill the aircrafts with priority first
 // If there is no ammo when this method is called, it should throw an exception
+// fight()
+// It should take another carrier as a reference parameter and fire all the ammo from the aircrafts to it,
+// then subtract all the damage from its health points
 // getStatus();
 // It should return a string about itself and all of its aircrafts' statuses in the following format:
 // If the health points are 0 then it should return: It's dead Jim :(
@@ -73,6 +76,25 @@ class Carrier {
     return dps;
   }
 
+  fight(enemy: Carrier): void {
+    for (let i: number = 0; i < this.jets.length; i++) {
+      if (enemy.healthPoint > 0) {
+        enemy.healthPoint -= this.jets[i].fight();
+      } else {
+        console.log(`Enemy carrier is sinking.`);
+        break;
+      }
+    }
+    for (let i: number = 0; i < enemy.jets.length; i++) {
+      if (this.healthPoint > 0) {
+        this.healthPoint -= enemy.jets[i].fight();
+      } else {
+        console.log(`We are sinking.`);
+        break;
+      }
+    }
+  }
+
   aircraftStatus(): string {
     let aircraftData: string = '';
     for (let i: number = 0; i < this.jets.length; i++) {
@@ -100,13 +122,27 @@ class Carrier {
 //Test
 //The carrier:
 let queenMary = new Carrier(40, 2000);
+let kingHenry = new Carrier(100, 1000);
 //Adding airplanes:
 queenMary.add(new F16());
 queenMary.add(new F16());
 queenMary.add(new F35());
 queenMary.add(new F35());
 queenMary.add(new F35());
+////////////////////////
+kingHenry.add(new F16());
+kingHenry.add(new F16());
+kingHenry.add(new F16());
+kingHenry.add(new F16());
+kingHenry.add(new F16());
+
 //Adding ammo:
 queenMary.fill();
+kingHenry.fill();
 //Status:
 queenMary.getStatus();
+kingHenry.getStatus();
+//fight
+queenMary.fight(kingHenry);
+
+kingHenry.getStatus();
