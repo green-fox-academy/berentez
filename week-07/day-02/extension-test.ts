@@ -36,7 +36,6 @@ test('is vowel: a', function (t: any): any {
   t.end();
 });
 
-//Capitals
 test('is vowel: u', function (t: any): any {
   t.ok(isVowel('U'));
   t.end();
