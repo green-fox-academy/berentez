@@ -12,24 +12,43 @@ export function maxOfThree(a: number, b: number, c: number): number {
   }
 }
 
-export function median(pool: number[]): number {
-  return pool[Math.floor((pool.length - 1) / 2)];
+export function median(pool: number[]): number[] {
+  let medianArray: number[] = [];
+  for (let i: number = 0; i < pool.length; i++) {
+    for (let n: number = 1; n < pool.length; n++) {
+      if (pool[i] > pool[n]) {
+        [pool[i], pool[n]] = [pool[n], pool[i]];
+      }
+    }
+  }
+  if (pool.length % 2 === 0) {
+    medianArray.push(pool[Math.floor((pool.length - 1) / 2)]);
+    medianArray.push(pool[Math.floor(pool.length / 2)]);
+  } else {
+    medianArray.push(pool[Math.floor((pool.length - 1) / 2)]);
+  }
+  return medianArray;
 }
+console.log(median([9, 8, 7, 6]));
 
 export function isVowel(character: string): boolean {
   return ['a', 'u', 'o', 'e', 'i'].some((vowel) => vowel === character.toLowerCase());
 }
 
-export function translate(hungarian: string): string {
+export function translate(hungarian) {
   let teve = hungarian;
   let length = teve.length;
+  let usedCharacters: string[] = [];
 
   for (let i = 0; i < length; i++) {
     let c = teve[i];
     if (isVowel(c)) {
-      teve = teve.split(c).join(`${c}v${c}`);
-      i += 2;
-      length += 2;
+      if (usedCharacters.indexOf(c) === -1) {
+        teve = teve.split(c).join(`${c}v${c}`);
+        usedCharacters.push(c);
+        i += 2;
+        length += 2;
+      }
     }
   }
   return teve;
