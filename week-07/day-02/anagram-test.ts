@@ -1,0 +1,1 @@
+import { findAnagram } from './anagram';
