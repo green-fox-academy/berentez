@@ -3,10 +3,12 @@ export function add(a: number, b: number): number {
 }
 
 export function maxOfThree(a: number, b: number, c: number): number {
-  if (a > b) {
+  if (a >= b && a >= c) {
     return a;
-  } else {
+  } else if (c >= b && c >= a) {
     return c;
+  } else if (b >= c && b >= a) {
+    return a;
   }
 }
 

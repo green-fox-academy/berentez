@@ -27,17 +27,18 @@ test('median: four', function (t: any): any {
 });
 
 test('median: five', function (t: any): any {
-  t.equal(median([1, 2, 3, 4, 5]), 3);
+  t.equal(median([1]), 1);
   t.end();
 });
 
 test('is vowel: a', function (t: any): any {
-  t.ok(isVowel('a'));
+  t.ok(isVowel('A'));
   t.end();
 });
 
+//Capitals
 test('is vowel: u', function (t: any): any {
-  t.ok(isVowel('u'));
+  t.ok(isVowel('U'));
   t.end();
 });
 
@@ -47,7 +48,7 @@ test('is vowel: k', function (t: any): any {
 });
 
 test('translate: bemutatkozik', function (t: any): any {
-  t.equal(translate('bemutatkozik'), 'bevemuvutavatkovozivik');
+  t.equal(translate('elem'), 'evelevem');
   t.end();
 });
 
