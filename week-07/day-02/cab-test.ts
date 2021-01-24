@@ -42,3 +42,20 @@ test('Random character generator: ', (t: any) => {
   t.equal(actual, expected, `Actual: ${actual}, Expected: ${expected} `);
   t.end();
 });
+
+//stringify() test
+
+test('number to string array: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.stringify(5923);
+  const expected = ['5', '9', '2', '3'];
+
+  t.deepEqual(actual, expected);
+  t.end();
+});
+
+// checkFourDigit() test
+
+// test('If the generated array has 0 in the 1st and 2nd position it calls randomNUmber again: ', (t: any) => ){
+//     const game = new CAB();
+// };
