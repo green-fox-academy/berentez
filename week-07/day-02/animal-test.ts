@@ -51,3 +51,25 @@ test('testing drink():', (t: any) => {
   t.equal(actual, expected);
   t.end();
 });
+
+//play
+test('testing play(): ', (t: any) => {
+  const dog = new Animal();
+  dog.play(35);
+  const actual = dog.thirst;
+  const expected = 85;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+//Too much playing
+test('testing play(): ', (t: any) => {
+  const dog = new Animal();
+  dog.play(60);
+  const actual = dog.hunger;
+  const expected = 100;
+
+  t.equal(actual, expected);
+  t.end();
+});
