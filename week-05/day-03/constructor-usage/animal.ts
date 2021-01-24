@@ -15,23 +15,35 @@ export class Animal {
     this.thirst = 50;
   }
 
-  eat(): void {
-    this.hunger--;
+  eat(howManyTimes: number): void {
+    for (let i: number = 0; i < howManyTimes; i++) {
+      if (this.hunger !== 0) {
+        this.hunger--;
+      }
+    }
   }
 
-  drink(): void {
-    this.thirst--;
+  drink(howManyTimes: number): void {
+    for (let i: number = 0; i < howManyTimes; i++) {
+      if (this.thirst !== 0) {
+        this.thirst--;
+      }
+    }
   }
 
-  play(): void {
-    this.hunger++;
-    this.thirst++;
+  play(howManyTimes: number): void {
+    for (let i: number = 0; i < howManyTimes; i++) {
+      if (this.thirst !== 100 && this.hunger !== 100) {
+        this.hunger++;
+        this.thirst++;
+      }
+    }
   }
 }
 
 //Test
-let dog = new Animal();
-dog.eat();
-dog.eat();
-dog.play();
-console.log(dog);
+// let dog = new Animal();
+// dog.eat();
+// dog.eat();
+// dog.play();
+// console.log(dog);
