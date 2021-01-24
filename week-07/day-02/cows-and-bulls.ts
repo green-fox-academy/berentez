@@ -6,16 +6,16 @@
 export class CAB {
   private _numberToGuess: number;
   gameState: 'playing' | 'finished';
-  private _guesscount: number;
+  private _guessCount: number;
 
   constructor() {
     this.gameState = 'playing';
     console.log('New game! Guess a number!');
     this._numberToGuess = this.randomNumber();
-    this._guesscount = 0;
+    this._guessCount = 0;
   }
 
-  private randomNumber(): number {
+  randomNumber(): number {
     let numberArray: number[] = [];
     for (let i: number = 0; i < 4; i++) {
       numberArray.push(this.randomCharacter());
@@ -27,17 +27,3 @@ export class CAB {
     return Math.floor(Math.random() * 10);
   }
 }
-
-console.log(Math.floor(Math.random() * 10));
-console.log(Math.floor(Math.random() * 10));
-console.log(Math.floor(Math.random() * 10));
-
-console.log(Math.floor(Math.random() * 10));
-
-console.log(Math.floor(Math.random() * 10));
-
-console.log(Math.floor(Math.random() * 10));
-
-console.log(Math.floor(Math.random() * 10));
-
-console.log(Math.floor(Math.random() * 10));
