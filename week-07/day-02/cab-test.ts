@@ -107,3 +107,13 @@ test('check for bulls: ', (t: any) => {
   t.equal(actual, expected);
   t.end();
 });
+
+//Check result()
+test('check result: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.result(['7', '8', '9', '1'], 7981);
+  const expected = 'The result is: 2 cow, 2 bull.';
+
+  t.equal(actual, expected);
+  t.end();
+});

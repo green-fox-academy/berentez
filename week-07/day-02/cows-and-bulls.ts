@@ -45,15 +45,16 @@ export class CAB {
   //     this.giveGuessToGuessRecord(guessedNumber);
   //     this._guessCount++;
   //     guessedArray = this.stringify(guessedNumber);
-  //     result(guessedArray);
+  //     result(guessedArray, this._numberToGuess);
   //   }
   // }
 
-  // result(guessedArray: string[]): string {
-  //   const result = this.stringify(this._numberToGuess);
-  //   const cows: number = this.checkCows(guessedArray, result);
-  //   const bulls: number = this.chechBulls(guessedArray, result);
-  // }
+  result(guessedArray: string[], numbertoGuess: number): string {
+    const result = this.stringify(numbertoGuess);
+    const cows: number = this.checkCows(guessedArray, result);
+    const bulls: number = this.checkBulls(guessedArray, result);
+    return `The result is: ${cows} cow, ${bulls} bull.`;
+  }
 
   checkCows(guessedArray: string[], result: string[]): number {
     let cows: number = 0;
