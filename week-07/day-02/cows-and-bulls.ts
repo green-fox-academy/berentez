@@ -3,17 +3,24 @@
 // The CAB object should have a counter where it counts the guesses.
 // The CAB object should have a guess method, which returns a string of the guess result
 
+import { getUnpackedSettings } from 'http2';
+
 export class CAB {
   private _numberToGuess: number;
   gameState: 'playing' | 'finished';
   private _guessCount: number;
-  private guessRecord: Object;
+  private _guessRecord: Object;
 
   constructor() {
     this.gameState = 'playing';
     console.log('New game! Guess a number!');
     this._numberToGuess = this.randomNumber();
     this._guessCount = 0;
+    this._guessRecord = {};
+  }
+
+  get guessRecord() {
+    return this._guessRecord;
   }
 
   randomNumber(): number {
@@ -35,19 +42,19 @@ export class CAB {
     return Math.floor(Math.random() * 10);
   }
 
-  // guess(guessedNumber: number) {
-  //   let guessedArray: string[] = [];
-  //   if (guessedNumber < 1000 || guessedNumber > 9999) {
-  //     console.error('You need to guess a 4 digit number');
-  //   } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
-  //     console.error('You already tried this guess');
-  //   } else {
-  //     this.giveGuessToGuessRecord(guessedNumber);
-  //     this._guessCount++;
-  //     guessedArray = this.stringify(guessedNumber);
-  //     result(guessedArray, this._numberToGuess);
-  //   }
-  // }
+  guess(guessedNumber: number) {
+    let guessedArray: string[] = [];
+    if (guessedNumber < 1000 || guessedNumber > 9999) {
+      console.error('You need to guess a 4 digit number');
+    } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
+      console.error('You already tried this guess');
+    } else {
+      this.giveGuessToGuessRecord(guessedNumber);
+      this._guessCount++;
+      guessedArray = this.stringify(guessedNumber);
+      this.result(guessedArray, this._numberToGuess);
+    }
+  }
 
   result(guessedArray: string[], numbertoGuess: number): string {
     const result = this.stringify(numbertoGuess);
@@ -84,9 +91,13 @@ export class CAB {
     return number.toString().split('');
   }
 
-  // giveGuessToGuessRecord(guess: number): void {
-  //   this.guessRecord[guess] = result();
-  // }
+  giveGuessToGuessRecord(guess: number): void {
+    this.guessRecord[guess] = this.result(this.stringify(guess), this._numberToGuess);
+  }
 }
 
-new CAB();
+let game = new CAB();
+game.guess(9632);
+game.guess(9214);
+game.guess(7152);
+console.log(game.guessRecord);

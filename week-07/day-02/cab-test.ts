@@ -117,3 +117,16 @@ test('check result: ', (t: any) => {
   t.equal(actual, expected);
   t.end();
 });
+
+//GuessRecord()
+test('record guess: ', (t: any) => {
+  const game = new CAB();
+  game.giveGuessToGuessRecord(6239);
+  game.giveGuessToGuessRecord(6237);
+  game.giveGuessToGuessRecord(6235);
+  const actual = Object.keys(game.guessRecord);
+  const expected = ['6235', '6237', '6239'];
+
+  t.deepEqual(actual, expected);
+  t.end();
+});
