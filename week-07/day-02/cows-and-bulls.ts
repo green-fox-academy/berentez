@@ -7,7 +7,7 @@ export class CAB {
   private _numberToGuess: number;
   gameState: 'playing' | 'finished';
   private _guessCount: number;
-  private guessRecord: string[];
+  private guessRecord: Object;
 
   constructor() {
     this.gameState = 'playing';
@@ -35,27 +35,57 @@ export class CAB {
     return Math.floor(Math.random() * 10);
   }
 
-  guess(guessedNumber: number) {
-    let guessedArray: string[] = [];
-    if (guessedNumber < 1000 || guessedNumber > 9999) {
-      console.error('You need to guess a 4 digit number');
-    } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
-      console.error('You already tried this guess');
-    } else {
-      this._guessCount++;
-      guessedArray = this.stringify(guessedNumber);
+  // guess(guessedNumber: number) {
+  //   let guessedArray: string[] = [];
+  //   if (guessedNumber < 1000 || guessedNumber > 9999) {
+  //     console.error('You need to guess a 4 digit number');
+  //   } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
+  //     console.error('You already tried this guess');
+  //   } else {
+  //     this.giveGuessToGuessRecord(guessedNumber);
+  //     this._guessCount++;
+  //     guessedArray = this.stringify(guessedNumber);
+  //     result(guessedArray);
+  //   }
+  // }
+
+  // result(guessedArray: string[]): string {
+  //   const result = this.stringify(this._numberToGuess);
+  //   const cows: number = this.checkCows(guessedArray, result);
+  //   const bulls: number = this.chechBulls(guessedArray, result);
+  // }
+
+  checkCows(guessedArray: string[], result: string[]): number {
+    let cows: number = 0;
+    for (let i: number = 0; i < guessedArray.length; i++) {
+      if (guessedArray[i] === result[i]) {
+        cows++;
+      }
     }
+    return cows;
+  }
+
+  checkBulls(guessedArray: string[], result: string[]): number {
+    let bulls: number = 0;
+    for (let i: number = 0; i < guessedArray.length; i++) {
+      for (let n: number = 0; n < result.length; n++) {
+        if (i !== n) {
+          if (guessedArray[i] === result[n]) {
+            bulls++;
+          }
+        }
+      }
+    }
+    return bulls;
   }
 
   stringify(number: number) {
     return number.toString().split('');
   }
 
-  giveGuessToGuessRecord(): void {}
+  // giveGuessToGuessRecord(guess: number): void {
+  //   this.guessRecord[guess] = result();
+  // }
 }
-
-//https://www.voidcanvas.com/make-console-log-output-colorful-and-stylish-in-browser-node
-// console.log('\x1b[33m%s\x1b[0m', 'I Am Using Yellow');
-// console.log('\x1b[44m%s\x1b[0m', 'Background Color Is Blue');
 
 new CAB();

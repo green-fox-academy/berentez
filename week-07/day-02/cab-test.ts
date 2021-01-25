@@ -56,6 +56,54 @@ test('number to string array: ', (t: any) => {
 
 // checkFourDigit() test
 
-// test('If the generated array has 0 in the 1st and 2nd position it calls randomNUmber again: ', (t: any) => ){
-//     const game = new CAB();
-// };
+test('If the generated array has 0 in the 1st and 2nd position it calls randomNUmber again: ', (t: any) => {
+  const game = new CAB();
+  const array = [0, 4, 6, 7];
+  game.checkFourDigit(array);
+  const actual: number = array[0];
+  function range() {
+    let number: number = 0;
+    for (let i: number = 1; i < 10; i++) {
+      if (i === array[0]) {
+        number = i;
+        break;
+      }
+    }
+    return number;
+  }
+  const expected = range();
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+//Check number of cows
+
+test('check for cows: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.checkCows(['7', '8', '9', '10'], ['7', '8', '2', '10']);
+  const expected = 3;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+//Check number of bulls #1
+test('check for bulls: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.checkBulls(['7', '8', '9', '10'], ['10', '9', '8', '7']);
+  const expected = 4;
+
+  t.equal(actual, expected);
+  t.end();
+});
+
+//Check number of bulls #2
+test('check for bulls: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.checkBulls(['7', '8', '9', '10'], ['7', '9', '8', '7']);
+  const expected = 3;
+
+  t.equal(actual, expected);
+  t.end();
+});
