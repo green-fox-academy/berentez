@@ -23,6 +23,10 @@ export class CAB {
     return this._guessRecord;
   }
 
+  get guessCount() {
+    return this._guessCount;
+  }
+
   randomNumber(): number {
     let numberArray: number[] = [];
     for (let i: number = 0; i < 4; i++) {
@@ -42,17 +46,30 @@ export class CAB {
     return Math.floor(Math.random() * 10);
   }
 
-  guess(guessedNumber: number) {
+  guess(guessedNumber: number): string {
     let guessedArray: string[] = [];
+    let guessResult: string = '';
     if (guessedNumber < 1000 || guessedNumber > 9999) {
-      console.error('You need to guess a 4 digit number');
+      console.error('\x1b[41m%s\x1b[0m', 'You need to guess a 4 digit number');
     } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
-      console.error('You already tried this guess');
+      console.error('\x1b[41m%s\x1b[0m', 'You already tried this guess');
     } else {
       this.giveGuessToGuessRecord(guessedNumber);
       this._guessCount++;
       guessedArray = this.stringify(guessedNumber);
-      this.result(guessedArray, this._numberToGuess);
+      let guessResult = this.result(guessedArray, this._numberToGuess);
+      this.afterGuess(guessResult);
+    }
+    return guessResult;
+  }
+
+  afterGuess(guessResult: string): void {
+    if (guessResult === 'The result is: 4 cow, 0 bull.') {
+      this.gameState = 'finished';
+      console.log('you are the winner!');
+    } else {
+      console.log(this.guessRecord);
+      console.log(`You guessed ${this.guessCount} times.`);
     }
   }
 
@@ -96,8 +113,14 @@ export class CAB {
   }
 }
 
-let game = new CAB();
-game.guess(9632);
-game.guess(9214);
-game.guess(7152);
-console.log(game.guessRecord);
+const game = new CAB();
+
+console.log(game.guess(1534));
+console.log(game.guess(1244));
+console.log(game.guess(1111));
+console.log(game.guess(65));
+console.log(game.guess(3216));
+console.log(game.guess(9999));
+console.log(game.guess(9999));
+console.log(game.guess(12395));
+game.guessRecord;

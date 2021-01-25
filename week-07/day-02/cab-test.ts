@@ -130,3 +130,13 @@ test('record guess: ', (t: any) => {
   t.deepEqual(actual, expected);
   t.end();
 });
+
+// Constructor
+test('Constructor: ', (t: any) => {
+  const game = new CAB();
+  const actual = game.gameState;
+  const expected = 'playing';
+
+  t.equal(actual, expected);
+  t.end();
+});
