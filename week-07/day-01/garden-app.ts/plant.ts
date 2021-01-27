@@ -1,4 +1,4 @@
-export class Plant {
+export abstract class Plant {
   color: string;
   waterLevel: number;
   needsWater: boolean;
