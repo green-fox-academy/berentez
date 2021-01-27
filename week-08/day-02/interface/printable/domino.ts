@@ -20,3 +20,12 @@ export class Domino implements Printable {
     console.log(`Domino A side: ${this.sideA}, B side: ${this.sideB}`);
   }
 }
+
+const dominoes: Domino[] = [];
+for (let i: number = 0; i < 5; i++) {
+  dominoes.push(new Domino());
+}
+
+for (let domino of dominoes) {
+  domino.printAllFields();
+}
