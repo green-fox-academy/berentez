@@ -23,13 +23,19 @@ interface Reservationy {
 
 class Reservation implements Reservationy {
   private static bookingNumber: number = 0;
+  private counter: number;
   private code: string;
   private dow: string;
 
   constructor() {
-    Reservation.bookingNumber++;
     this.code = this.getCodeBooking();
     this.dow = this.getDowBooking();
+    this.addCounterToBooking();
+  }
+
+  private addCounterToBooking(): void {
+    Reservation.bookingNumber++;
+    this.counter = Reservation.bookingNumber;
   }
 
   getDowBooking(): string {
@@ -48,7 +54,7 @@ class Reservation implements Reservationy {
   }
 
   printBooking(): void {
-    console.log(`Booking${Reservation.bookingNumber} ${this.code} for ${this.dow}`);
+    console.log(`Booking${this.counter} ${this.code} for ${this.dow}`);
   }
 }
 
