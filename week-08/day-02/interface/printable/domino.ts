@@ -22,7 +22,7 @@ export class Domino implements Printable {
 }
 
 const dominoes: Domino[] = [];
-for (let i: number = 0; i < 5; i++) {
+for (let i: number = 0; i < 20; i++) {
   dominoes.push(new Domino());
 }
 
