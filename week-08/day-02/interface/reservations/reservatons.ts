@@ -39,7 +39,7 @@ class Reservation implements Reservationy {
   }
 
   getDowBooking(): string {
-    const days: string[] = ['MON', 'THU', 'WED', 'THR', 'FRY', 'SAT', 'SUN'];
+    const days: string[] = ['MON', 'TUE', 'WED', 'THU', 'FRY', 'SAT', 'SUN'];
     let index: number = Math.floor(Math.random() * 7);
     return days[index];
   }
