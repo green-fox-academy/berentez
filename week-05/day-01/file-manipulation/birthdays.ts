@@ -12,14 +12,8 @@ const fs = require('fs');
 
 function mostBirthsINYears(file: string): Object {
   const read = fs.readFileSync(file, 'utf-8');
-  let date = splitByComma(read);
-  const dateSplit = date.join('-').split('-');
-  const stringYear: string[] = [];
-  for (let i: number = 0; i < dateSplit.length; i++) {
-    if (i % 3 === 0) {
-      stringYear.push(dateSplit[i]);
-    }
-  }
+  const date = splitByComma(read);
+  const stringYear: string[] = getYear(date);
   let year: number[] = [];
   year = stringYear.sort().map((value) => {
     return parseInt(value);
@@ -48,4 +42,15 @@ function splitByComma(readFile: string): string[] {
     }
   }
   return date;
+}
+
+function getYear(splittedFile: string[]) {
+  const dateSplit = splittedFile.join('-').split('-');
+  const stringYear: string[] = [];
+  for (let i: number = 0; i < dateSplit.length; i++) {
+    if (i % 3 === 0) {
+      stringYear.push(dateSplit[i]);
+    }
+  }
+  return stringYear;
 }
