@@ -12,23 +12,17 @@ const fs = require('fs');
 
 function mostBirthsINYears(file: string): Object {
   const read = fs.readFileSync(file, 'utf-8');
-  const date = splitByComma(read);
+  const date: string[] = splitByComma(read);
   const stringYear: string[] = getYear(date);
+
+  // transform into integer
   let year: number[] = [];
   year = stringYear.sort().map((value) => {
     return parseInt(value);
   });
 
-  let mostYear = {};
-
-  for (let i: number = 0; i < year.length; i++) {
-    if (mostYear.hasOwnProperty(year[i]) === false) {
-      mostYear[year[i]] = 1;
-    } else if (mostYear.hasOwnProperty(year[i]) === true) {
-      mostYear[year[i]] += 1;
-    }
-  }
-  return mostYear;
+  let object = countYearsInObject(year);
+  return object;
 }
 
 console.log(mostBirthsINYears('births.csv'));
@@ -53,4 +47,16 @@ function getYear(splittedFile: string[]) {
     }
   }
   return stringYear;
+}
+
+function countYearsInObject(yearArray: number[]): Object {
+  let mostYear = {};
+  for (let i: number = 0; i < yearArray.length; i++) {
+    if (mostYear.hasOwnProperty(yearArray[i]) === false) {
+      mostYear[yearArray[i]] = 1;
+    } else if (mostYear.hasOwnProperty(yearArray[i]) === true) {
+      mostYear[yearArray[i]] += 1;
+    }
+  }
+  return mostYear;
 }
