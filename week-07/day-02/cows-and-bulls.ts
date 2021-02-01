@@ -3,11 +3,9 @@
 // The CAB object should have a counter where it counts the guesses.
 // The CAB object should have a guess method, which returns a string of the guess result
 
-import { getUnpackedSettings } from 'http2';
-
 export class CAB {
   private _numberToGuess: number;
-  gameState: 'playing' | 'finished';
+  gameState: 'playing' | 'finished'; // boolean would be better
   private _guessCount: number;
   private _guessRecord: Object;
 
@@ -26,7 +24,7 @@ export class CAB {
   get guessCount() {
     return this._guessCount;
   }
-
+  //Generate random number between --
   randomNumber(): number {
     let numberArray: number[] = [];
     for (let i: number = 0; i < 4; i++) {
@@ -38,7 +36,7 @@ export class CAB {
 
   checkFourDigit(numberArray: number[]): void {
     if (numberArray[0] === 0) {
-      numberArray[0] += Math.ceil(Math.random() * 9);
+      numberArray[0] = Math.ceil(Math.random() * 9);
     }
   }
 
@@ -51,7 +49,7 @@ export class CAB {
     let guessResult: string = '';
     if (guessedNumber < 1000 || guessedNumber > 9999) {
       console.error('\x1b[41m%s\x1b[0m', 'You need to guess a 4 digit number');
-    } else if (this.guessRecord.hasOwnProperty(guessedNumber)) {
+    } else if (this.guessRecord[guessedNumber]) {
       console.error('\x1b[41m%s\x1b[0m', 'You already tried this guess');
     } else {
       this.giveGuessToGuessRecord(guessedNumber);
@@ -103,7 +101,7 @@ export class CAB {
     }
     return bulls;
   }
-
+  //////////////////////////////////
   stringify(number: number) {
     return number.toString().split('');
   }
