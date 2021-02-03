@@ -1,0 +1,3 @@
+[submodule "week-09/wanderer/wanderer-typescript"]
+	path = week-09/wanderer/wanderer-typescript
+	url = https://github.com/berentez/wanderer-typescript.git
