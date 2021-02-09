@@ -29,3 +29,30 @@ for (let i: number = 0; i < lottery.length; i++) {
 }
 
 console.log(numberArray);
+
+let numbers: number[] = [];
+numbers = numberArray
+  .join(';')
+  .split(';')
+  .map((value) => {
+    return parseInt(value);
+  });
+
+fs.writeFileSync('lottery.txt', numbers.toString());
+// console.log(numbers);
+
+function countNumbersInObject(numbers: number[]): Object {
+  let mostNumber = {};
+  for (let i: number = 0; i < numbers.length; i++) {
+    if (mostNumber.hasOwnProperty(numbers[i]) === false) {
+      mostNumber[numbers[i]] = 1;
+    } else if (mostNumber.hasOwnProperty(numbers[i]) === true) {
+      mostNumber[numbers[i]] += 1;
+    }
+  }
+  return mostNumber;
+}
+
+let object = countNumbersInObject(numbers);
+
+// console.log(object);
