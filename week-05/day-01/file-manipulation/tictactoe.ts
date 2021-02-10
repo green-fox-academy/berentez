@@ -3,18 +3,17 @@
 // We have provided you some example files (draw.txt, win-x.txt, win-o.txt)
 // Return "X", "O" or "Draw" based on the input file's content
 import * as fs from 'fs';
-import elementFinder = require('../../../week-03/day-03/old-exercises/element-finder');
 
 console.log(ticTacResult('win-o.txt'));
 // Should print "O"
 
-// console.log(ticTacResult('win-x.txt'));
+console.log(ticTacResult('win-x.txt'));
 // Should print "X"
 
-// console.log(ticTacResult('draw.txt'));
+console.log(ticTacResult('draw.txt'));
 // Should print "Draw"
 
-function ticTacResult(file: string): any {
+function ticTacResult(file: string): string {
   let game: string;
   try {
     game = fs.readFileSync(file, 'utf8');
@@ -23,7 +22,7 @@ function ticTacResult(file: string): any {
   }
   let gameMatrix: string[][] = makeMatrix(game);
 
-  return gameMatrix;
+  return calculateWinner(gameMatrix);
 }
 
 function makeMatrix(game: string) {
@@ -37,8 +36,104 @@ function makeMatrix(game: string) {
   return matrix;
 }
 
-function checkRaw() {}
+function checkRaw(matrix: string[][]) {
+  let zero: number = 0;
+  let cross: number = 0;
+  for (let i: number = 0; i < matrix.length; i++) {
+    for (let n: number = 0; n < matrix[i].length; n++) {
+      if (matrix[i][n] === 'O') {
+        zero++;
+      } else {
+        cross++;
+      }
+    }
+    if (checkWinner(zero, cross) === 0) {
+      zero = 0;
+      cross = 0;
+    } else {
+      break;
+    }
+  }
+  return checkWinner(zero, cross);
+}
 
-function checkColumn() {}
+function checkColumn(matrix: string[][]) {
+  let zero: number = 0;
+  let cross: number = 0;
+  for (let i: number = 0; i < matrix.length; i++) {
+    for (let n: number = 0; n < matrix[i].length; n++) {
+      if (matrix[n][i] === 'O') {
+        zero++;
+      } else {
+        cross++;
+      }
+    }
+    if (checkWinner(zero, cross) === 0) {
+      zero = 0;
+      cross = 0;
+    } else {
+      break;
+    }
+  }
+  return checkWinner(zero, cross);
+}
 
-function checkDiagonal() {}
+function checkDiagonalDown(matrix: string[][]) {
+  let zero: number = 0;
+  let cross: number = 0;
+  for (let i: number = 0; i < matrix.length; i++) {
+    if (matrix[i][i] === 'O') {
+      zero++;
+    } else {
+      cross++;
+    }
+  }
+  if (checkWinner(zero, cross) === 0) {
+    zero = 0;
+    cross = 0;
+  }
+  return checkWinner(zero, cross);
+}
+
+function checkDiagonalUp(matrix: string[][]) {
+  let zero: number = 0;
+  let cross: number = 0;
+  for (let i: number = 0; i < matrix.length; i++) {
+    if (matrix[2 - i][i] === 'O') {
+      zero++;
+    } else {
+      cross++;
+    }
+  }
+  if (checkWinner(zero, cross) === 0) {
+    zero = 0;
+    cross = 0;
+  }
+  return checkWinner(zero, cross);
+}
+
+function checkWinner(zero: number, cross: number): number {
+  if (zero === 3) {
+    return -2;
+  } else if (cross === 3) {
+    return 1;
+  } else if (zero !== 3 && cross !== 3) {
+    return 0;
+  }
+}
+
+function calculateWinner(matrix: string[][]): string {
+  let winner: number = 0;
+  winner += checkRaw(matrix);
+  winner += checkColumn(matrix);
+  winner += checkDiagonalDown(matrix);
+  winner += checkDiagonalUp(matrix);
+
+  if (winner < 0) {
+    return 'O';
+  } else if (winner > 0) {
+    return 'X';
+  } else if (winner === 0) {
+    return 'Draw';
+  }
+}
