@@ -90,37 +90,4 @@ function getTopNumbers(object: object, values: number[]) {
   return topFiveNum;
 }
 
-// let object = countNumbersInObject(numbers);
-
-// // console.log(object);
-
-// let topFive: any[] = [];
-// for (let number in object) {
-//   topFive.push(number, object[number]);
-// }
-
-// topFive.sort(function (a, b) {
-//   return b[1] - a[1];
-// });
-
-// function topFiveNumbers() {
-//   let topNumber: string;
-//   let topFiveNumber: string[] = [];
-//   for (let k: number = 0; k < 5; k++) {
-//     for (let i: number = 0; i < Object.keys(object).length; i++) {
-//       for (let n: number = 1; n < Object.keys(object).length; n++) {
-//         if (Object.values(object)[i] < Object.values(object)[n]) {
-//           topNumber = Object.keys(object)[n];
-
-//         }
-//       }
-//     }
-//     topFiveNumber.push(topNumber);
-//     object[topNumber] = 0;
-//   }
-//   return topFiveNumber;
-// }
-
-// console.log(topFiveNumbers());
-
 console.log(getTopFive('lottery.csv'));
