@@ -4,41 +4,58 @@ export {};
 import * as fs from 'fs';
 let lotteryNumbers: string;
 
-try {
-  lotteryNumbers = fs.readFileSync('lottery.csv', 'utf-8');
-} catch (err) {
-  console.error('No such file exists.');
+function getTopFive(data: string): object {
+  try {
+    lotteryNumbers = fs.readFileSync(data, 'utf-8');
+  } catch (err) {
+    console.error('No such file exists.');
+  }
+  let clearData: string[] = splitData(lotteryNumbers);
+  removeJunk(clearData);
+  let lotteryNumberList: string[] = getLotteryNumbers(clearData);
+  let numberList: number[] = transformToNumber(lotteryNumberList);
+  // fs.writeFileSync('lottery.txt', numberList.toString());
+  let lotteryObject = countNumbersInObject(numberList);
+
+  return lotteryObject;
 }
 
-let lottery: string[] = lotteryNumbers
-  .split('Ft')
-  .join('-')
-  .split(/-;|\r|\n/);
+function splitData(csv: string): string[] {
+  let lottery: string[] = lotteryNumbers
+    .split('Ft')
+    .join('-')
+    .split(/-;|\r|\n/);
+  return lottery;
+}
 
-for (let i: number = 0; i < lottery.length; i++) {
-  if (lottery[i] === '') {
-    lottery.splice(i, 1);
+function removeJunk(arrayWithJunk: string[]): void {
+  for (let i: number = 0; i < arrayWithJunk.length; i++) {
+    if (arrayWithJunk[i] === '') {
+      arrayWithJunk.splice(i, 1);
+    }
   }
 }
 
-let numberArray: string[] = [];
-for (let i: number = 0; i < lottery.length; i++) {
-  if (i % 5 === 4) {
-    numberArray.push(lottery[i]);
+function getLotteryNumbers(dataList: string[]): string[] {
+  let numberArray: string[] = [];
+  for (let i: number = 0; i < dataList.length; i++) {
+    if (i % 5 === 4) {
+      numberArray.push(dataList[i]);
+    }
   }
+  return numberArray;
 }
 
-console.log(numberArray);
-
-let numbers: number[] = [];
-numbers = numberArray
-  .join(';')
-  .split(';')
-  .map((value) => {
-    return parseInt(value);
-  });
-
-fs.writeFileSync('lottery.txt', numbers.toString());
+function transformToNumber(lotteryList: string[]): number[] {
+  let numbers: number[] = [];
+  numbers = lotteryList
+    .join(';')
+    .split(';')
+    .map((value) => {
+      return parseInt(value);
+    });
+  return numbers;
+}
 
 function countNumbersInObject(numbers: number[]): Object {
   let mostNumber = {};
@@ -52,18 +69,18 @@ function countNumbersInObject(numbers: number[]): Object {
   return mostNumber;
 }
 
-let object = countNumbersInObject(numbers);
+// let object = countNumbersInObject(numbers);
 
-// console.log(object);
+// // console.log(object);
 
-let topFive: any[] = [];
-for (let number in object) {
-  topFive.push(number, object[number]);
-}
+// let topFive: any[] = [];
+// for (let number in object) {
+//   topFive.push(number, object[number]);
+// }
 
-topFive.sort(function (a, b) {
-  return b[1] - a[1];
-});
+// topFive.sort(function (a, b) {
+//   return b[1] - a[1];
+// });
 
 // function topFiveNumbers() {
 //   let topNumber: string;
@@ -84,3 +101,5 @@ topFive.sort(function (a, b) {
 // }
 
 // console.log(topFiveNumbers());
+
+console.log(getTopFive('lottery.csv'));
