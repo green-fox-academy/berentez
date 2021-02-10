@@ -12,7 +12,7 @@
 //      can come between them but if the next character in the licence plate is a vowel then no other letter can come between them
 //  - the licence plate can contain a 2-5 letter long string and no numeric values, only alphabetical
 //  - You can find all the words in the English language in the provided file.
-//    The file is a txt file and you have to parse it to create a list of words from it. You can find the source file with the words here here
+//    The file is a txt file and you have to parse it to create a list of words from it. You can find the source file with the words
 
 // Your task is
 
@@ -32,17 +32,31 @@
 // expected output: {ardor, ardors, ardour, ardours, readout, readouts, redo, redo, redoed, redo, redoes, redo, redoing, redo, redone, redo, redos, redouble, redoubled, redouble, redoubles, redouble, redoubling, redoubt, redoubts, redound, redounded, redound, redounding, redound, redounds}
 export {};
 import * as fs from 'fs';
+let vocublary: string;
 
-function licencePlate(licence: string) {
+function licencePlate(licence: string): any {
   if (licence.length !== 3) {
     throw new Error('Uncorrect input');
   }
 
   try {
-    const vocublary = fs.readFileSync('words.txt', 'utf8');
+    vocublary = fs.readFileSync('words.txt', 'utf8');
   } catch (err) {
-    console.error('File not found!');
+    console.error('No such file exists.');
   }
+  let wordList: string[] = splitData(vocublary);
+  return wordList;
 }
 
-licencePlate('lkj');
+console.log(licencePlate('lkj'));
+
+// let number: string = '0123456789    ';
+
+// for (let i: number = 0; i < number.length; i++) {
+//   console.log(number.charCodeAt(i));
+// }
+
+function splitData(txt: string): string[] {
+  let wordList: string[] = txt.split(/\t|\r|\n|\r\n|\n\r/);
+  return wordList;
+}
