@@ -4,7 +4,7 @@ export {};
 import * as fs from 'fs';
 let lotteryNumbers: string;
 
-function getTopFive(data: string): object {
+function getTopFive(data: string): number[] {
   try {
     lotteryNumbers = fs.readFileSync(data, 'utf-8');
   } catch (err) {
@@ -16,12 +16,13 @@ function getTopFive(data: string): object {
   let numberList: number[] = transformToNumber(lotteryNumberList);
   // fs.writeFileSync('lottery.txt', numberList.toString());
   let lotteryObject = countNumbersInObject(numberList);
+  let value: number[] = valueSort(lotteryObject);
 
-  return lotteryObject;
+  return getTopNumbers(lotteryObject, value);
 }
 
 function splitData(csv: string): string[] {
-  let lottery: string[] = lotteryNumbers
+  let lottery: string[] = csv
     .split('Ft')
     .join('-')
     .split(/-;|\r|\n/);
@@ -67,6 +68,26 @@ function countNumbersInObject(numbers: number[]): Object {
     }
   }
   return mostNumber;
+}
+
+function valueSort(numbers: object): number[] {
+  return Object.values(numbers).sort().reverse();
+}
+
+function getTopNumbers(object: object, values: number[]) {
+  let topFiveNum: number[] = [];
+  for (let i: number = 0; i < 5; i++) {
+    for (let n: number = 0; n < Object.keys(object).length; n++) {
+      if (object.hasOwnProperty(n)) {
+        if (object[n] === values[i]) {
+          topFiveNum.push(n);
+          object[n] = 0;
+          break;
+        }
+      }
+    }
+  }
+  return topFiveNum;
 }
 
 // let object = countNumbersInObject(numbers);
