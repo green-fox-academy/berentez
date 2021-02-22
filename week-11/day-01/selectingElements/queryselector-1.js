@@ -15,3 +15,10 @@ const conceitedKing = container.querySelectorAll('.asteroid');
 for (let i = 0; i < conceitedKing.length; i++){
     console.log(conceitedKing[i]);
 }
+
+//4.
+
+const noBusiness = document.querySelectorAll('div');
+for (let i = 0; i < noBusiness.length; i++){
+    console.log(noBusiness[i]);
+}
