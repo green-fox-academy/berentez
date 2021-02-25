@@ -48,7 +48,6 @@ document.addEventListener('click', addTree);
 
 function addTree() {
   const newTree: HTMLDivElement = document.createElement('div');
-  const newSpan: HTMLElement = document.createElement('span');
   if (Math.round(Math.random()) === 0) {
     newTree.setAttribute('class', 'tree one');
     newTree.setAttribute('style', `top: -35px; right: ${randomNum()}vw`);
@@ -57,14 +56,20 @@ function addTree() {
     newTree.setAttribute('style', `top: -45px; right: ${randomNum()}vw`);
   }
 
-  addSpan(newTree, newSpan);
+  addSpan(newTree);
 
   horizon.appendChild(newTree);
 }
 
-function addSpan(tree, span) {
-  for (let i: number = 0; i < 4; i++) {
-    console.log(i);
-    tree.appendChild(span);
+function addSpan(tree) {
+  let spanNumber: number = 0;
+  if (tree.classList.contains('two')) {
+    spanNumber = 4;
+  } else {
+    spanNumber = 3;
+  }
+
+  for (let i: number = 0; i < spanNumber; i++) {
+    tree.appendChild(document.createElement('span'));
   }
 }
