@@ -20,7 +20,7 @@ function randomNum() {
 document.addEventListener('click', addStar);
 
 function addStar(e) {
-  const newStar = document.createElement('div');
+  const newStar: HTMLDivElement = document.createElement('div');
   newStar.classList.add('star');
   // I had to use pixel for this to work
   newStar.setAttribute('style', `left:${e.clientX}px; top: ${e.clientY}px`);
@@ -33,8 +33,6 @@ function addStar(e) {
 
 const stars = document.querySelectorAll('.star');
 
-console.log(stars[Math.floor(Math.random() * stars.length)]);
-
 function fallingStars() {
   // for (let i = 0; i < stars.length; i++) {
   stars[Math.floor(Math.random() * stars.length)].setAttribute('class', 'star fallen');
@@ -42,3 +40,31 @@ function fallingStars() {
 }
 
 setInterval(fallingStars, 1000);
+
+// Make trees grow on click!
+const horizon = document.querySelector('div.horizon');
+
+document.addEventListener('click', addTree);
+
+function addTree() {
+  const newTree: HTMLDivElement = document.createElement('div');
+  const newSpan: HTMLElement = document.createElement('span');
+  if (Math.round(Math.random()) === 0) {
+    newTree.setAttribute('class', 'tree one');
+    newTree.setAttribute('style', `top: -35px; right: ${randomNum()}vw`);
+  } else {
+    newTree.setAttribute('class', 'tree two');
+    newTree.setAttribute('style', `top: -45px; right: ${randomNum()}vw`);
+  }
+
+  addSpan(newTree, newSpan);
+
+  horizon.appendChild(newTree);
+}
+
+function addSpan(tree, span) {
+  for (let i: number = 0; i < 4; i++) {
+    console.log(i);
+    tree.appendChild(span);
+  }
+}
