@@ -1,4 +1,4 @@
-// Write the image's url to the console.
+// '// Write the image's url to the console.
 
 const image = document.querySelector('img');
 console.log('original image: ', image.getAttribute('src'));
