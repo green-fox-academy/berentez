@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
+}
+
+.item {
+  height: 200px;
+  min-width: 200px;
+}
+
+.green {
+  background: rgb(81, 212, 0);
+}
+
+.yellow {
+  background: rgb(255, 214, 42);
+}
+
+.purple {
+  background: rgb(176, 42, 255);
+}
