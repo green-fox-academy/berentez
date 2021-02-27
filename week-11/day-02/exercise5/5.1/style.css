@@ -9,6 +9,7 @@
   display: flex;
   align-items: center;
   flex-direction: column;
+  min-width: 800px;
 }
 
 #header {
@@ -26,7 +27,7 @@
 }
 
 .side {
-  width: 15%;
+  min-width: 15%;
   height: 100%;
 }
 
