@@ -1,0 +1,21 @@
+.container {
+  display: flex;
+  width: 700px;
+  height: 250px;
+  margin: 0 auto;
+  background: rgb(255, 214, 42);
+  justify-content: flex-start;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li.item {
+  background: rgb(176, 42, 255);
+  width: 100px;
+  height: 100px;
+  align-self: center;
+  margin-right: 7px;
+}
