@@ -1,0 +1,46 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+ul {
+  list-style-type: none;
+}
+
+#wrapper {
+  background: linear-gradient(0.25turn, rgb(170, 170, 170), rgb(243, 243, 242), rgb(170, 170, 170));
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+h1 {
+  font-weight: 40;
+}
+
+#viewer {
+  width: 90%;
+  height: 50.625%;
+  display: flex;
+}
+
+.navigation {
+  width: 5%;
+  height: 100%;
+  background: white;
+}
+
+.picture {
+  width: 90%;
+  height: 100%;
+  background: steelblue;
+}
+
+#thumbnails {
+  height: 10%;
+  width: 50%;
+  background: cornflowerblue;
+}
