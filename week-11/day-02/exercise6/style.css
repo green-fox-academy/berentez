@@ -6,9 +6,16 @@
 .wrapper {
   width: 100vw;
   height: 100vh;
-  max-width: 1900px;
+  max-width: 1800px;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#content {
+  display: flex;
+  height: 100%;
+  width: 90%;
 }
 
 ul {
@@ -21,7 +28,7 @@ nav {
   background: rgb(176, 42, 255);
   display: flex;
   width: 90%;
-  height: 15%;
+  height: 10%;
   align-items: center;
   justify-content: space-between;
 }
@@ -44,7 +51,7 @@ ul.right {
 
 li.left {
   background: rgb(42, 234, 255);
-  height: 75%;
+  height: 95%;
   margin-left: 3%;
 }
 
@@ -62,11 +69,22 @@ li.three {
 
 li.right {
   background: rgb(42, 234, 255);
-  height: 75%;
+  height: 80%;
   width: 35%;
   margin-left: 10%;
 }
 
 /* main-area */
+#main-content {
+  background: rgb(255, 214, 42);
+  height: 100%;
+  width: 100%;
+}
 
 /* sidebar */
+
+#sidebar {
+  background: rgb(81, 212, 0);
+  height: 100%;
+  width: 40vw;
+}
