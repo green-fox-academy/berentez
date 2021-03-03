@@ -36,6 +36,10 @@ body {
   align-items: center;
 }
 
+#navigation:hover {
+  background-color: lightgrey;
+}
+
 .arrowright {
   transform: rotate(180deg);
 }
