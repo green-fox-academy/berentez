@@ -34,17 +34,32 @@ function addStar(e) {
 const stars = document.querySelectorAll('.star');
 
 function fallingStars() {
-  // for (let i = 0; i < stars.length; i++) {
   stars[Math.floor(Math.random() * stars.length)].setAttribute('class', 'star fallen');
-  // }
 }
 
 setInterval(fallingStars, 1000);
 
-// Make trees grow on click!
-const horizon = document.querySelector('div.horizon');
+// Make trees grow on click!////////////////////////////////////////////////////////////////////Not wrorking
+// Need to do other staff have to come back!
 
-document.addEventListener('click', addTree);
+const tree1: HTMLElement = document.querySelectorAll('.tree')[0] as HTMLElement;
+const tree2: HTMLElement = document.querySelectorAll('.tree')[1] as HTMLElement;
+const span: HTMLElement = tree1.querySelector('span');
+let newNode: HTMLElement = document.createElement('span');
+
+function grow(): void {
+  newNode.classList.add('new');
+  tree1.insertBefore(newNode, span);
+}
+
+tree1.addEventListener('click', grow);
+// for (let i: number = 0; i < tree.length; i++) {
+//   tree[i].addEventListener('click', grow);
+// }
+
+// ++ function:  more trees
+document.addEventListener('auxclick', addTree);
+const horizon = document.querySelector('div.horizon');
 
 function addTree() {
   const newTree: HTMLDivElement = document.createElement('div');
