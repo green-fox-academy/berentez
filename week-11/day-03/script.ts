@@ -3,6 +3,8 @@ const pictures: NodeListOf<Element> = document.querySelectorAll('#thumbnails img
 const title = document.querySelector('.discription h2');
 const text = document.querySelector('.discription p');
 
+//needs refactoring
+
 rightArraw.onclick = () => {
   const activePicture: HTMLElement = document.querySelector('#picture img');
   const activeThumbnail: HTMLElement = document.querySelector('.activethumbnail');

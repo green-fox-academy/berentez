@@ -1,3 +1,4 @@
+CREATE DATABASE todo ();
 CREATE TABLE todo (
   id INT PRIMARY KEY,
   task_name VARCHAR(50),
