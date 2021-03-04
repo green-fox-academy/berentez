@@ -74,7 +74,7 @@ body {
   color: rgb(124, 123, 122);
   margin: 1%;
   position: absolute;
-  bottom: 10%;
+  top: 30%;
 }
 
 #thumbnails {
@@ -99,5 +99,6 @@ body {
   border: 0.2rem solid goldenrod;
 }
 
-/* .activethumbnail {
-} */
+.activethumbnail {
+  height: 80%;
+}

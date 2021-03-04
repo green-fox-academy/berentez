@@ -1,5 +1,7 @@
 const rightArraw: HTMLElement = document.querySelector('#navigation.right');
 const pictures: NodeListOf<Element> = document.querySelectorAll('#thumbnails img');
+const title = document.querySelector('.discription h2');
+const text = document.querySelector('.discription p');
 
 rightArraw.onclick = () => {
   const activePicture: HTMLElement = document.querySelector('#picture img');
@@ -9,6 +11,8 @@ rightArraw.onclick = () => {
       activePicture.setAttribute('src', pictures[i + 1].getAttribute('src'));
       pictures[i].setAttribute('class', '');
       pictures[i + 1].setAttribute('class', 'activethumbnail');
+      title.textContent = pictures[i + 1].getAttribute('title');
+      text.textContent = pictures[i + 1].getAttribute('text');
     }
   }
 };
@@ -23,6 +27,8 @@ leftArraw.onclick = () => {
       activePicture.setAttribute('src', pictures[i + -1].getAttribute('src'));
       pictures[i].setAttribute('class', '');
       pictures[i - 1].setAttribute('class', 'activethumbnail');
+      title.textContent = pictures[i + -1].getAttribute('title');
+      text.textContent = pictures[i + -1].getAttribute('text');
     }
   }
 };
