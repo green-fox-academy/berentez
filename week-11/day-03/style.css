@@ -15,6 +15,7 @@ body {
   align-items: center;
   justify-content: center;
   position: relative;
+  min-width: 1000px;
 }
 
 /* main-picture area */
@@ -75,6 +76,7 @@ body {
   margin: 1%;
   position: absolute;
   top: 30%;
+  font-size: 1.8vh;
 }
 
 #thumbnails {
@@ -100,5 +102,5 @@ body {
 }
 
 .activethumbnail {
-  height: 80%;
+  border: cadetblue;
 }
