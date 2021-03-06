@@ -21,7 +21,7 @@ body {
 /* main-picture area */
 
 #viewer {
-  height: 45%;
+  height: 60%;
   width: 80%;
   background: grey;
   box-shadow: 2px 5px 5px 2px rgba(153, 153, 153, 0.9);
@@ -63,6 +63,7 @@ body {
   position: absolute;
   background: black;
   opacity: 0.8;
+  font-size: 2vh;
 }
 
 .discription h2 {
@@ -76,31 +77,30 @@ body {
   margin: 1%;
   position: absolute;
   top: 30%;
-  font-size: 1.8vh;
+  font-size: 2vh;
 }
 
 #thumbnails {
-  height: 10%;
+  height: 9%;
   width: 50%;
-  position: absolute;
-  margin: 0 auto;
-  bottom: 16%;
   display: flex;
+  justify-content: center;
 }
 
 #thumbnails img {
-  width: 9%;
+  width: 8%;
+  height: 90%;
   margin: 1%;
-  border: 0.3rem solid white;
+  border: 0.3rem solid silver;
   border-radius: 4px;
   object-fit: cover;
   box-shadow: 0px 6px 7px 0px rgba(50, 50, 50, 0.91);
 }
 
 #thumbnails img:hover {
-  border: 0.2rem solid goldenrod;
+  border: 0.4rem solid goldenrod;
 }
 
-.activethumbnail {
-  border: cadetblue;
+#thumbnails img.activethumbnail {
+  border: 0.4rem solid orange;
 }
