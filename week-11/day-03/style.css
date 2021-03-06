@@ -103,4 +103,5 @@ body {
 
 #thumbnails img.activethumbnail {
   border: 0.4rem solid orange;
+  box-shadow: 0px 10px 12px 0px rgba(50, 50, 50, 0.91);
 }

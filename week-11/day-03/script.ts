@@ -8,7 +8,7 @@ const leftArraw: HTMLElement = document.querySelector('#navigation.left');
 
 //////////////////////////////////
 
-//arriw right
+//arrow right
 rightArraw.onclick = () => {
   changeByArrow(1);
 };
@@ -31,7 +31,7 @@ function changeByArrow(direction: number) {
   const activeThumbnail: HTMLElement = document.querySelector('.activethumbnail');
   for (let i: number = 0; i < thumbnails.length; i++) {
     if (thumbnails[i].getAttribute('src') === activeThumbnail.getAttribute('src')) {
-      changePic(i, direction);
+      checkPic(i, direction);
     }
   }
 }
@@ -43,4 +43,14 @@ function changePic(i: number, direction?: number) {
   thumbnails[i + direction].setAttribute('class', 'activethumbnail');
   title.textContent = thumbnails[i + direction].getAttribute('title');
   text.textContent = thumbnails[i + direction].getAttribute('text');
+}
+
+function checkPic(i, direction: number) {
+  if (direction === 1 && i === thumbnails.length - 1) {
+    changePic(-1, direction);
+  } else if (direction === -1 && i === 0) {
+    changePic(thumbnails.length, direction);
+  } else {
+    changePic(i, direction);
+  }
 }
