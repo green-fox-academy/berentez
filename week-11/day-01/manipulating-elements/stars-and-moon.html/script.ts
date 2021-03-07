@@ -4,22 +4,26 @@
 
 const section: HTMLElement = document.querySelector('.world');
 
-for (let i: number = 0; i < 100; i++) {
-  const newStar: HTMLDivElement = document.createElement('div');
-  newStar.classList.add('star');
-  newStar.setAttribute('style', `left:${randomNum()}%; top: ${randomNum()}%`);
-  section.appendChild(newStar);
+function addRandomStars(starNumber: number): void {
+  for (let i: number = 0; i < starNumber; i++) {
+    const newStar: HTMLDivElement = document.createElement('div');
+    newStar.classList.add('star');
+    newStar.setAttribute('style', `left:${randomNum()}%; top: ${randomNum()}%`);
+    section.appendChild(newStar);
+  }
 }
 
 //for random coordianates
-function randomNum() {
+function randomNum(): number {
   return Math.floor(Math.random() * 100);
 }
+
+addRandomStars(10);
 
 // 2) On click anywhere on section.world, add a star beneath the cursor.
 document.addEventListener('click', addStar);
 
-function addStar(e) {
+function addStar(e): void {
   const newStar: HTMLDivElement = document.createElement('div');
   newStar.classList.add('star');
   // I had to use pixel for this to work
@@ -31,25 +35,44 @@ function addStar(e) {
 // That means you should pick a random star on random interval and give it fallen class,
 //  until all stars are fallen.
 
-const stars = document.querySelectorAll('.star');
-
-function fallingStars() {
+function fallingStars(): void {
+  const stars: NodeListOf<Element> = document.querySelectorAll('.star');
   stars[Math.floor(Math.random() * stars.length)].setAttribute('class', 'star fallen');
 }
 
-setInterval(fallingStars, 1000);
+function randomInterval(): number {
+  return Math.round(Math.random() * 3000);
+}
+
+setInterval(fallingStars, randomInterval());
 
 // Make trees grow on click!////////////////////////////////////////////////////////////////////Not wrorking
-// Need to do other staff have to come back!
 
-const tree1: HTMLElement = document.querySelectorAll('.tree')[0] as HTMLElement;
-const tree2: HTMLElement = document.querySelectorAll('.tree')[1] as HTMLElement;
+const tree1: HTMLElement = document.querySelectorAll('.one')[0] as HTMLElement;
+const tree2: HTMLElement = document.querySelectorAll('.two')[1] as HTMLElement;
+const tree: NodeListOf<Element> = document.querySelectorAll('.tree');
 const span: HTMLElement = tree1.querySelector('span');
 let newNode: HTMLElement = document.createElement('span');
+
+const topStyle: string[] = ['-35px', '-45px', '-55px', '-65px', '-75px'];
+
+function changeTop(): string {
+  const styleOne = tree1.style;
+  console.log(styleOne);
+  for (let i: number = 0; i < topStyle.length; i++) {
+    if (styleOne.getPropertyValue('top') === topStyle[i]) {
+      console.log(topStyle[i + 1] + 'yO');
+      return topStyle[i + 1];
+    }
+  }
+}
+
+// console.log(tree1.getAttribute('top'));
 
 function grow(): void {
   newNode.classList.add('new');
   tree1.insertBefore(newNode, span);
+  tree1.setAttribute('style', `top: ${changeTop()}`);
 }
 
 tree1.addEventListener('click', grow);
