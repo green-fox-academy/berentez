@@ -4,7 +4,7 @@
 
 const section: HTMLElement = document.querySelector('.world');
 
-for (let i: number = 0; i < 10; i++) {
+for (let i: number = 0; i < 100; i++) {
   const newStar: HTMLDivElement = document.createElement('div');
   newStar.classList.add('star');
   newStar.setAttribute('style', `left:${randomNum()}%; top: ${randomNum()}%`);

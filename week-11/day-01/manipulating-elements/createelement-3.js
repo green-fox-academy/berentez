@@ -12,27 +12,16 @@ const kids = [
     { 'petName': 'Lesser mouse lemur', 'owner': 'Isidor' },
   ];
 
-  //1.
+  //1-2.
 
-  const article = document.querySelector('main');
+  const main = document.querySelector('main');
 
   for (let i = 0; i < kids.length; i++){
-    article.appendChild(document.createElement('article'));
-  }
-
-  //2.
-
-  const articles = document.querySelectorAll('article');
-
-  for (let i = 0; i < articles.length; i++){
-      const owner = document.createElement('h3');
+    const article = main.appendChild(document.createElement('article'));
+    const owner = document.createElement('h3');
       const pet = document.createElement('p');
       owner.textContent = kids[i].owner;
       pet.textContent = kids[i].petName;
-      articles[i].appendChild(owner);
-      articles[i].appendChild(pet);
+      article.appendChild(owner);
+      article.appendChild(pet);
   }
-
-  //3.
-
-article.classList.add('pets');
