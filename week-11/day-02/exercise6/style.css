@@ -6,8 +6,7 @@
 .wrapper {
   width: 100vw;
   height: 1200px;
-  max-width: 1800px;
-  min-width: 1200px;
+  max-width: 1400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -24,13 +23,13 @@ ul {
   list-style-type: none;
 }
 
-h2 {
+h2.main-content {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 140%;
   margin-bottom: 10px;
 }
 
-p {
+p.main-content {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: 100%;
 }
@@ -92,7 +91,7 @@ li.right {
 #main-content {
   background: rgb(255, 214, 42);
   height: 100%;
-  width: 80vw;
+  width: 80%;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -143,7 +142,7 @@ li.right {
 #sidebar {
   background: rgb(81, 212, 0);
   height: 100%;
-  width: 40vw;
+  width: 40%;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
