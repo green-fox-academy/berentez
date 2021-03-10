@@ -1,9 +1,7 @@
-const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 const path = require('path');
 
-const urlencodedParses = bodyParser.urlencoded({extended: false})
 
 app.use(express.static('assets'));
 
@@ -14,12 +12,16 @@ app.get('/', function(req, res){
 
 //Doubling
 app.get('/doubling', function(req, res){
-  res.render('doubling', {qs: req.query});
+  let number = req.query.input;
+  let result = {}; 
+
+  if (number === undefined){
+    result = {"error": "Please provide an input!"}
+  } else {
+      result = {"received": number * 1, "result": number * 2}
+  }
+  res.end(JSON.stringify(result))
 });
 
-app.post('/doubling',  urlencodedParses, function(req, res){
-  console.log(req.body);
-  res.render('doubling', {qs: req.query});
-});
 
 app.listen(3000);
