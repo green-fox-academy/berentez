@@ -1,5 +1,5 @@
-const { application } = require('express');
 const express = require('express');
+const fs = require('fs');
 const app = express();
 const path = require('path');
 
@@ -64,5 +64,66 @@ app.get('/appenda/:word', (req, res) => {
   }
 });
  
+
+//Do until
+
+function sum(number){
+  let result = 0;
+  for (let i = number; i > 0; i--){
+    result += i;
+  }
+  return result;
+}
+
+app.use(express.json());
+
+app.post('/dountil/:action', (req, res) => {
+
+  console.log(req.body);
+  
+  try {
+    fs.writeFileSync('dountil.json', JSON.stringify(req.body));
+    res.status(200).send();
+  }
+  catch(err){
+    res.status(500);
+  }
+  const params = req.params;
+  const {action} = params;
+
+  if (action === 'sum'){
+    try {
+      const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
+      console.log(data)
+
+      res.status(200).send({'result': sum(Object.values(data)[0])});
+    }
+    catch {
+      res.status(500).send();
+    }
+    
+  }
+}); 
+
+// app.get('/dountil/:action', (req, res) => {
+//   const params = req.params;
+//   console.log(params)
+//   const {action} = params;
+//   console.log(action)
+
+//   if (action === 'sum'){
+//     try {
+//       const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
+//       console.log(data)
+
+//       res.status(200).send({'result': sum(Object.values(data)[0])});
+//     }
+//     catch {
+//       res.status(500).send();
+//     }
+    
+//   }
+
+// });
 
 app.listen(3000);
