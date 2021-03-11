@@ -30,9 +30,7 @@ app.get('/doubling', function(req, res){
 //Greeter
 
 app.get('/greeter', function (req, res){
-  // const urlParams = window.location.search.substr(1);
-  // const name = urlParams.get('name')
-  // const title = urlParams.get('title')
+
   const queryParams = req.query
   const name = queryParams.name;
   const title = queryParams.title;
@@ -51,8 +49,6 @@ app.get('/greeter', function (req, res){
       result = {'welcome_message': `Oh, hi there ${name}, my dear ${title}!`}
       res.status(200);
   }
-  console.log(name)
-  console.log(title)
 
   res.end(JSON.stringify(result));
 
