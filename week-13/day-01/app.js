@@ -14,15 +14,21 @@ app.get('/', function(req, res){
 //Doubling
 app.get('/doubling', function(req, res){
   let number = req.query.input;
+  // or you can use -> const { number } = req,query;
   let result = {}; 
 
   if (number === undefined){
-    result = {'error': 'Please provide an input!'}
+    result = {
+      error: 'Please provide an input!'
+    }
+    res.json(result);
   } else {
     // had to multiply by one couse it becomes string.
-      result = {'received': number * 1, 'result': number * 2}
+    const double = parseInt(number) * 2;
+      result = {
+        'received': parseInt(number), 'result': double}
+        res.json(result);
   }
-  res.end(JSON.stringify(result))
 });
 
 
@@ -75,6 +81,14 @@ function sum(number){
   return result;
 }
 
+function factor(number){
+  let result = 1;
+  for (let i = number; i > 0; i--){
+    result *= i;
+  }
+  return result;
+}
+
 app.use(express.json());
 
 app.post('/dountil/:action', (req, res) => {
@@ -91,22 +105,24 @@ app.post('/dountil/:action', (req, res) => {
   const params = req.params;
   const {action} = params;
 
-  if (action === 'sum'){
-    try {
-      const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
-      console.log(data)
-
+  try {
+    const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
+    console.log(data)
+    if (req.body.values === 'sum'){
       res.status(200).send({'result': sum(Object.values(data)[0])});
-    }
-    catch {
-      res.status(500).send();
-    }
-    
-  }
+    } else if ( action === 'factor'){
+      res.status(200).send({'result': factor(Object.values(data)[0])});
+   }
+ }
+ catch {
+   res.status(200).send();
+
+ }
+  
 }); 
 
 // app.get('/dountil/:action', (req, res) => {
-//   const params = req.params;
+//   const params = req.params;)
 //   console.log(params)
 //   const {action} = params;
 //   console.log(action)
