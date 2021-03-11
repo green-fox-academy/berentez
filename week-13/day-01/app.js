@@ -53,6 +53,16 @@ app.get('/greeter', function (req, res){
   res.end(JSON.stringify(result));
 
 });
+
+// AppendA
+app.get('/appenda/:word', (req, res) => {
+  const params = req.params;
+  const {word} = params;
+
+  if (word !== undefined){
+    res.send({'appended': `${word}a`});
+  }
+});
  
 
 app.listen(3000);
