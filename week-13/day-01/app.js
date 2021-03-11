@@ -30,11 +30,12 @@ app.get('/doubling', function(req, res){
 //Greeter
 
 app.get('/greeter', function (req, res){
-  const urlParams = window.location.search.substr(1);
+  // const urlParams = window.location.search.substr(1);
   // const name = urlParams.get('name')
   // const title = urlParams.get('title')
-  const name = req.params[0];
-  const title = req.params[1];
+  const queryParams = req.query
+  const name = queryParams.name;
+  const title = queryParams.title;
   let result = {};
 
   if (name === undefined && title === undefined){
