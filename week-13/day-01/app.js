@@ -2,7 +2,7 @@ const express = require('express');
 const fs = require('fs');
 const app = express();
 const path = require('path');
-
+app.use(express.json());
 
 app.use(express.static('assets'));
 
@@ -89,57 +89,25 @@ function factor(number){
   return result;
 }
 
-app.use(express.json());
-
 app.post('/dountil/:action', (req, res) => {
-
-  console.log(req.body);
-  
-  try {
-    fs.writeFileSync('dountil.json', JSON.stringify(req.body));
-    res.status(200).send();
-  }
-  catch(err){
-    res.status(500);
-  }
   const params = req.params;
-  const {action} = params;
+  const { action } = params;
+  const { until: input } = req.body;
+  const intInput = parseInt(input);
 
-  try {
-    const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
-    console.log(data)
-    if (req.body.values === 'sum'){
-      res.status(200).send({'result': sum(Object.values(data)[0])});
-    } else if ( action === 'factor'){
-      res.status(200).send({'result': factor(Object.values(data)[0])});
-   }
- }
- catch {
-   res.status(200).send();
+  if (input === undefined){
+    const result = {
+      error : "Please provide a number!"
+    }
+    res.json(result);
+  } else if (action === 'sum'){
+    result = sum(intInput);
+    res.json({'result': result});
+  } else if (action === 'factor'){
+    result = factor(intInput);
+    res.json({'result': result});
 
- }
-  
+  }
 }); 
-
-// app.get('/dountil/:action', (req, res) => {
-//   const params = req.params;)
-//   console.log(params)
-//   const {action} = params;
-//   console.log(action)
-
-//   if (action === 'sum'){
-//     try {
-//       const data = JSON.parse(fs.readFileSync('dountil.json', 'utf-8' ));
-//       console.log(data)
-
-//       res.status(200).send({'result': sum(Object.values(data)[0])});
-//     }
-//     catch {
-//       res.status(500).send();
-//     }
-    
-//   }
-
-// });
 
 app.listen(3000);
