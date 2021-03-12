@@ -10,6 +10,7 @@ app.post('/arrays', (req, res) =>{
 
   if (math === undefined || numbers.length === 0){
     res.json({'error': 'Please provide what to do with the numbers!'})
+
   } else if ( math === 'sum'){
     //Sum 
     let result = 0;
@@ -20,6 +21,7 @@ app.post('/arrays', (req, res) =>{
       return result;
     }
     res.json({result : sum()});
+
   } else if ( math === 'multiply'){
     //Multiply
     let result = 1;
@@ -30,7 +32,18 @@ app.post('/arrays', (req, res) =>{
       return result;
     }
     res.json({result : multiply()});
+
+  } else if ( math === 'double'){
+    //Double
+    const double = function() {
+      for (let i= 0; i < numbers.length; i++){
+        numbers[i] = numbers[i] * 2;
+      }
+      return numbers;
+    }
+    res.json({result : double()})
   }
+  
 })
 
 app.listen(PORT, () => {
