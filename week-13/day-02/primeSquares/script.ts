@@ -23,7 +23,6 @@ const primeValidator = (box: HTMLDivElement) => {
 
 // Create a timer that keeps calling the prime validator function until it reaches the last element
 
-// let outerInterval = setInterval(() => {
 let index = 0;
 let interval = setInterval(() => {
   primeValidator(boxes[index]);
