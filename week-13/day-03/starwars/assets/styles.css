@@ -77,7 +77,3 @@ li {
 li:hover {
   color: gray;
 }
-
-.clicked {
-  background-color: red;
-}

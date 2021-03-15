@@ -35,9 +35,9 @@ function renderHTML(data) {
 
 function clickEvent(name, data, index) {
   name.addEventListener('click', function () {
-    const http = new XMLHttpRequest();
-    console.log(data.results[index].films.length);
     for (let i = 0; i < data.results[index].films.length; i++) {
+      const http = new XMLHttpRequest();
+      console.log(data.results[index].films.length);
       console.log(data.results[index].films[i]);
       http.open('GET', `${data.results[index].films[i]}`);
       http.onload = function () {
