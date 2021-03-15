@@ -47,6 +47,10 @@ header label {
   border-radius: 20px;
 }
 
+button:hover {
+  background-color: gray;
+}
+
 #container {
   display: flex;
   height: 80%;
@@ -68,4 +72,12 @@ li {
   font-size: 1.5em;
   color: black;
   padding: 10px;
+}
+
+li:hover {
+  color: gray;
+}
+
+.clicked {
+  background-color: red;
 }

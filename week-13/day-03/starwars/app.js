@@ -1,5 +1,8 @@
 // The input text's content should be sent to the people's api and you should perform a search with it.
 // If you get the response, you should display all the results.
+// If the user clicks on the character's name, then perform another Ajax
+// request and display all the films they appeared in.
+
 const btn = document.querySelector('#btn');
 const search = document.querySelector('#input');
 
@@ -26,5 +29,33 @@ function renderHTML(data) {
     const newName = document.createElement('li');
     newName.innerHTML = data.results[i].name;
     nameDisplay.appendChild(newName);
+    clickEvent(newName, data, i);
   }
+}
+
+function clickEvent(name, data, index) {
+  name.addEventListener('click', function () {
+    const http = new XMLHttpRequest();
+    console.log(data.results[index].films.length);
+    for (let i = 0; i < data.results[index].films.length; i++) {
+      console.log(data.results[index].films[i]);
+      http.open('GET', `${data.results[index].films[i]}`);
+      http.onload = function () {
+        if (http.status >= 200 && http.status < 400) {
+          const filmData = JSON.parse(http.responseText);
+          printFilms(filmData);
+        } else {
+          console.log('We connected to the server, but it returned an error');
+        }
+      };
+      http.send();
+    }
+  });
+}
+
+function printFilms(data) {
+  const filmDisplay = document.querySelector('.films');
+  const film = document.createElement('li');
+  film.innerHTML = data.title;
+  filmDisplay.appendChild(film);
 }
