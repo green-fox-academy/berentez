@@ -10,6 +10,7 @@ body {
   margin: auto;
   display: flex;
   flex-direction: column;
+  align-content: space-between;
 }
 
 header {
@@ -44,4 +45,27 @@ header label {
   height: 100%;
   margin: 10px;
   border-radius: 20px;
+}
+
+#container {
+  display: flex;
+  height: 80%;
+}
+
+.name {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+}
+
+.films {
+  width: 50%;
+  height: 100%;
+  padding: 20px;
+}
+
+li {
+  font-size: 1.5em;
+  color: black;
+  padding: 10px;
 }
