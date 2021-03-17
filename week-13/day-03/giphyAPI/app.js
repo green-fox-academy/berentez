@@ -14,7 +14,6 @@ http.onreadystatechange = () => {
 
 //1
 http.open('GET', 'https://api.giphy.com/v1/gifs/trending?api_key=Rc3d5oFRWm5Zw2DDRPy2cGkyDqO2og67', true);
-http.send();
 
 http.onload = function () {
   if (http.status >= 200 && http.status < 400) {
@@ -22,41 +21,27 @@ http.onload = function () {
 
     //3
     createThumbnail(myData);
-
-    display(gif);
   }
 };
+http.send();
 
 const main = document.querySelector('#display');
 
 //3
 
 function createThumbnail(data) {
-  console.log('runnn');
   for (let i = 0; i < 16; i++) {
     const newThumbnail = document.createElement('img');
     newThumbnail.classList.add('gif');
     palette.appendChild(newThumbnail);
     newThumbnail.setAttribute('src', data.data[i].images.fixed_width_small_still.url);
+    display(data, i);
   }
 }
 
-const gif = document.querySelectorAll('.gif');
-
-function display() {
-  for (let i = 0; i < gif.length; i++) {
-    gif[i].addEventListener('click', function () {
-      changeGif(i);
-      console.log('running');
-    });
-  }
-}
-
-function changeGif(n) {
-  const active = document.querySelector('.active');
-  active.setAttribute('class', '');
-  gif(n).classList.add('active');
-  active = document.querySelector('.active');
-  main.setAttribute('style', `background-image: ${active} `);
-  console.log('run');
+function display(data, i) {
+  const gif = document.querySelectorAll('.gif');
+  gif[i].addEventListener('click', function () {
+    main.setAttribute('src', data.data[i].images.original.url);
+  });
 }
