@@ -12,7 +12,6 @@ btn.addEventListener('click', function () {
   http.onload = function () {
     if (http.status >= 200 && http.status < 400) {
       const myData = JSON.parse(http.responseText);
-      console.log(myData);
       renderHTML(myData);
     } else {
       console.log('We connected to the server, but it returned an error');
@@ -37,25 +36,34 @@ function clickEvent(name, data, index) {
   name.addEventListener('click', function () {
     for (let i = 0; i < data.results[index].films.length; i++) {
       const http = new XMLHttpRequest();
-      console.log(data.results[index].films.length);
-      console.log(data.results[index].films[i]);
       http.open('GET', `${data.results[index].films[i]}`);
       http.onload = function () {
         if (http.status >= 200 && http.status < 400) {
           const filmData = JSON.parse(http.responseText);
+
           printFilms(filmData);
         } else {
           console.log('We connected to the server, but it returned an error');
         }
       };
+      deleteList();
       http.send();
     }
   });
 }
 
 function printFilms(data) {
-  const filmDisplay = document.querySelector('.films');
+  const filmDisplay = document.querySelector('.films ul');
   const film = document.createElement('li');
   film.innerHTML = `${data.title} (${data.release_date})`;
   filmDisplay.appendChild(film);
+}
+
+//removing previous search
+function deleteList() {
+  const target = document.querySelectorAll('.films ul li');
+  const filmDisplay = document.querySelector('.films ul');
+  for (let i = 0; i < target.length; i++) {
+    filmDisplay.removeChild(target[i]);
+  }
 }
