@@ -56,6 +56,6 @@ function clickEvent(name, data, index) {
 function printFilms(data) {
   const filmDisplay = document.querySelector('.films');
   const film = document.createElement('li');
-  film.innerHTML = data.title;
+  film.innerHTML = `${data.title} (${data.release_date})`;
   filmDisplay.appendChild(film);
 }
