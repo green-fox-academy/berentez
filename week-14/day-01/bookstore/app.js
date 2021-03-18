@@ -39,6 +39,11 @@ app.get('/book', (req, res) => {
   });
 });
 
+process.on('uncaughtException', (err) => {
+  console.log('Fatal error', err.message);
+  process.setMaxListeners(1);
+});
+
 app.listen(3000, () => {
   console.log('Listening on PORT 3000');
 });
