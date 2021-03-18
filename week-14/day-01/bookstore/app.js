@@ -13,6 +13,7 @@ const connection = mysql.createConnection({
   database: 'bookinfo',
 });
 
+//check connection
 connection.connect((err, result) => {
   if (err) {
     console.log(err.message);
@@ -21,13 +22,23 @@ connection.connect((err, result) => {
   console.log('\x1b[32m', 'Database connection success');
 });
 
-connection.query('SELECT book_name FROM book_mast;', (err, rows) => {
-  if (err) {
-    console.error(`Cannot retreive data: ${err.toString()}`);
-    return null;
-  }
+app.use('/', express.static('assets'));
+app.use(express.json());
 
-  console.log('Data received from database');
-  console.log(rows);
-  return rows;
+app.get('/book', (req, res) => {
+  //book_name query
+  connection.query('SELECT book_name FROM book_mast;', (err, rows) => {
+    if (err) {
+      res.status(500).json({
+        error: err.message,
+      });
+      return null;
+    }
+
+    res.json(rows);
+  });
+});
+
+app.listen(3000, () => {
+  console.log('Listening on PORT 3000');
 });
