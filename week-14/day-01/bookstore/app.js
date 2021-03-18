@@ -13,4 +13,21 @@ const connection = mysql.createConnection({
   database: 'bookinfo',
 });
 
-connection.connect(() => {});
+connection.connect((err, result) => {
+  if (err) {
+    console.log(err.message);
+    return;
+  }
+  console.log('\x1b[32m', 'Database connection success');
+});
+
+connection.query('SELECT book_name FROM book_mast;', (err, rows) => {
+  if (err) {
+    console.error(`Cannot retreive data: ${err.toString()}`);
+    return null;
+  }
+
+  console.log('Data received from database');
+  console.log(rows);
+  return rows;
+});
