@@ -18,8 +18,6 @@ function displayText(): void {
 
 let timer = setInterval(displayText, 1000);
 
-timer;
-
 button.onclick = function () {
   clearInterval(timer);
   display.innerHTML = 'BOMB defused';
