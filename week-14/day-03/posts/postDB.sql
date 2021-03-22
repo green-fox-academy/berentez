@@ -5,7 +5,7 @@ CREATE TABLE `reddit`.`post` (
   `title` VARCHAR(100) NOT NULL,
   `url` VARCHAR(100) NOT NULL,
   `timestamp` TIMESTAMP NULL,
-  `score` INT NULL,
+  `score` INT NULL DEFAULT 0,
   `owner` VARCHAR(45) NULL,
   `vote` INT NULL,
   PRIMARY KEY (`id`),

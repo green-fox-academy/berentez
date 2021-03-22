@@ -38,6 +38,10 @@ app.get('/posts', (req, res) => {
   });
 });
 
+app.post('/posts', (req, res) => {
+  const post = req.body;
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
