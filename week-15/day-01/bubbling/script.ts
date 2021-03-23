@@ -3,7 +3,7 @@ const pic: HTMLDivElement = document.querySelector('.img-inspector');
 let background: number[] = [0, 0];
 let size: number = 200;
 
-//move buttons working,
+//move buttons
 
 nav.addEventListener('click', function (e) {
   const target: HTMLButtonElement = e.target as HTMLButtonElement;
@@ -19,6 +19,7 @@ nav.addEventListener('click', function (e) {
   }
 });
 
+//zoom buttons
 nav.addEventListener('click', function (e) {
   const target: HTMLButtonElement = e.target as HTMLButtonElement;
   const attribute = target.getAttribute('data-direction');
