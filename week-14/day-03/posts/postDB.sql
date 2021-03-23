@@ -4,10 +4,10 @@ CREATE TABLE `reddit`.`post` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `title` VARCHAR(100) NOT NULL,
   `url` VARCHAR(100) NOT NULL,
-  `timestamp` TIMESTAMP NULL,
+  `timestamp` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `score` INT NULL DEFAULT 0,
   `owner` VARCHAR(45) NULL,
-  `vote` INT NULL,
+  `vote` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
 );
@@ -18,8 +18,20 @@ VALUES
     '25',
     'Dear JavaScript',
     'http://9gag.com',
-    '1494339525',
+    '2010-10-10 10:10:10',
     '791',
     'null',
     '1'
-  )
+  ),
+  (
+    '74',
+    'Crockford',
+    'http://9gag.com',
+    '2012-12-12 12:00:00',
+    '567',
+    'null',
+    '0'
+  );
+INSER INTO `post` (`title`, `url`)
+VALUES
+  ('Crockford', 'http://9gag.com');

@@ -40,6 +40,17 @@ app.get('/posts', (req, res) => {
 
 app.post('/posts', (req, res) => {
   const post = req.body;
+  const title = post.title;
+  const url = post.url;
+  const owner = post.owner;
+
+  conn.query('INSERT INTO post SET ?', { title, url, owner }, (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    return res.sendStatus(201);
+  });
 });
 
 app.listen(PORT, () => {
