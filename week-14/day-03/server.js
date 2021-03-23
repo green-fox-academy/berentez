@@ -77,6 +77,18 @@ app.put('/posts/:id/upvote', (req, res) => {
   });
 });
 
+app.put('/posts/:id/downvote', (req, res) => {
+  const id = req.params.id;
+  const score = req.params.score;
+  conn.query(`UPDATE post SET score = score - 1 WHERE id = ?`, [id], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    return res.sendStatus(200);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
