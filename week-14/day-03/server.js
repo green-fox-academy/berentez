@@ -53,6 +53,30 @@ app.post('/posts', (req, res) => {
   });
 });
 
+app.get('/posts/:id', (req, res) => {
+  const id = req.params.id;
+  conn.query('SELECT * FROM post WHERE post.id = ?', [id], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    res.status(200).json(result);
+  });
+});
+
+app.put('/posts/:id/upvote', (req, res) => {
+  const id = req.params.id;
+  const score = req.params.score;
+
+  conn.query(`UPDATE post SET score = score + 1 WHERE id = ?`, [id], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    return res.sendStatus(200);
+  });
+});
+
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });

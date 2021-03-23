@@ -32,6 +32,7 @@ VALUES
     'null',
     '0'
   );
-INSER INTO `post` (`title`, `url`)
+INSERT INTO
+  `post` (`title`, `url`)
 VALUES
   ('Crockford', 'http://9gag.com');
