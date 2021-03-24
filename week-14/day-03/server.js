@@ -89,6 +89,21 @@ app.put('/posts/:id/downvote', (req, res) => {
   });
 });
 
+app.put('/posts/:id', (req, res) => {
+  const id = req.params.id;
+  const title = req.body.title;
+  const url = req.body.url;
+
+  conn.query(`UPDATE post SET title = '${title}', url = '${url}' WHERE id = ?`, [id], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+
+      return;
+    }
+    return res.sendStatus(200);
+  });
+});
+
 app.delete('/posts/:id', (req, res) => {
   const id = req.params.id;
   conn.query(`DELETE FROM post WHERE id = ?`, [id], (err, result) => {
