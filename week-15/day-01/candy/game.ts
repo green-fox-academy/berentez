@@ -14,10 +14,12 @@ function refreshNum(): number {
   return parseInt(candyCounter.innerHTML);
 }
 
+//create candy
 candyBtn.addEventListener('click', function () {
   candyCounter.innerHTML = (refreshNum() + 1 * multiplier).toString();
 });
 
+//create lollyops
 const buyLollyBtn: HTMLButtonElement = document.querySelector('.buy-lollypops');
 const lollypop: HTMLElement = document.querySelector('.lollypops');
 
@@ -27,3 +29,9 @@ buyLollyBtn.addEventListener('click', function () {
     candyCounter.innerHTML = (refreshNum() - 100).toString();
   }
 });
+
+window.onload = () => {
+  setInterval(function () {
+    candyCounter.innerHTML = (refreshNum() + (lollypop.innerHTML.length / 2) * multiplier).toString();
+  }, 1000);
+};
