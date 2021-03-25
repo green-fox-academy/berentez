@@ -15,31 +15,69 @@ function refreshNum(): number {
 }
 
 //create candy
-candyBtn.addEventListener('click', function () {
+candyBtn.addEventListener('click', function addCandy(): void {
   candyCounter.innerHTML = (refreshNum() + 1 * multiplier).toString();
+  if (refreshNum() >= 10000) {
+    candyBtn.removeEventListener('click', addCandy);
+  }
 });
 
 //create lollyops
 const buyLollyBtn: HTMLButtonElement = document.querySelector('.buy-lollypops');
 const lollypop: HTMLElement = document.querySelector('.lollypops');
 
-buyLollyBtn.addEventListener('click', function () {
-  if (refreshNum() >= 100) {
+buyLollyBtn.addEventListener('click', function addLolly(): void {
+  if (refreshNum() >= 10000) {
+    buyLollyBtn.removeEventListener('click', addLolly);
+  }
+  if (refreshNum() >= 100 && refreshNum() < 10000) {
     lollypop.innerHTML += '🍭';
     candyCounter.innerHTML = (refreshNum() - 100).toString();
   }
 });
 
+//candy rain button
+const candyRainBtn: HTMLButtonElement = document.querySelector('.candy-machine');
+candyRainBtn.addEventListener('click', function rainCandy(): void {
+  if (refreshNum() >= 1000) {
+    multiplier = multiplier * 10;
+    candyCounter.innerHTML = (refreshNum() - 1000).toString();
+    candyRainBtn.removeEventListener('click', rainCandy);
+  }
+});
+
+//candies / second
+const efficiency: HTMLElement = document.querySelector('.speed');
+let clicks: number = 0;
+let sec: number = 0;
+
+function clicksPerSecond() {
+  candyBtn.onclick = () => {
+    clicks += 1 * multiplier;
+  };
+  return clicks / sec;
+}
+
+// lollypops production
 window.onload = () => {
-  setInterval(function () {
+  const interval = setInterval(function () {
+    sec++;
+    efficiency.innerHTML = (clicksPerSecond() + Math.floor(lollypop.innerHTML.length / 20)).toString();
     if (lollypop.innerHTML.length >= 20) {
       candyCounter.innerHTML = (refreshNum() + Math.floor(lollypop.innerHTML.length / 20) * multiplier).toString();
-      console.log('fut');
     }
+    gameOver(interval);
   }, 1000);
 };
 
-const candyRainBtn: HTMLButtonElement = document.querySelector('.candy-machine');
-candyRainBtn.addEventListener('click', function () {
-  multiplier = multiplier * 10;
-});
+//endgame
+function gameOver(interval: NodeJS.Timeout): void {
+  if (refreshNum() >= 10000) {
+    const win = document.createElement('h1');
+    const container = document.querySelector('.game-over');
+    win.setAttribute('style', 'color: green');
+    win.innerHTML = 'WIN!!!';
+    container.appendChild(win);
+    clearInterval(interval);
+  }
+}
