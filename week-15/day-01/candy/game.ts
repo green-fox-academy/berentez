@@ -10,6 +10,20 @@ const candyBtn: HTMLButtonElement = document.querySelector('.create-candies');
 const candyCounter: HTMLDivElement = document.querySelector('.candies');
 const multiplier: number = 1;
 
+function refreshNum(): number {
+  return parseInt(candyCounter.innerHTML);
+}
+
 candyBtn.addEventListener('click', function () {
-  candyCounter.innerHTML = (parseInt(candyCounter.innerHTML) + 1 * multiplier).toString();
+  candyCounter.innerHTML = (refreshNum() + 1 * multiplier).toString();
+});
+
+const buyLollyBtn: HTMLButtonElement = document.querySelector('.buy-lollypops');
+const lollypop: HTMLElement = document.querySelector('.lollypops');
+
+buyLollyBtn.addEventListener('click', function () {
+  if (refreshNum() >= 100) {
+    lollypop.innerHTML += '🍭';
+    candyCounter.innerHTML = (refreshNum() - 100).toString();
+  }
 });
