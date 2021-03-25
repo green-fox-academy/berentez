@@ -32,6 +32,9 @@ buyLollyBtn.addEventListener('click', function () {
 
 window.onload = () => {
   setInterval(function () {
-    candyCounter.innerHTML = (refreshNum() + (lollypop.innerHTML.length / 2) * multiplier).toString();
+    if (lollypop.innerHTML.length >= 20) {
+      candyCounter.innerHTML = (refreshNum() + Math.floor(lollypop.innerHTML.length / 20) * multiplier).toString();
+      console.log('fut');
+    }
   }, 1000);
 };
