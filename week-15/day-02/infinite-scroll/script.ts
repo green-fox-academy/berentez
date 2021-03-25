@@ -1,7 +1,7 @@
 const scrollThreshold: number = 300;
 let lastKnownPosition: number = 0;
 
-function randomDiv(divNum: number): void {
+function randomDiv(divNum: number, method?: string): void {
   const container: HTMLDivElement = document.querySelector('#container');
   console.log(container);
   const randomNum: number = divNum;
@@ -9,7 +9,10 @@ function randomDiv(divNum: number): void {
     const newDiv = document.createElement('div');
     newDiv.classList.add('box');
     newDiv.setAttribute('style', `background-color: #${randomCol()}`);
-
+    if (method === 'insert') {
+      container.insertBefore(newDiv, container.childNodes[0]);
+      return;
+    }
     container.appendChild(newDiv);
   }
 }
@@ -30,5 +33,8 @@ window.addEventListener('scroll', function (e) {
   console.log(windowHeight - scrollThreshold, lastKnownPosition);
   if (windowHeight - scrollThreshold <= lastKnownPosition) {
     randomDiv(10);
+  }
+  if (scrollThreshold >= lastKnownPosition) {
+    randomDiv(10, 'insert');
   }
 });
