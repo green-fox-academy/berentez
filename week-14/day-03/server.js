@@ -26,6 +26,7 @@ app.get('/hello', (req, res) => {
 });
 
 app.get('/posts', (req, res) => {
+  //header
   conn.query('SELECT * FROM post', (err, results) => {
     if (err) {
       res.status(500).json({
@@ -33,8 +34,16 @@ app.get('/posts', (req, res) => {
       });
       return;
     }
+    // for (let i = 0; i < results.length; i++) {
+    //   results[i].timestamp = new Date( results[i].timestamp).getTime();
+    // }
+    const timestampRes = results.map((value) => {
+      const timestamp = new Date(value.timestamp).getTime();
+      return { ...value, timestamp };
+    });
 
-    res.status(200).json(results);
+    res.status(200);
+    res.json(timestampRes);
   });
 });
 
@@ -49,7 +58,7 @@ app.post('/posts', (req, res) => {
       res.sendStatus(500);
       return;
     }
-    return res.sendStatus(201);
+    return res.sendStatus(201).setHeader('Content-Type', 'application/json');
   });
 });
 
