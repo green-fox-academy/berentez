@@ -8,7 +8,7 @@
 
 const candyBtn: HTMLButtonElement = document.querySelector('.create-candies');
 const candyCounter: HTMLDivElement = document.querySelector('.candies');
-const multiplier: number = 1;
+let multiplier: number = 1;
 
 function refreshNum(): number {
   return parseInt(candyCounter.innerHTML);
@@ -38,3 +38,8 @@ window.onload = () => {
     }
   }, 1000);
 };
+
+const candyRainBtn: HTMLButtonElement = document.querySelector('.candy-machine');
+candyRainBtn.addEventListener('click', function () {
+  multiplier = multiplier * 10;
+});
