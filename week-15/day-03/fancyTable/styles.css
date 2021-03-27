@@ -5,11 +5,6 @@ body {
   min-width: 1000px;
 }
 
-table thead tr {
-  font-weight: normal;
-  text-align: left;
-}
-
 table {
   margin: 10vh auto;
   height: 60vh;
@@ -21,6 +16,16 @@ table {
   box-shadow: 0px 4px 7px 0px rgba(50, 50, 50, 0.35);
 }
 
+/* thead */
+table thead tr {
+  font-weight: normal;
+  text-align: left;
+  background-color: black;
+  color: rgb(158, 167, 175);
+  border-bottom: 0.3vw solid rgb(158, 167, 175);
+  font-size: x-large;
+}
+
 th {
   padding-left: 1.5vw;
   padding-top: 4vh;
@@ -28,9 +33,11 @@ th {
   font-weight: normal;
 }
 
-td {
-  padding-left: 1.5vw;
+table tr th:nth-child(1) {
+  border-right: 0.1vw solid rgb(158, 167, 175);
 }
+
+/* tbody */
 
 table tr td:nth-child(1) {
   border-right: 0.1vw solid rgb(158, 167, 175);
@@ -38,17 +45,6 @@ table tr td:nth-child(1) {
 
 table tr td:nth-child(2):before {
   content: '$ ';
-}
-
-table tr th:nth-child(1) {
-  border-right: 0.1vw solid rgb(158, 167, 175);
-}
-
-table thead tr {
-  background-color: black;
-  color: rgb(158, 167, 175);
-  border-bottom: 0.3vw solid rgb(158, 167, 175);
-  font-size: x-large;
 }
 
 table tbody tr {
@@ -63,6 +59,10 @@ table tbody tr:nth-child(odd) {
 
 table tbody tr:nth-child(even) {
   background-color: rgb(255, 255, 255);
+}
+
+td {
+  padding-left: 1.5vw;
 }
 
 /* border radius */
