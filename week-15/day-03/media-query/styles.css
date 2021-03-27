@@ -1,0 +1,29 @@
+.container {
+  display: flex;
+  justify-content: center;
+  width: 800px;
+  margin: 0 auto;
+}
+
+.item {
+  height: 200px;
+  min-width: 200px;
+}
+
+.green {
+  background: rgb(81, 212, 0);
+}
+
+.yellow {
+  background: rgb(255, 214, 42);
+  flex-grow: 1;
+}
+.purple {
+  background: rgb(176, 42, 255);
+}
+
+@media screen and (max-width: 800px) {
+  .container {
+    flex-direction: column;
+  }
+}
