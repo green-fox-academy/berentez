@@ -23,8 +23,10 @@ button {
   margin: 3%;
   height: 10%;
   color: white;
-  font-size: x-large;
+  font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
+  opacity: 0.9;
+  padding-bottom: 3px;
   outline: none;
   border-radius: 10px;
   border-style: none;
@@ -32,15 +34,27 @@ button {
 
 .btn--blue {
   background: linear-gradient(0deg, rgba(55, 83, 146, 1) 0%, rgba(70, 101, 165, 1) 50%);
-  background-color: rgb(63, 93, 157);
-  box-shadow: inset 0px -8px 0px 0px rgba(38, 57, 109, 1);
-  box-shadow: 0px 5px 2px 0px rgba(50, 50, 50, 0.5);
+  box-shadow: inset 0px -6px 0px 0px rgba(38, 57, 109, 1), inset 0px 3px 0px 0px rgb(85, 119, 191, 1),
+    0px 5px 5px 0px rgba(50, 50, 50, 0.5);
 }
 
 .btn--green {
   background: linear-gradient(0deg, rgba(22, 158, 76, 1) 0%, rgba(29, 176, 92, 1) 50%);
+  box-shadow: inset 0px -6px 0px 0px rgba(22, 106, 64, 1), inset 0px 3px 0px 0px rgba(85, 211, 139, 1),
+    0px 5px 5px 0px rgba(50, 50, 50, 0.5);
 }
 
 .btn--red {
   background: linear-gradient(0deg, rgba(207, 60, 44, 1) 0%, rgba(215, 72, 55, 1) 50%);
+  box-shadow: inset 0px -6px 0px 0px rgba(134, 43, 47, 1), inset 0px 3px 0px 0px rgba(220, 100, 83, 1),
+    0px 5px 5px 0px rgba(50, 50, 50, 0.5);
+}
+
+button:hover {
+  filter: brightness(110%);
+}
+
+button:active {
+  filter: brightness(80%);
+  box-shadow: none;
 }
