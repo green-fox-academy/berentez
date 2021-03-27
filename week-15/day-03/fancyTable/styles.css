@@ -43,7 +43,7 @@ table tr td:nth-child(1) {
   border-right: 0.1vw solid rgb(158, 167, 175);
 }
 
-table tr td:nth-child(2):before {
+[data-currency='dollar']:before {
   content: '$ ';
 }
 
@@ -60,7 +60,6 @@ table tbody tr:nth-child(odd) {
 table tbody tr:nth-child(even) {
   background-color: rgb(255, 255, 255);
 }
-
 td {
   padding-left: 1.5vw;
 }
