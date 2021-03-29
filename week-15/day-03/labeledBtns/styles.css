@@ -23,6 +23,7 @@ body {
   display: flex;
   flex-direction: row;
   height: 6%;
+  position: relative;
 }
 
 button {
@@ -35,6 +36,7 @@ button {
   justify-content: center;
   align-items: center;
   background-color: rgb(28, 36, 43);
+  position: relative;
 }
 
 button i {
@@ -49,6 +51,24 @@ span[data-action] {
   align-items: center;
   font-family: Arial, Helvetica, sans-serif;
   visibility: hidden;
+  position: absolute;
+  left: 20%;
+  z-index: 20;
+}
+
+.triangle {
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-width: 4px 0 4px 6px;
+  border-color: transparent transparent transparent rgb(28, 36, 43);
+  display: flex;
+  justify-content: center;
+  align-self: center;
+  position: absolute;
+  left: 20%;
+  visibility: hidden;
+  z-index: 30;
 }
 
 span[data-action='delete'] {
