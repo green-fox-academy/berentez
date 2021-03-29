@@ -10,7 +10,7 @@ btn.addEventListener('click', function () {
   btn.disabled = true;
 });
 
-//Second way to solve this task
+// Second way to solve this task
 let click: number = 0;
 
 bd.addEventListener('click', function () {
@@ -20,4 +20,12 @@ bd.addEventListener('click', function () {
     bd.appendChild(newTimestamp);
     click++;
   }
+});
+
+//third way
+bd.addEventListener('click', function event() {
+  const newTimestamp: HTMLElement = document.createElement('p');
+  newTimestamp.innerHTML = timestamp.toString();
+  bd.appendChild(newTimestamp);
+  bd.removeEventListener('click', event);
 });
