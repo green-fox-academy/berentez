@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: rgb(49, 56, 65);
+  height: 100vh;
+  width: 100vw;
+}
+
+#container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  height: 100%;
+  justify-content: center;
+}
+
+.btn {
+  margin-top: 15%;
+  display: flex;
+  flex-direction: row;
+  height: 10%;
+}
+
+button {
+  width: 20%;
+  height: 100%;
+  background-color: inherit;
+  border: none;
+  outline: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(28, 36, 43);
+}
+
+button i {
+  font-size: x-large;
+  color: rgb(210, 211, 213);
+}
+span[data-action] {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: Arial, Helvetica, sans-serif;
+  visibility: hidden;
+}
+
+span[data-action='delete'] {
+  background-color: rgb(243, 69, 65);
+  color: rgb(210, 211, 213);
+}
+
+span[data-action='confirm'] {
+  background-color: rgb(56, 186, 125);
+  color: rgb(210, 211, 213);
+}
+
+button[data-action='delete'] :hover {
+  color: rgb(243, 69, 65);
+}
+
+button[data-action='confirm'] :hover {
+  color: rgb(56, 186, 125);
+}
+
+.btn:hover span {
+  visibility: inherit;
+}
