@@ -62,7 +62,11 @@ app.post('/posts', (req, res) => {
   const post = req.body;
   const title = post.title;
   const url = post.url;
-  const owner = post.owner;
+  const owner = req.headers.user;
+
+  if (owner === undefined) {
+    owner = 'Anonymus';
+  }
 
   conn.query('INSERT INTO post SET ?', { title, url, owner }, (err, result) => {
     if (err) {
@@ -125,8 +129,9 @@ app.put('/posts/:id', (req, res) => {
 });
 
 app.delete('/posts/:id', (req, res) => {
+  const user = req.headers.user;
   const id = req.params.id;
-  conn.query(`DELETE FROM post WHERE id = ?`, [id], (err, result) => {
+  conn.query(`DELETE FROM post WHERE id = ? AND owner = ?`, [id, user], (err, result) => {
     if (err) {
       res.sendStatus(500);
       return;
