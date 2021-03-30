@@ -21,8 +21,19 @@ conn.connect((err) => {
   console.log('connection established to database');
 });
 
+//trying out req.headers
+app.get('/', function (request, response) {
+  console.log(request.headers.user);
+  response.send();
+});
+
 app.get('/hello', (req, res) => {
-  res.send('hello world');
+  const user = req.headers.user;
+  if (user === undefined) {
+    res.send('hello world');
+  } else {
+    res.send(`hello ${user}`);
+  }
 });
 
 app.get('/posts', (req, res) => {
