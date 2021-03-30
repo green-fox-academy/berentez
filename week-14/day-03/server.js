@@ -62,7 +62,7 @@ app.post('/posts', (req, res) => {
   const post = req.body;
   const title = post.title;
   const url = post.url;
-  const owner = req.headers.user;
+  let owner = req.headers.user;
 
   if (owner === undefined) {
     owner = 'Anonymus';
@@ -90,9 +90,8 @@ app.get('/posts/:id', (req, res) => {
 
 app.put('/posts/:id/upvote', (req, res) => {
   const id = req.params.id;
-  const score = req.params.score;
 
-  conn.query(`UPDATE post SET score = score + 1 WHERE id = ?`, [id], (err, result) => {
+  conn.query(`UPDATE post SET score = score + 1, vote = 1 WHERE id = ?`, [id], (err, result) => {
     if (err) {
       res.sendStatus(500);
       return;
@@ -104,7 +103,7 @@ app.put('/posts/:id/upvote', (req, res) => {
 app.put('/posts/:id/downvote', (req, res) => {
   const id = req.params.id;
   const score = req.params.score;
-  conn.query(`UPDATE post SET score = score - 1 WHERE id = ?`, [id], (err, result) => {
+  conn.query(`UPDATE post SET score = score - 1, vote = -1 WHERE id = ?`, [id], (err, result) => {
     if (err) {
       res.sendStatus(500);
       return;
@@ -114,18 +113,23 @@ app.put('/posts/:id/downvote', (req, res) => {
 });
 
 app.put('/posts/:id', (req, res) => {
+  const user = req.headers.user;
   const id = req.params.id;
   const title = req.body.title;
   const url = req.body.url;
 
-  conn.query(`UPDATE post SET title = '${title}', url = '${url}' WHERE id = ?`, [id], (err, result) => {
-    if (err) {
-      res.sendStatus(500);
+  conn.query(
+    `UPDATE post SET title = '${title}', url = '${url}' WHERE id = ? AND owner = ?`,
+    [id, user],
+    (err, result) => {
+      if (err) {
+        res.sendStatus(500);
 
-      return;
+        return;
+      }
+      return res.sendStatus(200);
     }
-    return res.sendStatus(200);
-  });
+  );
 });
 
 app.delete('/posts/:id', (req, res) => {
