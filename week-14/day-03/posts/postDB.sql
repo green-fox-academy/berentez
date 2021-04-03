@@ -7,7 +7,6 @@ CREATE TABLE `reddit`.`post` (
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
   `score` INT NULL DEFAULT 0,
   `owner` VARCHAR(45) NULL,
-  `vote` INT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
 );
@@ -20,8 +19,7 @@ VALUES
     'http://9gag.com',
     '2010-10-10 10:10:10',
     '791',
-    'null',
-    '1'
+    'null'
   ),
   (
     '74',
@@ -29,8 +27,7 @@ VALUES
     'http://9gag.com',
     '2012-12-12 12:00:00',
     '567',
-    'null',
-    '0'
+    'null'
   );
 INSERT INTO
   `post` (`title`, `url`)

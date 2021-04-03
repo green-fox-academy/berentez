@@ -38,24 +38,47 @@ app.get('/hello', (req, res) => {
 
 app.get('/posts', (req, res) => {
   //header
-  conn.query('SELECT * FROM post', (err, results) => {
-    if (err) {
-      res.status(500).json({
-        error: err.message,
-      });
-      return;
-    }
-    // for (let i = 0; i < results.length; i++) {
-    //   results[i].timestamp = new Date( results[i].timestamp).getTime();
-    // }
-    const timestampRes = results.map((value) => {
-      const timestamp = new Date(value.timestamp).getTime();
-      return { ...value, timestamp };
-    });
+  const user = req.headers.user;
 
-    res.status(200);
-    res.json(timestampRes);
-  });
+  if (user === undefined) {
+    conn.query(`SELECT * FROM reddit.post`, (err, results) => {
+      if (err) {
+        res.status(500).json({
+          error: err.message,
+        });
+        return;
+      }
+      const timestampRes = results.map((value) => {
+        const timestamp = new Date(value.timestamp).getTime();
+        return { ...value, timestamp };
+      });
+
+      res.status(200);
+      res.json(timestampRes);
+    });
+  } else {
+    conn.query(
+      `SELECT DISTINCT post.id, post.title, post.url, post.timestamp, post.score, post.owner, vote.vote FROM post LEFT JOIN vote vote ON post.id = vote.id WHERE vote.user = '${user}' `,
+      (err, results) => {
+        if (err) {
+          res.status(500).json({
+            error: err.message,
+          });
+          return;
+        }
+        // for (let i = 0; i < results.length; i++) {
+        //   results[i].timestamp = new Date( results[i].timestamp).getTime();
+        // }
+        const timestampRes = results.map((value) => {
+          const timestamp = new Date(value.timestamp).getTime();
+          return { ...value, timestamp };
+        });
+
+        res.status(200);
+        res.json(timestampRes);
+      }
+    );
+  }
 });
 
 app.post('/posts', (req, res) => {
@@ -88,21 +111,37 @@ app.get('/posts/:id', (req, res) => {
   });
 });
 
-app.put('/posts/:id/upvote', (req, res) => {
-  const id = req.params.id;
+app.put(
+  '/posts/:id/upvote',
+  (req, res, next) => {
+    const id = req.params.id;
 
-  conn.query(`UPDATE post SET score = score + 1, vote = 1 WHERE id = ?`, [id], (err, result) => {
-    if (err) {
-      res.sendStatus(500);
-      return;
-    }
-    return res.sendStatus(200);
-  });
-});
+    conn.query(`UPDATE post SET score = score + 1 WHERE id = ?`, [id], (err, result) => {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      return res.sendStatus(200);
+    });
+    next();
+  },
+  function (req, res) {
+    const id = req.params.id;
+    const user = req.headers.user;
+    vote = 1;
+    conn.query('INSERT INTO vote SET ?', { user, id, vote }, (err, result) => {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      console.log('fut');
+      res.status(200);
+    });
+  }
+);
 
 app.put('/posts/:id/downvote', (req, res) => {
   const id = req.params.id;
-  const score = req.params.score;
   conn.query(`UPDATE post SET score = score - 1, vote = -1 WHERE id = ?`, [id], (err, result) => {
     if (err) {
       res.sendStatus(500);
@@ -115,6 +154,7 @@ app.put('/posts/:id/downvote', (req, res) => {
 //UPDATE POST
 app.put('/posts/:id', (req, res) => {
   const user = req.headers.user;
+  console.log(user);
   const id = req.params.id;
   const title = req.body.title;
   const url = req.body.url;
@@ -133,6 +173,7 @@ app.put('/posts/:id', (req, res) => {
   );
 });
 
+//DELETE
 app.delete('/posts/:id', (req, res) => {
   const user = req.headers.user;
   const id = req.params.id;
