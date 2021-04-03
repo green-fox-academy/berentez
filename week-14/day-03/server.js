@@ -112,6 +112,7 @@ app.put('/posts/:id/downvote', (req, res) => {
   });
 });
 
+//UPDATE POST
 app.put('/posts/:id', (req, res) => {
   const user = req.headers.user;
   const id = req.params.id;
