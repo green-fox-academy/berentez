@@ -73,7 +73,7 @@ app.post('/posts', (req, res) => {
       res.sendStatus(500);
       return;
     }
-    return res.sendStatus(201).setHeader('Content-Type', 'application/json');
+    return res.sendStatus(201); //setHeader('Content-Type', 'application/json');
   });
 });
 
@@ -119,7 +119,7 @@ app.put('/posts/:id', (req, res) => {
   const url = req.body.url;
 
   conn.query(
-    `UPDATE post SET title = '${title}', url = '${url}' WHERE id = ? AND owner = ?`,
+    `UPDATE post SET title = '${title}', url = '${url}', timestamp = CURRENT_TIMESTAMP WHERE id = ? AND owner = ?`,
     [id, user],
     (err, result) => {
       if (err) {
