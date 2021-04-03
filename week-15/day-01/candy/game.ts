@@ -39,10 +39,13 @@ buyLollyBtn.addEventListener('click', function addLolly(): void {
 //candy rain button
 const candyRainBtn: HTMLButtonElement = document.querySelector('.candy-machine');
 candyRainBtn.addEventListener('click', function rainCandy(): void {
+  console.log(refreshNum());
+  if (refreshNum() >= 10000) {
+    candyRainBtn.removeEventListener('click', rainCandy);
+  }
   if (refreshNum() >= 1000) {
     multiplier = multiplier * 10;
     candyCounter.innerHTML = (refreshNum() - 1000).toString();
-    candyRainBtn.removeEventListener('click', rainCandy);
   }
 });
 
