@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <title>login-form</title>
   </head>
   <body>
@@ -17,8 +18,8 @@
         </li>
         <li>
           <label for="password">password</label>
-          <input type="password" name="password" id="password" required />
-          <span toggle="#password-field" class="fa fa-fw fa-eye field-icon toggle-password"></span>
+          <input type="password" name="password" id="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" />
+          <span toggle="#password" class="fa fa-fw fa-eye field-icon toggle-password"></span>
         </li>
         <li>
           <p>Forgot Password?</p>
@@ -28,5 +29,8 @@
         </li>
       </ul>
     </form>
+    <script type="text/typescript" src="script.ts"></script>
+    <script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>
+    <script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>
   </body>
 </html>
