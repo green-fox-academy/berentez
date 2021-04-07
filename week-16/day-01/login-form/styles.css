@@ -83,4 +83,5 @@ button:hover {
   margin-top: -33px;
   position: relative;
   z-index: 1;
+  color: rgb(97, 97, 97);
 }
