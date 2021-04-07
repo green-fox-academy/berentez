@@ -47,6 +47,7 @@ li label {
 li input {
   width: 100%;
   height: 50px;
+  font-size: large;
 }
 
 input:focus {
@@ -77,11 +78,11 @@ button:hover {
   background-color: rgb(97, 97, 97);
 }
 
-.field-icon {
+.fa.field-icon {
   float: right;
   margin-left: -25px;
   margin-top: -33px;
-  position: relative;
   z-index: 1;
   color: rgb(97, 97, 97);
+  font-size: 12px;
 }
