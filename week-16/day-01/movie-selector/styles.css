@@ -45,3 +45,7 @@ p {
   font-size: small;
   font: bold;
 }
+
+.movie {
+  display: none;
+}
