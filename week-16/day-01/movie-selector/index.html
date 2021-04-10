@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
+    <title>movie-selector</title>
+  </head>
+  <body>
+    <div class="container">
+      <form action="">
+        <label for="genre">Movie Selector</label>
+        <select name="genre" id="genre">
+          <option value="">Select a genre</option>
+          <option value="sci-fi">Sci-fi</option>
+          <option value="drama">Drama</option>
+          <option value="comedy">Comedy</option>
+        </select>
+        <select name="movies" id="movies">
+          <option value="">Select a movie</option>
+          <option class="drama sci-fi" value="moon">Moon</option>
+          <option class="sci-fi" value="2001">2001: A Space Odyssey</option>
+          <option class="drama sci-fi" value="contact">Contact</option>
+          <option class="drama" value="darkest-hour">Darkest Hour</option>
+          <option class="drama" value="there-will-be-blood">There Will Be Blood</option>
+          <option class="drama" value="american-beauty">American Beauty</option>
+          <option class="comedy" value="airplane">Airplane!</option>
+          <option class="comedy" value="deadpool">Deadpool</option>
+          <option class="comedy" value="wayne-wolrd">Wayne's World</option>
+        </select>
+      </form>
+    </div>
+    <script type="text/typescript" src="script.ts"></script>
+    <script src="https://rawgit.com/Microsoft/TypeScript/master/lib/typescriptServices.js"></script>
+    <script src="https://rawgit.com/basarat/typescript-script/master/transpiler.js"></script>
+  </body>
+</html>
