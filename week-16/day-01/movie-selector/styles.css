@@ -41,9 +41,16 @@ select {
   width: 40%;
 }
 
+.result {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 p {
   font-size: small;
   font: bold;
+  margin-right: 5%;
 }
 
 .movie {
