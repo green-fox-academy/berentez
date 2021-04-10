@@ -8,7 +8,25 @@
     <title>newsletter</title>
   </head>
   <body>
-    Yo dude
+    <div class="container">
+      <h1>Subscribe to our newsletter</h1>
+      <form action="/signup" method="POST">
+        <ul>
+          <li>
+            <label for="name">Full name</label>
+            <input type="text" name="full-name" id="name" required />
+          </li>
+          <li>
+            <label for="email">Email address</label>
+            <input type="email" name="email" id="email" required />
+          </li>
+
+          <li>
+            <input type="submit" value="Sign up!" />
+          </li>
+        </ul>
+      </form>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
