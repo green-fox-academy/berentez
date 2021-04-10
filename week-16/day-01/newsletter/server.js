@@ -6,15 +6,10 @@ app.use('/signup', express.static('assets'));
 app.use(express.json());
 
 app.post('/signup', (req, res) => {
-  const sub = req.body;
-  const name = sub.name;
-  const email = sub.email;
+  const { username } = req.body;
+  const { email } = req.body;
 
-  if (err) {
-    res.status(500).json({
-      error: err.message,
-    });
-  }
+  res.json(`Thanks ${username}, we will send updates to ${email}`);
 });
 
 app.listen(3000, () => {
