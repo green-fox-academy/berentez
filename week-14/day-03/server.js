@@ -96,7 +96,7 @@ app.post('/posts', (req, res) => {
       res.sendStatus(500);
       return;
     }
-    return res.sendStatus(201); //setHeader('Content-Type', 'application/json');
+    return res.sendStatus(201);
   });
 });
 

@@ -6,17 +6,11 @@
 const http = new XMLHttpRequest();
 const palette = document.querySelector('#container');
 
-http.onreadystatechange = () => {
-  if (http.readyState === 4 && http.status === 200) {
-    console.log(JSON.parse(http.response));
-  }
-};
-
 //1
 http.open('GET', 'https://api.giphy.com/v1/gifs/trending?api_key=Rc3d5oFRWm5Zw2DDRPy2cGkyDqO2og67', true);
 
 http.onload = function () {
-  if (http.status >= 200 && http.status < 400) {
+  if (http.status >= 200) {
     const myData = JSON.parse(http.responseText);
 
     //3

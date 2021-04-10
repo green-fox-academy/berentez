@@ -14,7 +14,7 @@ btn.addEventListener('click', function () {
       const myData = JSON.parse(http.responseText);
       renderHTML(myData);
     } else {
-      console.log('We connected to the server, but it returned an error');
+      console.log('error');
     }
   };
   http.send();

@@ -82,7 +82,6 @@ app.get('/book', (req, res) => {
         where += ';';
       }
     }
-    console.log(sqlString + where);
     connection.query(sqlString + where, (err, rows) => {
       if (err) {
         res.status(500).json({
@@ -90,7 +89,6 @@ app.get('/book', (req, res) => {
         });
         return null;
       }
-      console.log(rows);
 
       res.json(rows);
     });
