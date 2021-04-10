@@ -11,6 +11,7 @@ body {
 
 .container {
   margin: auto;
+  width: 40%;
 }
 ul {
   list-style: none;
@@ -35,7 +36,7 @@ legend {
   justify-content: space-around;
 }
 
-button {
+input[name='button'] {
   background-color: steelblue;
   border-radius: 10px;
   border: 2px solid slategray;
@@ -44,6 +45,14 @@ button {
   color: white;
 }
 
-button:hover {
+input[name='button']:hover {
   background-color: teal;
+}
+
+input[name='button']:disabled {
+  background-color: grey;
+}
+
+h2 {
+  margin-top: 30px;
 }
