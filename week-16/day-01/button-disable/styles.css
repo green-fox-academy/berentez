@@ -1,0 +1,49 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.container {
+  margin: auto;
+}
+ul {
+  list-style: none;
+}
+
+fieldset {
+  padding: 15px;
+  border-radius: 10px;
+  margin: 15px;
+}
+
+legend {
+  background-color: steelblue;
+  border-radius: 5px;
+  color: white;
+  padding: 10px;
+}
+
+.btn {
+  margin-top: 15%;
+  display: flex;
+  justify-content: space-around;
+}
+
+button {
+  background-color: steelblue;
+  border-radius: 10px;
+  border: 2px solid slategray;
+  padding: 7px;
+  outline: none;
+  color: white;
+}
+
+button:hover {
+  background-color: teal;
+}

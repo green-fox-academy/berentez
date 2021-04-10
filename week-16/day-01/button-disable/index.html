@@ -4,7 +4,46 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>button disable</title>
   </head>
-  <body></body>
+  <body>
+    <div class="container">
+      <form action="">
+        <fieldset>
+          <legend>What is your favourite pet?</legend>
+          <ul>
+            <li>
+              <input type="radio" id="dog" name="pet" value="Doggo" />
+              <label for="dog">Doggo</label>
+            </li>
+            <li>
+              <input type="radio" id="cat" name="pet" value="Catto" />
+              <label for="cat">Catto</label>
+            </li>
+            <li>
+              <input type="radio" id="fish" name="pet" value="Viktor" />
+              <label for="fish">Viktor the goldfish</label>
+            </li>
+          </ul>
+        </fieldset>
+        <fieldset>
+          <legend>Do you want to sign up for cat facts?</legend>
+          <ul>
+            <li>
+              <input type="radio" id="yes" name="signup" value="yes" />
+              <label for="yes">Yeah, sure!</label>
+            </li>
+            <li>
+              <input type="radio" id="no" name="signup" value="no" />
+              <label for="no">No thx!</label>
+            </li>
+        </fieldset>
+        <div class="btn">
+          <button class="cat-btn">I love cats</button>
+          <button class="sign-up">Sign up</button>
+        </div>
+      </form>
+    </div>
+  </body>
 </html>
