@@ -1,7 +1,7 @@
 const iLoveCats: HTMLInputElement = document.querySelector('#cat-btn');
 const signUp: HTMLInputElement = document.querySelector('#sign-up');
-let pet: string = '';
-let subscribe: string = '';
+let pet: string = 'Doggo';
+let subscribe: string = 'no';
 const response: HTMLElement = document.querySelector('h2');
 const container: HTMLDivElement = document.querySelector('.container');
 const radio: NodeListOf<Element> = document.querySelectorAll("input[type = 'radio']");
