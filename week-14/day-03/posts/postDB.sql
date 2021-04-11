@@ -5,8 +5,7 @@ CREATE TABLE `reddit`.`post` (
   `title` VARCHAR(100) NOT NULL,
   `url` VARCHAR(100) NOT NULL,
   `timestamp` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  `score` INT NULL DEFAULT 0,
-  `owner` VARCHAR(45) NULL,
+  `owner` INT NULL,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE
 );
@@ -18,16 +17,14 @@ VALUES
     'Dear JavaScript',
     'http://9gag.com',
     '2010-10-10 10:10:10',
-    '791',
-    'null'
+    '214'
   ),
   (
     '74',
     'Crockford',
     'http://9gag.com',
     '2012-12-12 12:00:00',
-    '567',
-    'null'
+    '169'
   );
 INSERT INTO
   `post` (`title`, `url`)
