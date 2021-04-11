@@ -13,8 +13,8 @@ body {
 .container {
   margin: 30px auto;
   display: flex;
-  height: 60%;
-  width: 50%;
+  height: 50%;
+  width: 40%;
   align-items: center;
   justify-content: space-around;
   background-color: white;
@@ -25,9 +25,12 @@ body {
 
 .form {
   width: 40%;
+  margin: 0 5%;
 }
 ul {
   list-style: none;
+  display: flex;
+  flex-direction: column;
 }
 
 li {
@@ -53,7 +56,7 @@ input:focus {
   border-bottom: 3px solid rgb(22, 160, 133);
 }
 
-input[type='button'] {
+input[type='submit'] {
   border: none;
   width: 50%;
   background-color: rgb(22, 160, 133);
@@ -63,7 +66,11 @@ input[type='button'] {
   margin-top: 5%;
 }
 
-input[type='button']:focus {
+input[type='submit']:focus {
+  background-color: rgb(22, 160, 133);
+}
+
+input[type='submit']:focus {
   border-bottom: none;
 }
 .or {
@@ -72,22 +79,49 @@ input[type='button']:focus {
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-left: 4%;
 }
 
 p {
+  background-color: rgb(221, 221, 221);
+  -webkit-box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.75);
+  -moz-box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.75);
+  box-shadow: 0px 3px 2px 0px rgba(50, 50, 50, 0.75);
+  border-radius: 50%;
+  height: 26px;
+  padding: 14%;
+  padding-bottom: 6%;
+  font-weight: lighter;
+  font-size: medium;
+  color: rgb(34, 34, 34);
 }
 
 .social {
   display: flex;
   flex-direction: column;
   width: 40%;
+  margin: 0 5%;
 }
 
 .social button {
   padding: 3%;
   margin: 10px 10px 10px 0;
+  outline: none;
+  border-radius: 3px;
+  border: none;
+  font-weight: bold;
+  color: white;
 }
 
 button.fb {
   margin-top: 25%;
+  background-color: rgb(50, 80, 142);
+}
+
+button.tw {
+  background-color: rgb(85, 172, 238);
+}
+
+button.google {
+  background-color: rgb(221, 75, 57);
 }

@@ -14,7 +14,10 @@
           <legend>Sign up</legend>
           <ul>
             <li>
-              <input type="text" name="username" id="username" placeholder="Username" required autofocus />
+              <input type="text" name="username" id="username" placeholder="Username" list="data" required autofocus />
+              <datalist id="data">
+                <option value="Spiderman">Spiderman</option>
+              </datalist>
             </li>
             <li>
               <input type="email" name="email" id="email" placeholder="E-mail" required />
@@ -26,7 +29,7 @@
               <input type="password" name="re-psw" id="re-psw" placeholder="Retype password" required />
             </li>
             <li>
-              <input type="button" name="sign-up" id="sign-up" value="SIGN ME UP" />
+              <input type="submit" name="sign-up" id="sign-up" value="SIGN ME UP" />
             </li>
           </ul>
         </form>
@@ -40,5 +43,6 @@
         <button class="google">Log in with Google</button>
       </div>
     </div>
+    <script src="script.js"></script>
   </body>
 </html>
