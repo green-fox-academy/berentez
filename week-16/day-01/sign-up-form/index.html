@@ -23,7 +23,14 @@
               <input type="email" name="email" id="email" placeholder="E-mail" required />
             </li>
             <li>
-              <input type="password" name="psw" id="psw" placeholder="Password" required />
+              <input
+                type="password"
+                name="psw"
+                id="psw"
+                placeholder="Password"
+                required
+                pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
+              />
             </li>
             <li>
               <input type="password" name="re-psw" id="re-psw" placeholder="Retype password" required />
