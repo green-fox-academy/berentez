@@ -32,7 +32,16 @@ app.get('/hello', (req, res) => {
   if (user === undefined) {
     res.send('hello world');
   } else {
-    res.send(`hello ${user}`);
+    conn.query(`SELECT username FROM reddit.user WHERE userid = ${user}`, (err, result) => {
+      if (err) {
+        res.status(404).json({
+          error: err.message,
+        });
+        return;
+      }
+      console.log(result);
+      res.send(`Hello ${result[0].username}!`);
+    });
   }
 });
 
