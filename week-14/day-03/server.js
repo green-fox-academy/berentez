@@ -27,6 +27,21 @@ app.get('/', function (request, response) {
   response.send();
 });
 
+//This should be used somehow. It runs after the get method. its async
+// async function gettingUsernameFromId(user) {
+//   conn.query(`SELECT username FROM reddit.user WHERE userid = ${user}`, (err, result) => {
+//     if (err) {
+//       res.status(404).json({
+//         error: err.message,
+//       });
+//       return;
+//     }
+//     const username = result[0].username;
+//     console.log(username);
+//     return username;
+//   });
+// }
+
 app.get('/hello', (req, res) => {
   const user = req.headers.user;
   if (user === undefined) {
@@ -39,8 +54,8 @@ app.get('/hello', (req, res) => {
         });
         return;
       }
-      console.log(result);
-      res.send(`Hello ${result[0].username}!`);
+      const username = result[0].username;
+      res.send(`Hello ${username}!`);
     });
   }
 });
