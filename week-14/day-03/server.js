@@ -82,7 +82,8 @@ app.get('/posts', (req, res) => {
     });
   } else {
     conn.query(
-      `SELECT DISTINCT post.id, post.title, post.url, post.timestamp, post.score, post.owner, vote.vote FROM post LEFT JOIN vote vote ON post.id = vote.id WHERE vote.user = '${user}' `,
+      (query1 = `SELECT post.id, post.title, post.url, post.timestamp, post.owner, SUM(vote) as score FROM post JOIN vote ON post.id = vote.postid WHERE id = postid`),
+      (query2 = `SELECT vote.vote FROM vote WHERE userid = ${user}`),
       (err, results) => {
         if (err) {
           res.status(500).json({
@@ -93,10 +94,32 @@ app.get('/posts', (req, res) => {
         // for (let i = 0; i < results.length; i++) {
         //   results[i].timestamp = new Date( results[i].timestamp).getTime();
         // }
+        console.log(query1);
+        console.log(query2);
+        console.log(results);
+
         const timestampRes = results.map((value) => {
           const timestamp = new Date(value.timestamp).getTime();
           return { ...value, timestamp };
         });
+
+        // timestampRes.forEach((element) => {
+        //   console.log(element.id);
+        //   conn.query(
+        //     `SELECT vote FROM reddit.vote WHRERE postid = '${element.id}' AND userid = '${user}' `,
+        //     (err, results) => {
+        //       if (err) {
+        //         res.status(500).json({
+        //           error: err.message,
+        //         });
+        //         return;
+        //       }
+        //       element.vote = results;
+        //     }
+        //   );
+        // });
+
+        console.log(timestampRes);
 
         res.status(200);
         res.json(timestampRes);
