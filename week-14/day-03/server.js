@@ -42,6 +42,18 @@ app.get('/', function (request, response) {
 //   });
 // }
 
+// function calculateScore(post) {
+//   conn.query(`SELECT SUM(vote.vote) as score FROM vote WERE postId = ${post.id}`, (err, result) => {
+//     if (err) {
+//       res.status(500).json({
+//         error: err.message,
+//       });
+//       return;
+//     }
+//     return result;
+//   });
+// }
+
 app.get('/hello', (req, res) => {
   const user = req.headers.user;
   if (user === undefined) {
@@ -77,12 +89,32 @@ app.get('/posts', (req, res) => {
         return { ...value, timestamp };
       });
 
+      // const score = timestampRes.map((value) => {
+      //   const voteScore = calculateScore(value);
+      //   return voteScore;
+      // });
+
+      // const ownerRes = timestampRes.map((value) => {
+      //   const userName = gettingUsernameFromId(value);
+      //   return { ...value, userName };
+      // });
+
       res.status(200);
       res.json(timestampRes);
     });
   } else {
+    // !!!!!!!!!!!!!!!!!!!!!!!!!
+    //This is rally not working.
+    //1) Just one post is displayed (it should be two in most cases)
+    //2) WHERE userid = ${user} is no good, couse the users score will be summed not the posts
+    //3) If I dont use this WHERE statement I got the score right but the vote will be the last searched.
+    //4) I cannot wright a query which can do both
+    //5) If I dont have a vote in my table I couldn't get back 0 for vote. I will get this back = [].
+
     conn.query(
-      `SELECT post.id, post.title, post.url, post.timestamp, post.owner, SUM(vote) as score, vote.vote FROM post JOIN vote ON post.id = vote.postid WHERE postid>0`,
+      `SELECT post.id, post.title, post.url, post.timestamp, post.owner, SUM(vote.vote) as score, 
+      vote.vote FROM post LEFT OUTER JOIN vote ON post.id =vote.postid  WHERE  userid = ?`,
+      [user],
       (err, results) => {
         if (err) {
           res.status(500).json({
@@ -106,6 +138,7 @@ app.get('/posts', (req, res) => {
   }
 });
 
+//Posting works as intented
 app.post('/posts', (req, res) => {
   const post = req.body;
   const title = post.title;
@@ -125,6 +158,7 @@ app.post('/posts', (req, res) => {
   });
 });
 
+//Same problem as listing all the posts
 app.get('/posts/:id', (req, res) => {
   const id = req.params.id;
   conn.query('SELECT * FROM post WHERE post.id = ?', [id], (err, result) => {
