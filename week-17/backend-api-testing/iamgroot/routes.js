@@ -16,7 +16,7 @@ app.get('/groot', (req, res) => {
     res.status(200);
   }
 
-  res.end(JSON.stringify(result));
+  res.json(result);
 });
 
 module.exports = app;
