@@ -5,6 +5,7 @@ const app = express();
 const PORT = 3005;
 
 app.use(express.json());
+app.use('/', express.static('dist'));
 
 const conn = mysql.createConnection({
   host: 'localhost',
@@ -28,16 +29,18 @@ app.get('/', function (request, response) {
 });
 
 //This should be used somehow. It runs after the get method. its async
-// async function gettingUsernameFromId(user) {
+// function gettingUsernameFromId(user) {
 //   conn.query(`SELECT username FROM reddit.user WHERE userid = ${user}`, (err, result) => {
 //     if (err) {
-//       res.status(404).json({
-//         error: err.message,
-//       });
-//       return;
-//     }
-//     const username = result[0].username;
-//     console.log(username);
+//       const username = 'Anonymus'
+
+//     //     error: err.message,
+//     //   });
+//     //   return;
+//     // }
+//     console.log(result);
+//     const username = result;
+//     // console.log(username);
 //     return username;
 //   });
 // }
@@ -95,7 +98,7 @@ app.get('/posts', (req, res) => {
       // });
 
       // const ownerRes = timestampRes.map((value) => {
-      //   const userName = gettingUsernameFromId(value);
+      //   const userName = gettingUsernameFromId(value.owner);
       //   return { ...value, userName };
       // });
 
@@ -104,7 +107,7 @@ app.get('/posts', (req, res) => {
     });
   } else {
     // !!!!!!!!!!!!!!!!!!!!!!!!!
-    //This is rally not working.
+    //This is really not working.
     //1) Just one post is displayed (it should be two in most cases)
     //2) WHERE userid = ${user} is no good, couse the users score will be summed not the posts
     //3) If I dont use this WHERE statement I got the score right but the vote will be the last searched.
@@ -112,8 +115,8 @@ app.get('/posts', (req, res) => {
     //5) If I dont have a vote in my table I couldn't get back 0 for vote. I will get this back = [].
 
     conn.query(
-      `SELECT post.id, post.title, post.url, post.timestamp, post.owner, SUM(vote.vote) as score, 
-      vote.vote FROM post LEFT OUTER JOIN vote ON post.id =vote.postid  WHERE  userid = ?`,
+      `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus'), fs.score, IFNULL(v2.vote, 0) as vote FROM (SELECT p.id, p.title, p.url, p.timestamp, p.owner, ifNULL(SUM( v.vote ), 0)  as score FROM reddit.post p LEFT Join reddit.vote v on p.id = v.postid 
+      GROUP BY p.id ) as fs LEFT JOIN reddit.vote v2 ON fs.id = v2.postid and userid =? LEFT JOIN reddit.user u ON fs.owner = u.userid`,
       [user],
       (err, results) => {
         if (err) {

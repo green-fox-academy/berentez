@@ -1,4 +1,4 @@
-const container = document.querySelector('.container');
+const container = document.querySelector('.posts');
 
 function getposts() {
   const httpRequest = new XMLHttpRequest();
@@ -29,7 +29,6 @@ function showPost(posts) {
     divCon.appendChild(title);
     divCon.appendChild(link);
     divCon.appendChild(timestamp);
-    console.log(element);
   });
 }
 

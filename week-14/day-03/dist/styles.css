@@ -1,11 +1,114 @@
-h1 {
-  background-color: cornflowerblue;
+* {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  font-family: 'Lato', sans-serif;
+  height: 100vh;
+  width: 100vw;
+  background-color: rgb(55, 60, 63);
+}
+
+header.main {
+  background-image: url('/pics/space.jpg');
+  height: 30%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+header.main p {
   color: white;
-  padding: 2%;
-  text-align: center;
+  font-weight: 100;
+  font-size: xx-large;
+  letter-spacing: 5rem;
+}
+
+.container {
+  width: 60%;
+  height: 70%;
+  margin: 0 auto;
+
+  display: flex;
+  justify-content: space-around;
+}
+
+.posts {
+  margin-top: 25px;
+  width: 60%;
 }
 
 .post {
-  background-color: #222;
+  background-color: white;
+  color: black;
+  height: 100px;
+  width: 100%;
+  margin: 5px 25px;
+  border-radius: 5px;
+}
+
+div.submit {
+  height: 100%;
+  width: 30%;
+  margin: 30px;
+}
+
+button.submit {
+  width: 100%;
+  color: white;
+  border: 1px solid grey;
+  background-color: rgb(55, 60, 63);
+  height: 40px;
+  margin-bottom: 10px;
+  outline: none;
+  text-transform: uppercase;
+}
+
+button.submit:hover {
+  background-color: grey;
+}
+
+header.about {
+  height: 40px;
+  background-color: rgb(55, 60, 63);
+  border: 1px solid grey;
+  display: flex;
+  align-items: center;
+  border-top-left-radius: 7px;
+  border-top-right-radius: 7px;
+}
+
+header.about h2 {
+  margin: 15px;
+  color: white;
+  font-weight: lighter;
+}
+
+header.about p {
+  color: grey;
+}
+
+div.about {
+  background-color: grey;
+  height: 300px;
+  border-radius: 7px;
+}
+
+ul {
+  list-style: none;
+  margin-top: 1rem;
+}
+
+h4 {
+  text-align: center;
+  margin-top: 1rem;
+  color: rgb(55, 60, 63);
+}
+li {
+  padding: 0.5rem;
+  margin-left: 1rem;
+  font-size: small;
   color: white;
 }
