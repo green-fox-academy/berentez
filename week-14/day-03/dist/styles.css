@@ -1,0 +1,11 @@
+h1 {
+  background-color: cornflowerblue;
+  color: white;
+  padding: 2%;
+  text-align: center;
+}
+
+.post {
+  background-color: #222;
+  color: white;
+}
