@@ -161,7 +161,7 @@ app.put('/posts/:id/upvote', (req, res, next) => {
       });
     } else {
       const data = JSON.stringify(result[0].vote);
-      //0 => 1
+      // 1 => 0
       if (data === '1') {
         conn.query(`UPDATE reddit.vote v SET v.vote = 0 WHERE postid = ? AND userid = ?`, [id, user], (err, result) => {
           if (err) {
@@ -171,8 +171,8 @@ app.put('/posts/:id/upvote', (req, res, next) => {
           console.log(0);
           return res.sendStatus(200);
         });
-        // 1 => 0
-      } else if (data === '0') {
+        // 0 => 1
+      } else if (data === '0' || data === '-1') {
         conn.query(`UPDATE reddit.vote v SET v.vote = 1 WHERE postid = ? AND userid = ?`, [id, user], (err, result) => {
           if (err) {
             res.sendStatus(500);
@@ -186,27 +186,55 @@ app.put('/posts/:id/upvote', (req, res, next) => {
   });
 });
 
-// function (req, res) {
-//   const id = req.params.id;
-//   const user = req.headers.user;
-//   vote = 1;
-//   conn.query('INSERT INTO vote SET ?', { user, id, vote }, (err, result) => {
-//     if (err) {
-//       res.sendStatus(500);
-//       return;
-//     }
-//     console.log('fut');
-//     res.status(200);
-//   });
-
 app.put('/posts/:id/downvote', (req, res) => {
   const id = req.params.id;
-  conn.query(`UPDATE post SET score = score - 1, vote = -1 WHERE id = ?`, [id], (err, result) => {
+  const user = req.headers.user;
+
+  //Checking db for data
+  conn.query(`SELECT * FROM vote v WHERE v.postid = ? AND v.userid = ?`, [id, user], (err, result) => {
     if (err) {
       res.sendStatus(500);
       return;
     }
-    return res.sendStatus(200);
+    const post = JSON.stringify(result[0]);
+    //adding new raw to db
+    if (post === undefined) {
+      conn.query(`INSERT INTO reddit.vote VALUE (NULL, ?, ?, -1)`, [id, user], (err, result) => {
+        if (err) {
+          res.sendStatus(500);
+          return;
+        }
+
+        return res.sendStatus(200);
+      });
+    } else {
+      const data = JSON.stringify(result[0].vote);
+      //-1 => 0
+      if (data === '-1') {
+        conn.query(`UPDATE reddit.vote v SET v.vote = 0 WHERE postid = ? AND userid = ?`, [id, user], (err, result) => {
+          if (err) {
+            res.sendStatus(500);
+            return;
+          }
+          console.log(0);
+          return res.sendStatus(200);
+        });
+        // 0 => -1
+      } else if (data === '0' || data === '1') {
+        conn.query(
+          `UPDATE reddit.vote v SET v.vote = -1 WHERE postid = ? AND userid = ?`,
+          [id, user],
+          (err, result) => {
+            if (err) {
+              res.sendStatus(500);
+              return;
+            }
+            console.log(1);
+            return res.sendStatus(200);
+          }
+        );
+      }
+    }
   });
 });
 
