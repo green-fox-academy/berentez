@@ -123,10 +123,11 @@ app.post('/posts', (req, res) => {
 //Same problem as listing all the posts
 app.get('/posts/:id', (req, res) => {
   const id = req.params.id;
+  const user = req.headers.user;
   conn.query(
     `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus') AS owner, fs.score, IFNULL(v2.vote, 0) as vote FROM (SELECT p.id, p.title, p.url, p.timestamp, p.owner, ifNULL(SUM( v.vote ), 0)  as score FROM reddit.post p LEFT Join reddit.vote v on p.id = v.postid 
-    GROUP BY p.id ) as fs LEFT JOIN reddit.vote v2 ON fs.id = v2.postid and userid =525 LEFT JOIN reddit.user u ON fs.owner = u.userid WHERE fs.id =  ?`,
-    [id],
+    GROUP BY p.id ) as fs LEFT JOIN reddit.vote v2 ON fs.id = v2.postid and userid = ?  LEFT JOIN reddit.user u ON fs.owner = u.userid WHERE fs.id =  ?`,
+    [user, id],
     (err, result) => {
       if (err) {
         res.sendStatus(500);
@@ -241,23 +242,34 @@ app.put('/posts/:id/downvote', (req, res) => {
 //UPDATE POST
 app.put('/posts/:id', (req, res) => {
   const user = req.headers.user;
-  console.log(user);
   const id = req.params.id;
   const title = req.body.title;
   const url = req.body.url;
+  let owner = '';
 
-  conn.query(
-    `UPDATE post SET title = '${title}', url = '${url}', timestamp = CURRENT_TIMESTAMP WHERE id = ? AND owner = ?`,
-    [id, user],
-    (err, result) => {
-      if (err) {
-        res.sendStatus(500);
-
-        return;
-      }
-      return res.sendStatus(200);
+  //getting owner
+  conn.query(`SELECT * FROM reddit.post p WHERE p.id = ?`, [id], (err, result, next) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
     }
-  );
+    owner = JSON.stringify(result[0].owner);
+
+    if (user === owner) {
+      conn.query(
+        `UPDATE post SET title = ?, url = ?, timestamp = CURRENT_TIMESTAMP WHERE id = ? AND owner = ?`,
+        [title, url, id, user],
+        (err, result) => {
+          if (err) {
+            res.sendStatus(500);
+
+            return;
+          }
+          return res.sendStatus(200);
+        }
+      );
+    }
+  });
 });
 
 //DELETE
