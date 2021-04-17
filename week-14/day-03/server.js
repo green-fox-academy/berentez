@@ -268,6 +268,9 @@ app.put('/posts/:id', (req, res) => {
           return res.sendStatus(200);
         }
       );
+    } else {
+      console.log("You can't update this post!");
+      res.sendStatus(200);
     }
   });
 });
