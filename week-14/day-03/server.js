@@ -1,11 +1,16 @@
 const express = require('express');
 const mysql = require('mysql');
 const app = express();
+const path = require('path');
 
 const PORT = 3005;
 
 app.use(express.json());
 app.use('/', express.static('dist'));
+
+app.get('/createpost', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/createPost.html'));
+});
 
 const conn = mysql.createConnection({
   host: 'localhost',
@@ -23,7 +28,7 @@ conn.connect((err) => {
 });
 
 //trying out req.headers
-app.get('/', function (request, response) {
+app.get('/header', function (request, response) {
   console.log(request.headers.user);
   response.send();
 });
@@ -51,21 +56,27 @@ app.get('/posts', (req, res) => {
   const user = req.headers.user;
 
   if (user === undefined) {
-    conn.query(`SELECT * FROM reddit.post`, (err, results) => {
-      if (err) {
-        res.status(500).json({
-          error: err.message,
+    conn.query(
+      `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus') AS owner, fs.score 
+      FROM (SELECT p.id, p.title, p.url, p.timestamp, p.owner, ifNULL(SUM( v.vote ), 0)  as score 
+      FROM reddit.post p LEFT Join reddit.vote v on p.id = v.postid GROUP BY p.id ) as fs 
+      LEFT JOIN reddit.user u ON fs.owner = u.userid;`,
+      (err, results) => {
+        if (err) {
+          res.status(500).json({
+            error: err.message,
+          });
+          return;
+        }
+        const timestampRes = results.map((value) => {
+          const timestamp = new Date(value.timestamp).getTime();
+          return { ...value, timestamp };
         });
-        return;
-      }
-      const timestampRes = results.map((value) => {
-        const timestamp = new Date(value.timestamp).getTime();
-        return { ...value, timestamp };
-      });
 
-      res.status(200);
-      res.json(timestampRes);
-    });
+        res.status(200);
+        res.json(timestampRes);
+      }
+    );
   } else {
     conn.query(
       `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus') AS owner, fs.score, IFNULL(v2.vote, 0) AS vote 

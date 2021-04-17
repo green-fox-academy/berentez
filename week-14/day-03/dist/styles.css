@@ -47,6 +47,7 @@ header.main p {
   width: 100%;
   margin: 5px 25px;
   border-radius: 5px;
+  display: flex;
 }
 
 div.submit {
@@ -96,6 +97,48 @@ div.about {
   border-radius: 7px;
 }
 
+.vote-box {
+  width: 10%;
+  height: 100%;
+  background-color: grey;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.arrow {
+  height: 20px;
+  width: 30px;
+  border: none;
+}
+
+.up {
+  background: no-repeat center url('/pics/upvote.png');
+}
+
+.down {
+  background: no-repeat center url('/pics/downvote.png');
+}
+
+.upvoted {
+  background: no-repeat center url('/pics/upvoted.png');
+}
+
+.downvoted {
+  background: no-repeat center url('/pics/downvoted.png');
+}
+
+.score {
+  font-weight: bold;
+  font-size: small;
+}
+
+.content-box {
+  width: 90%;
+}
+
 ul {
   list-style: none;
   margin-top: 1rem;
@@ -111,4 +154,18 @@ li {
   margin-left: 1rem;
   font-size: small;
   color: white;
+}
+
+h2 {
+  padding: 0.5rem;
+  font-weight: 100;
+}
+
+a {
+  padding: 0.5rem;
+  font-weight: 100;
+}
+
+p {
+  padding: 0.5rem;
 }
