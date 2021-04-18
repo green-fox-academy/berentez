@@ -80,6 +80,12 @@ function calculateTime(time1, time2) {
   }
 }
 
+const btn = document.querySelector('button.submit');
+
+btn.onclick = function () {
+  location.href = 'http://localhost:3005/createpost';
+};
+
 window.onload = () => {
   getposts();
 };

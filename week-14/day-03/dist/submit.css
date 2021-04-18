@@ -1,0 +1,45 @@
+header.main p.submit {
+  color: lightgray;
+  font-size: small;
+  margin-top: 3rem;
+  margin-right: 4rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  height: auto;
+  justify-content: start;
+  background-color: grey;
+  margin-top: 2rem;
+  border-radius: 5px;
+}
+
+div {
+  margin: 1rem;
+  padding: 1rem;
+}
+
+input[type='text'],
+input[type='url'] {
+  width: 55%;
+  padding: 1rem;
+  background-color: lightgray;
+  border: none;
+  outline: none;
+  color: steelblue;
+  font-size: large;
+  font-weight: bold;
+}
+
+input:focus {
+  border: 2px solid steelblue;
+}
+
+input[type='submit'] {
+  width: 30%;
+  align-self: center;
+  margin-left: 3rem;
+  padding: 0.7rem;
+}

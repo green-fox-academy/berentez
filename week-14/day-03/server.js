@@ -119,7 +119,7 @@ app.post('/posts', (req, res) => {
   let owner = req.headers.user;
 
   if (owner === undefined) {
-    owner = 'Anonymus';
+    owner = undefined;
   }
 
   conn.query('INSERT INTO post SET ?', { title, url, owner }, (err, result) => {

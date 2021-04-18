@@ -15,11 +15,12 @@ header.main {
   height: 30%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-header.main p {
+header.main p.header {
   color: white;
   font-weight: 100;
   font-size: xx-large;
@@ -116,6 +117,7 @@ div.about {
 
 .up {
   background: no-repeat center url('/pics/upvote.png');
+  margin-top: 0.3rem;
 }
 
 .down {
@@ -124,6 +126,7 @@ div.about {
 
 .upvoted {
   background: no-repeat center url('/pics/upvoted.png');
+  margin-top: 0.3rem;
 }
 
 .downvoted {
