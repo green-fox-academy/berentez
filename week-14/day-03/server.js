@@ -8,10 +8,6 @@ const PORT = 3005;
 app.use(express.json());
 app.use('/', express.static('dist'));
 
-app.get('/createpost', function (req, res) {
-  res.sendFile(path.join(__dirname, 'dist/createPost.html'));
-});
-
 const conn = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -27,10 +23,29 @@ conn.connect((err) => {
   console.log('connection established to database');
 });
 
+app.get('/createpost', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/createPost.html'));
+});
+
+app.get('/login', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/login.html'));
+});
+
 //trying out req.headers
 app.get('/header', function (request, response) {
-  console.log(request.headers.user);
-  response.send();
+  const { user } = request.body;
+  console.log(user);
+  conn.query(`SELECT username FROM reddit.user  u WHERE userid = ${user}`, (err, result) => {
+    if (err) {
+      response.status(404).json({
+        error: err.message,
+      });
+      return;
+    }
+    const username = result[0].username;
+    console.log(username);
+    response.send();
+  });
 });
 
 app.get('/hello', (req, res) => {

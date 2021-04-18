@@ -119,9 +119,16 @@ div.about {
   background: no-repeat center url('/pics/upvote.png');
   margin-top: 0.3rem;
 }
+.up:checked {
+  background: no-repeat center url('/pics/upvoted.png');
+}
 
 .down {
   background: no-repeat center url('/pics/downvote.png');
+}
+
+.down:checked {
+  background: no-repeat center url('/pics/downvoted.png');
 }
 
 .upvoted {

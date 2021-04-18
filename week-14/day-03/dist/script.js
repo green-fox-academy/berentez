@@ -26,18 +26,38 @@ function createVoteBox(parent, element) {
   const box = document.createElement('div');
   box.classList.add('vote-box');
 
-  const up = document.createElement('button');
+  const up = document.createElement('radio');
   const score = document.createElement('p');
-  const down = document.createElement('button');
+  const down = document.createElement('radio');
 
   up.classList.add('arrow', 'up');
+  up.setAttribute('name', 'arrow');
   down.classList.add('arrow', 'down');
+  down.setAttribute('name', 'arrow');
   parent.classList.add('score');
   if (element.vote === 1) {
     up.classList.add('upvoted');
   } else if (element.vote === -1) {
     down.classList.add('downvoted');
   }
+
+  up.addEventListener('click', function () {
+    if (up.classList.contains('upvoted')) {
+      up.classList.remove('upvoted');
+    } else {
+      up.classList.add('upvoted');
+      down.classList.remove('downvoted');
+    }
+  });
+
+  down.addEventListener('click', function () {
+    if (down.classList.contains('downvoted')) {
+      down.classList.remove('downvoted');
+    } else {
+      down.classList.add('downvoted');
+      up.classList.remove('upvoted');
+    }
+  });
 
   score.textContent = element.score;
 
@@ -67,13 +87,10 @@ function createContentBox(parent, element) {
   parent.appendChild(box);
 }
 
-function calculateTime() {}
-
 function calculateTime(time1, time2) {
   const difference = Math.abs(time2 - time1);
   const days = Math.ceil(difference / (1000 * 60 * 60 * 24));
   if (days < 2) {
-    console.log('lefut');
     return `${Math.ceil(difference / (60 * 60 * 60 * 24))} hours ago`;
   } else {
     return `${days} days ago`;
@@ -89,3 +106,11 @@ btn.onclick = function () {
 window.onload = () => {
   getposts();
 };
+
+function vote(arrow) {
+  if (arrow.classList.contains(arrow + 'voted')) {
+    arrow.classList.remove(arrow + 'voted');
+  } else {
+    arrow.classList.add(arrow + 'voted');
+  }
+}

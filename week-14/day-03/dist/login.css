@@ -21,8 +21,7 @@ div {
   padding: 1rem;
 }
 
-input[type='text'],
-input[type='url'] {
+input[type='text'] {
   width: 55%;
   padding: 1rem;
   background-color: lightgray;
@@ -37,19 +36,21 @@ input:focus {
   border: 2px solid steelblue;
 }
 
-input[type='submit'] {
-  width: 30%;
-  align-self: center;
-  margin-left: 3rem;
-  padding: 0.7rem;
-  text-transform: uppercase;
-  background-color: steelblue;
-  border-radius: 5px;
-  border: none;
-  color: white;
-  font-weight: bold;
+form {
+  display: flex;
+  justify-content: space-around;
 }
 
-input[type='submit']:hover {
-  background-color: royalblue;
+input[type='button'] {
+  padding: 1rem;
+  width: 10rem;
+  font-weight: bold;
+  border-radius: 5px;
+  background-color: steelblue;
+  color: white;
+}
+
+.label {
+  margin: 2rem;
+  font-size: large;
 }

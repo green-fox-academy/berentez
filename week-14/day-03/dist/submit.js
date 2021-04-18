@@ -25,7 +25,6 @@ btn.addEventListener('click', (event) => {
   http.onload = () => {
     if (http.status === 201 || http.status === 200) {
       window.location.href = 'http://localhost:3005/';
-      console.log('lefut');
     } else {
       alert(`something went wrong, error: ${http.status} `);
     }
