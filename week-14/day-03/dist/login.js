@@ -1,31 +1,40 @@
 const btn = document.querySelector("input[type='button']");
 const userInput = document.querySelector('#username');
 const myStorage = window.localStorage;
+let userName = userInput.value;
 
 btn.addEventListener('click', function () {
   getUser();
 });
 
 function getUser() {
-  const httpRequest = new XMLHttpRequest();
-  httpRequest.open('GET', '/header', true);
-  httpRequest.setRequestHeader('Content-type', 'application/json');
-  // let body = {
-  //   user =
-  // }
-  const user = userInput.value;
-  myStorage.setItem('user', user);
-  console.log(myStorage);
-  httpRequest.send(JSON.stringify(myStorage));
-
-  httpRequest.onload = () => {
-    if (httpRequest.status >= 200) {
-      window.location.href = 'http://localhost:3005/';
-      console.log(myStorage);
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', '/loginid', true);
+  xhr.setRequestHeader('Content-type', 'application/json');
+  userName = userInput.value;
+  let reqName = {
+    user: userName,
+  };
+  // console.log(JSON.stringify(reqName));
+  xhr.send(JSON.stringify(reqName));
+  xhr.onload = () => {
+    if (xhr.status === 200) {
+      console.log('response ', JSON.stringify(xhr.responseText));
+      alert(JSON.stringify(xhr.responseText));
+      // let response = JSON.parse(httpRequest.responseText);
+      // console.log(response);
+      // window.location.href = 'http://localhost:3005/';
     } else {
-      alert(http.status);
+      alert(reqName);
+      console.log(reqName);
     }
   };
+  // const user = userInput.value;
+  // let body = {
+  //   user: user,
+  // };
 }
 
-window.onload = () => {};
+// window.onload = () => {
+
+// };

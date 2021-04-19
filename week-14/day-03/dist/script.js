@@ -1,4 +1,5 @@
 const container = document.querySelector('.posts');
+console.log(localStorage);
 
 function getposts() {
   const httpRequest = new XMLHttpRequest();
