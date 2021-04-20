@@ -48,6 +48,27 @@ app.get('/loginid', function (req, res) {
   });
 });
 
+//score
+
+app.get('/score/:id', function (req, res) {
+  const { id } = req.params;
+  conn.query(
+    `SELECT ifNULL(SUM( v.vote ), 0)  as score FROM reddit.vote v WHERE v.postid = ${id} GROUP BY v.postid `,
+    [id],
+    (err, result) => {
+      if (err) {
+        res.status(500).json({
+          error: err.message,
+        });
+        return;
+      }
+      const score = result;
+      console.log(score[0]);
+      res.send(score[0]);
+    }
+  );
+});
+
 //trying out req.headers
 app.get('/header', function (request, response) {
   const { user } = request.body;

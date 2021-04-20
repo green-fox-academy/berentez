@@ -18,9 +18,8 @@ function getUser() {
   xhr.onload = () => {
     if (xhr.status === 200) {
       const id = JSON.parse(xhr.responseText);
-      console.log(id);
+
       localStorage.setItem('user', `${id.userid}`);
-      console.log(localStorage);
 
       window.location.href = 'http://localhost:3005/';
     } else {

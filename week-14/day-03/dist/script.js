@@ -1,5 +1,4 @@
 const container = document.querySelector('.posts');
-console.log(localStorage);
 
 function getposts() {
   const httpRequest = new XMLHttpRequest();
@@ -46,6 +45,10 @@ function createVoteBox(parent, element) {
 
   up.addEventListener('click', function () {
     vote(up, element);
+    console.log('upvote');
+
+    askScore(element, score);
+    console.log('score ', score.textContent);
   });
 
   down.addEventListener('click', function () {
@@ -101,11 +104,7 @@ btn.onclick = function () {
   location.href = 'http://localhost:3005/createpost';
 };
 
-window.onload = () => {
-  getposts();
-};
-
-function vote(arrow, element) {
+function vote(arrow, element, score) {
   console.log(element.id);
   const xhr = new XMLHttpRequest();
   xhr.open('PUT', `/posts/${element.id}/upvote`, true);
@@ -113,9 +112,30 @@ function vote(arrow, element) {
   xhr.setRequestHeader('user', `${localStorage.user}`);
   xhr.send();
 
-  if (arrow.classList.contains(arrow + 'voted')) {
-    arrow.classList.remove(arrow + 'voted');
-  } else {
-    arrow.classList.add('voted');
-  }
+  xhr.onload = () => {
+    if (arrow.classList.contains('upvoted')) {
+      arrow.classList.remove('upvoted');
+      // score.textcontent = parseInt(textcontent) - 1;
+    } else {
+      arrow.classList.add(`upvoted`);
+      // score.textcontent = parseInt(textcontent) + 1;
+    }
+  };
 }
+
+function askScore(element, score) {
+  const xhr = new XMLHttpRequest();
+  xhr.open('GET', `score/${element.id}`, true);
+  xhr.setRequestHeader('Content-type', 'application/json');
+  xhr.setRequestHeader('user', `${localStorage.user}`);
+  xhr.send();
+
+  xhr.onload = () => {
+    score.innerText = JSON.parse(xhr.responseText).score;
+    // score.innerText = responseText;
+  };
+}
+
+window.onload = () => {
+  getposts();
+};
