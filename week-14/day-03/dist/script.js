@@ -33,6 +33,7 @@ function createVoteBox(parent, element) {
   const down = document.createElement('radio');
 
   up.classList.add('arrow', 'up');
+  up.setAttribute('id', `${element.id}`);
   up.setAttribute('name', 'arrow');
   down.classList.add('arrow', 'down');
   down.setAttribute('name', 'arrow');
@@ -44,12 +45,7 @@ function createVoteBox(parent, element) {
   }
 
   up.addEventListener('click', function () {
-    if (up.classList.contains('upvoted')) {
-      up.classList.remove('upvoted');
-    } else {
-      up.classList.add('upvoted');
-      down.classList.remove('downvoted');
-    }
+    vote(up, element);
   });
 
   down.addEventListener('click', function () {
@@ -109,13 +105,17 @@ window.onload = () => {
   getposts();
 };
 
-function vote(arrow) {
+function vote(arrow, element) {
+  console.log(element.id);
   const xhr = new XMLHttpRequest();
-  xhr.open();
+  xhr.open('PUT', `/posts/${element.id}/upvote`, true);
+  xhr.setRequestHeader('Content-type', 'application/json');
+  xhr.setRequestHeader('user', `${localStorage.user}`);
+  xhr.send();
 
   if (arrow.classList.contains(arrow + 'voted')) {
     arrow.classList.remove(arrow + 'voted');
   } else {
-    arrow.classList.add(arrow + 'voted');
+    arrow.classList.add('voted');
   }
 }
