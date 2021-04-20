@@ -11,30 +11,21 @@ function getUser() {
   const xhr = new XMLHttpRequest();
   xhr.open('GET', '/loginid', true);
   xhr.setRequestHeader('Content-type', 'application/json');
+
   userName = userInput.value;
-  let reqName = {
-    user: userName,
-  };
-  // console.log(JSON.stringify(reqName));
-  xhr.send(JSON.stringify(reqName));
+  xhr.setRequestHeader('user', `${userName}`);
+  xhr.send();
   xhr.onload = () => {
     if (xhr.status === 200) {
-      console.log('response ', JSON.stringify(xhr.responseText));
-      alert(JSON.stringify(xhr.responseText));
-      // let response = JSON.parse(httpRequest.responseText);
-      // console.log(response);
-      // window.location.href = 'http://localhost:3005/';
+      const id = JSON.parse(xhr.responseText);
+      console.log(id);
+      localStorage.setItem('user', `${id.userid}`);
+      console.log(localStorage);
+
+      window.location.href = 'http://localhost:3005/';
     } else {
       alert(reqName);
       console.log(reqName);
     }
   };
-  // const user = userInput.value;
-  // let body = {
-  //   user: user,
-  // };
 }
-
-// window.onload = () => {
-
-// };

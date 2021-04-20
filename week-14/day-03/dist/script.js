@@ -3,13 +3,14 @@ console.log(localStorage);
 
 function getposts() {
   const httpRequest = new XMLHttpRequest();
+
   httpRequest.onload = () => {
     const posts = JSON.parse(httpRequest.responseText);
     showPost(posts);
   };
   httpRequest.open('GET', 'http://localhost:3005/posts', true);
   httpRequest.setRequestHeader('Content-Type', 'application/json');
-
+  httpRequest.setRequestHeader('user', `${localStorage.user}`);
   httpRequest.send();
 }
 
@@ -109,6 +110,9 @@ window.onload = () => {
 };
 
 function vote(arrow) {
+  const xhr = new XMLHttpRequest();
+  xhr.open();
+
   if (arrow.classList.contains(arrow + 'voted')) {
     arrow.classList.remove(arrow + 'voted');
   } else {

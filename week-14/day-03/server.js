@@ -32,9 +32,9 @@ app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/login.html'));
 });
 
+//for login
 app.get('/loginid', function (req, res) {
-  const { user } = req.body;
-  // console.log('body ', req.body);
+  const { user } = req.headers;
   conn.query(`SELECT userid FROM reddit.user  u WHERE username = '${user}'`, (err, result) => {
     if (err) {
       res.status(404).json({
@@ -43,8 +43,7 @@ app.get('/loginid', function (req, res) {
       return;
     }
     const username = result;
-    // console.log('username: ', username);
-    // console.log(JSON.stringify(username));
+
     res.send(JSON.stringify(username[0]));
   });
 });
