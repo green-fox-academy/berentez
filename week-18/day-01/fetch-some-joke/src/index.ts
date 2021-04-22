@@ -5,7 +5,8 @@ function getJokes() {
     .then((res) => {
       return res.json();
     })
-    .then((response) => writeJoke(response.value.joke));
+    .then((response) => writeJoke(response.value.joke))
+    .catch((error) => console.error('Not a single Chuck Norris Joke for you: ', error));
 }
 
 function writeJoke(jokes: string): void {
