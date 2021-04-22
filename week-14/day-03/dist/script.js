@@ -72,6 +72,9 @@ function createContentBox(parent, element) {
   const update = document.createElement('span');
   const remove = document.createElement('span');
 
+  update.classList.add('update');
+  remove.classList.add('remove');
+
   title.innerText = element.title;
   link.innerText = element.url;
   timestamp.innerText = `Posted by ${element.owner} ${calculateTime(new Date(), new Date(element.timestamp))}.`;
@@ -103,6 +106,13 @@ btn.onclick = function () {
   location.href = 'http://localhost:3005/createpost';
 };
 
+const update = document.querySelector('.update');
+const remove = document.querySelector('.remove');
+
+// update.onclick = function () {
+//   location.href = 'http://localhost:3005/updatepost';
+// };
+
 function vote(vote, element, arrow, arrowTwo, voteTwo) {
   const xhr = new XMLHttpRequest();
   xhr.open('PUT', `/posts/${element.id}/${vote}`, true);
@@ -131,6 +141,7 @@ function askScore(element, score) {
   xhr.send();
 
   xhr.onload = () => {
+    console.log(JSON.parse(xhr.responseText));
     score.innerText = JSON.parse(xhr.responseText).score;
   };
 }

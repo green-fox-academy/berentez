@@ -10,6 +10,8 @@ btn.addEventListener('click', (event) => {
   http.open('POST', '/posts', true);
   http.setRequestHeader('Content-type', 'application/json');
 
+  http.setRequestHeader('user', localStorage.getItem('user'));
+
   if (title.value === '') {
     alert('Post must have a title!');
   } else if (url.value === '') {

@@ -171,10 +171,6 @@ app.post('/posts', (req, res) => {
   const url = post.url;
   let owner = req.headers.user;
 
-  if (owner === undefined) {
-    owner = undefined;
-  }
-
   conn.query('INSERT INTO post SET ?', { title, url, owner }, (err, result) => {
     if (err) {
       res.sendStatus(500);
@@ -343,7 +339,7 @@ app.put('/posts/:id', (req, res) => {
 app.delete('/posts/:id', (req, res) => {
   const user = req.headers.user;
   const id = req.params.id;
-  conn.query(`DELETE FROM post WHERE id = ? AND owner = ?`, [id, user], (err, result) => {
+  conn.query(`DELETE FROM reddit.post p WHERE p.id = ? AND p.owner = ? `, [id, user], (err, result) => {
     if (err) {
       res.sendStatus(500);
       return;
