@@ -131,12 +131,12 @@ div.about {
   background: no-repeat center url('/pics/downvoted.png');
 }
 
-.upvoted {
+.upvote {
   background: no-repeat center url('/pics/upvoted.png');
   margin-top: 0.3rem;
 }
 
-.downvoted {
+.downvote {
   background: no-repeat center url('/pics/downvoted.png');
 }
 
@@ -178,4 +178,14 @@ a {
 
 p {
   padding: 0.5rem;
+}
+
+span {
+  color: rgb(55, 60, 63);
+  font-size: xx-small;
+  margin-left: 2%;
+}
+
+span:hover {
+  color: steelblue;
 }

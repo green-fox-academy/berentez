@@ -38,26 +38,19 @@ function createVoteBox(parent, element) {
   down.setAttribute('name', 'arrow');
   parent.classList.add('score');
   if (element.vote === 1) {
-    up.classList.add('upvoted');
+    up.classList.add('upvote');
   } else if (element.vote === -1) {
-    down.classList.add('downvoted');
+    down.classList.add('downvote');
   }
 
   up.addEventListener('click', function () {
-    vote(up, element);
-    console.log('upvote');
-
+    vote('upvote', element, up, down, 'downvote');
     askScore(element, score);
-    console.log('score ', score.textContent);
   });
 
   down.addEventListener('click', function () {
-    if (down.classList.contains('downvoted')) {
-      down.classList.remove('downvoted');
-    } else {
-      down.classList.add('downvoted');
-      up.classList.remove('upvoted');
-    }
+    vote('downvote', element, down, up, 'upvote');
+    askScore(element, score);
   });
 
   score.textContent = element.score;
@@ -76,14 +69,20 @@ function createContentBox(parent, element) {
   const title = document.createElement('h2');
   const link = document.createElement('a');
   const timestamp = document.createElement('p');
+  const update = document.createElement('span');
+  const remove = document.createElement('span');
 
   title.innerText = element.title;
   link.innerText = element.url;
   timestamp.innerText = `Posted by ${element.owner} ${calculateTime(new Date(), new Date(element.timestamp))}.`;
+  update.innerText = 'UPDATE';
+  remove.innerText = 'REMOVE';
 
   box.appendChild(title);
   box.appendChild(link);
   box.appendChild(timestamp);
+  box.appendChild(update);
+  box.appendChild(remove);
 
   parent.appendChild(box);
 }
@@ -104,21 +103,22 @@ btn.onclick = function () {
   location.href = 'http://localhost:3005/createpost';
 };
 
-function vote(arrow, element, score) {
-  console.log(element.id);
+function vote(vote, element, arrow, arrowTwo, voteTwo) {
   const xhr = new XMLHttpRequest();
-  xhr.open('PUT', `/posts/${element.id}/upvote`, true);
+  xhr.open('PUT', `/posts/${element.id}/${vote}`, true);
   xhr.setRequestHeader('Content-type', 'application/json');
   xhr.setRequestHeader('user', `${localStorage.user}`);
   xhr.send();
 
   xhr.onload = () => {
-    if (arrow.classList.contains('upvoted')) {
-      arrow.classList.remove('upvoted');
-      // score.textcontent = parseInt(textcontent) - 1;
+    console.log(vote);
+    if (arrow.classList.contains(vote)) {
+      arrow.classList.remove(vote);
+    } else if (arrowTwo.classList.contains(voteTwo)) {
+      arrow.classList.add(vote);
+      arrowTwo.classList.remove(voteTwo);
     } else {
-      arrow.classList.add(`upvoted`);
-      // score.textcontent = parseInt(textcontent) + 1;
+      arrow.classList.add(vote);
     }
   };
 }
@@ -132,7 +132,6 @@ function askScore(element, score) {
 
   xhr.onload = () => {
     score.innerText = JSON.parse(xhr.responseText).score;
-    // score.innerText = responseText;
   };
 }
 
