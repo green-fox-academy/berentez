@@ -1,0 +1,40 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  width: 100wv;
+}
+
+.container {
+  background-color: purple;
+  margin: 0 auto;
+  max-width: 960px;
+  height: 20%;
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  margin-top: 10%;
+  grid-gap: 10px;
+  border: 10px solid purple;
+}
+
+div {
+  height: 100%;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.left,
+.right {
+  background-color: gold;
+}
+
+.main {
+  background-color: green;
+}
+
+p {
+  color: white;
+  font-size: xx-large;
+}
