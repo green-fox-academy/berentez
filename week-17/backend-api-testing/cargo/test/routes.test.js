@@ -118,3 +118,26 @@ describe('Shipstatus tests', () => {
     done();
   });
 });
+
+describe('error management', () => {
+  it('no parameter', (done) => {
+    request(app)
+      .get('/rocket/fill')
+      .expect(500)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.body.error).to.equal('no data given');
+      });
+    done();
+  });
+  it('status not ok', (done) => {
+    request(app)
+      .get('/rocket/fill')
+      .expect(500)
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res.status).to.equal(500);
+      });
+    done();
+  });
+});
