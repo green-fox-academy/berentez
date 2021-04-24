@@ -39,6 +39,18 @@ app.get('/rocket/fill', (req, res) => {
   }
 });
 
+app.get('/rocket/zero', (req, res) => {
+  cargo = {
+    caliber25: 0,
+    caliber30: 0,
+    caliber50: 0,
+    shipstatus: 'empty',
+    ready: false,
+  };
+  res.status(200);
+  res.json(cargo);
+});
+
 const fillCargo = (caliber, amount) => {
   let resBody = {
     received: caliber,
@@ -66,7 +78,7 @@ const checkShipStatus = () => {
 };
 
 const readyCheck = () => {
-  if (checkShipStatus === 'full') {
+  if (checkShipStatus() === 'full') {
     return true;
   }
   return false;
