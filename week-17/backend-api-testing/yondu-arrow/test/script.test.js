@@ -1,7 +1,6 @@
 const request = require('supertest');
 const app = require('../script.js');
 const { expect } = require('chai');
-const { get } = require('../../iamgroot/routes.js');
 
 describe('GET /arrow', () => {
   it('no parameter', (done) => {

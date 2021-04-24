@@ -1,6 +1,5 @@
 const fs = require('fs');
 const mysql = require('mysql');
-const { isReturnStatement } = require('typescript');
 
 const csv = 'users.csv';
 

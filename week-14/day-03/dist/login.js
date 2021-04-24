@@ -2,6 +2,7 @@ const btn = document.querySelector("input[type='button']");
 const userInput = document.querySelector('#username');
 const myStorage = window.localStorage;
 let userName = userInput.value;
+console.log(localStorage);
 
 btn.addEventListener('click', function () {
   getUser();
