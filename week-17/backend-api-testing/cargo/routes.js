@@ -53,8 +53,6 @@ const checkShipStatus = () => {
   let ammo = parseInt(cargo.caliber25) + parseInt(cargo.caliber30) + parseInt(cargo.caliber50);
   let percent = (ammo / 12500) * 100;
   let response = '0%';
-  console.log(ammo);
-  console.log(percent);
 
   if (percent > 100) {
     response = 'overloaded';
@@ -78,7 +76,6 @@ const updateCargo = (caliber, amount) => {
   ammo = parseInt(amount);
   if (caliber === '.50') {
     cargo.caliber50 += ammo;
-    console.log(cargo.caliber50);
   } else if (caliber === '.30') {
     cargo.caliber30 += ammo;
   } else {
