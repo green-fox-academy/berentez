@@ -1,7 +1,6 @@
 const request = require('supertest');
 const app = require('../routes.js');
 const { expect } = require('chai');
-const { response } = require('express');
 
 //Overall status of the default ship
 describe('GET /rocket', () => {
