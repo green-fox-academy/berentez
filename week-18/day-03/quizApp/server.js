@@ -94,14 +94,10 @@ app.post('/api/questions', (req, res) => {
   conn.query('INSERT INTO quizapp.questions (question) VALUES (?)', [question], (err, result) => {
     if (err) {
       res.sendStatus(500);
-      console.log('hiba');
       return;
     }
     const questionId = result.insertId;
     const answers = req.body.answers;
-
-    console.log(questionId);
-    console.log(answers);
 
     conn.query(
       `INSERT INTO quizapp.answers (question_id, answer, is_correct) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)`,
@@ -128,6 +124,23 @@ app.post('/api/questions', (req, res) => {
         res.sendStatus(200);
       }
     );
+  });
+});
+
+app.delete('/api/questions/:id', (req, res) => {
+  const id = req.params.id;
+  conn.query(`DELETE FROM quizapp.answers WHERE question_id = ?`, [id], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    conn.query(`DELETE FROM quizapp.questions q WHERE q.id = ?`, [id], (err, resultTwo) => {
+      if (err) {
+        res.sendStatus(500);
+        return;
+      }
+      res.sendStatus(200);
+    });
   });
 });
 
