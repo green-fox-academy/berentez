@@ -1,4 +1,11 @@
 const display = document.querySelector('.display');
+const aOne = document.querySelectorAll('#answer');
+const radio = document.querySelectorAll('.radio');
+const submit = document.querySelector('#submit');
+console.log(radio);
+
+//forms
+const question = document.querySelector('#question');
 
 const loadQuestions = () => {
   return fetch('http://localhost:8080/api/questions')
@@ -38,6 +45,45 @@ const deleteQuestion = (id) => {
     })
     .catch((error) => console.error(error));
 };
+
+///// !!!radio  giving back boolean, i need int -> next step!
+const addQuestion = () => {
+  const xhr = new XMLHttpRequest();
+  xhr.open('POST', '/api/questions', true);
+  xhr.setRequestHeader('Content-type', 'application/json');
+
+  let reqBody = {
+    question: question.value,
+    answers: [
+      {
+        answer: answer[0].value,
+        is_correct: radio[0].checked,
+      },
+      {
+        answer: answer[1].value,
+        is_correct: radio[1].checked,
+      },
+      {
+        answer: answer[2].value,
+        is_correct: radio[2].checked,
+      },
+      {
+        answer: answer[3].value,
+        is_correct: radio[3].checked,
+      },
+    ],
+  };
+
+  console.log(JSON.stringify(reqBody));
+  xhr.send(JSON.stringify(reqBody));
+  // xhr.onload = () => {
+
+  // }
+};
+
+submit.addEventListener('click', function () {
+  addQuestion();
+});
 
 window.onload = () => {
   loadQuestions();
