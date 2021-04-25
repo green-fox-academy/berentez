@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: lightgray;
+  height: 100vh;
+  width: 100vw;
+  flex-direction: column;
+
+}
+
+div.score {
+
+}
+
+a {
+}
+
+.container {
+  width: 30%;
+  height: 30%;
+  background-color: white;
+

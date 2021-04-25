@@ -6,6 +6,7 @@ const path = require('path');
 const PORT = 8080;
 
 app.use(express.json());
+app.use('/game', express.static('client/dist'));
 
 const conn = mysql.createConnection({
   host: 'localhost',
@@ -34,7 +35,7 @@ app.get('/questions', function (req, res) {
 
 /////////////////////////////////////////////////////
 
-//Return random question with answers
+//Return question with answers
 app.get('/api/game', function (req, res) {
   const questionId = req.headers.id;
 
@@ -72,6 +73,7 @@ app.get('/api/game', function (req, res) {
   );
 });
 
+//return all the questions
 app.get('/api/questions', (req, res) => {
   conn.query(`SELECT * FROM quizapp.questions`, (err, result) => {
     if (err) {
@@ -83,6 +85,49 @@ app.get('/api/questions', (req, res) => {
 
     res.status(200);
     res.json(result);
+  });
+});
+
+//post new question
+app.post('/api/questions', (req, res) => {
+  const { question } = req.body;
+  conn.query('INSERT INTO quizapp.questions (question) VALUES (?)', [question], (err, result) => {
+    if (err) {
+      res.sendStatus(500);
+      console.log('hiba');
+      return;
+    }
+    const questionId = result.insertId;
+    const answers = req.body.answers;
+
+    console.log(questionId);
+    console.log(answers);
+
+    conn.query(
+      `INSERT INTO quizapp.answers (question_id, answer, is_correct) VALUES (?, ?, ?), (?, ?, ?), (?, ?, ?), (?, ?, ?)`,
+
+      [
+        questionId,
+        answers[0].answer,
+        answers[0].is_correct,
+        questionId,
+        answers[1].answer,
+        answers[1].is_correct,
+        questionId,
+        answers[2].answer,
+        answers[2].is_correct,
+        questionId,
+        answers[3].answer,
+        answers[3].is_correct,
+      ],
+      (err, resultTwo) => {
+        if (err) {
+          res.sendStatus(500);
+          return;
+        }
+        res.sendStatus(200);
+      }
+    );
   });
 });
 
