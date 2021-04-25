@@ -127,6 +127,7 @@ app.post('/api/questions', (req, res) => {
   });
 });
 
+// delete question with answers
 app.delete('/api/questions/:id', (req, res) => {
   const id = req.params.id;
   conn.query(`DELETE FROM quizapp.answers WHERE question_id = ?`, [id], (err, result) => {
@@ -141,6 +142,23 @@ app.delete('/api/questions/:id', (req, res) => {
       }
       res.sendStatus(200);
     });
+  });
+});
+
+/////////////////////////////////////////////////////
+
+//plus features
+//counting questions
+
+app.get('/api/count', (req, res) => {
+  conn.query(`SELECT COUNT(q.question) as questions FROM quizapp.questions q`, (err, result) => {
+    if (err) {
+      res.sendStatus(500).json({
+        error: err.message,
+      });
+      return;
+    }
+    res.json(result);
   });
 });
 

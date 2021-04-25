@@ -7,19 +7,68 @@ body {
   background-color: lightgray;
   height: 100vh;
   width: 100vw;
-  flex-direction: column;
-
-}
-
-div.score {
-
-}
-
-a {
+  font-family: sans-serif;
 }
 
 .container {
-  width: 30%;
-  height: 30%;
-  background-color: white;
+  height: 70%;
+  width: 50%;
+  margin: 5% auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+}
 
+div,
+a {
+  margin: 0 auto;
+}
+
+.main {
+  background-color: white;
+  height: 90%;
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.main h1 {
+  font-size: large;
+  margin-bottom: 3%;
+}
+
+.main button {
+  height: 15%;
+  width: 70%;
+  margin: 1% 0;
+  border: none;
+  background-color: lightskyblue;
+}
+
+.main button:hover {
+  background-color: steelblue;
+}
+
+div.score {
+  margin-bottom: 3%;
+  display: flex;
+  justify-content: space-around;
+  width: 25%;
+}
+
+span.score {
+  font-size: xx-large;
+  font-weight: bold;
+}
+
+a {
+  color: steelblue;
+  margin-top: 3%;
+}
+
+.right {
+  background-color: green;
+}
