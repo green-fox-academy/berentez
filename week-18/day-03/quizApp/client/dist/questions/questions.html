@@ -4,9 +4,55 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="styles.css" />
     <title>Document</title>
   </head>
   <body>
-    Im making questions
+    <div class="container">
+      <div class="manage">
+        <h1>Manage questions</h1>
+        <div class="display"></div>
+      </div>
+      <div class="create">
+        <h1>Create a new question</h1>
+        <div class="form">
+          <form action="">
+            <div class="question">
+              <input type="text" id="question" placeholder="Type your question here" required />
+            </div>
+            <h2>Answers</h2>
+            <div class="answers">
+              <ul>
+                <li>
+                  <label for="1">#1</label>
+                  <input type="text" name="1" id="answer" placeholder="Type your answer here" />
+                  <input type="radio" name="answer" />
+                </li>
+                <li>
+                  <label for="2">#2</label>
+                  <input type="text" name="2" id="answer" placeholder="Type your answer here" />
+                  <input type="radio" name="answer" />
+                </li>
+                <li>
+                  <label for="3">#3</label>
+                  <input type="text" name="3" id="answer" placeholder="Type your answer here" />
+                  <input type="radio" name="answer" />
+                </li>
+                <li>
+                  <label for="134">#4</label>
+                  <input type="text" name="4" id="answer" placeholder="Type your answer here" />
+                  <input type="radio" name="answer" />
+                </li>
+              </ul>
+              <div>
+                <input type="submit" id="submit" value="submit" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+      <a href="http://localhost:8080/game">Go back to the game</a>
+    </div>
+    <script src="script.js"></script>
   </body>
 </html>

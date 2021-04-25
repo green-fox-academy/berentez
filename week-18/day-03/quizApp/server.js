@@ -7,6 +7,7 @@ const PORT = 8080;
 
 app.use(express.json());
 app.use('/game', express.static('client/dist'));
+app.use('/questions', express.static('client/dist/questions'));
 
 const conn = mysql.createConnection({
   host: 'localhost',

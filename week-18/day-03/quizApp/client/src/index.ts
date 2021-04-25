@@ -96,7 +96,7 @@ const checkResult = (index: number) => {
   xhr.onload = () => {
     const result = JSON.parse(xhr.responseText);
     if (result.answers[index].is_correct === 1) {
-      btn[index].setAttribute('style', 'background-color: green');
+      btn[index].setAttribute('style', 'background-color: rgb(97, 152, 100)');
       score.innerText = (parseInt(score.innerText) + 1).toString();
       console.log('fut');
     } else {
