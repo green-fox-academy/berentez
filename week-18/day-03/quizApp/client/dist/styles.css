@@ -72,3 +72,7 @@ a {
 p {
   padding: 2%;
 }
+
+.question {
+  padding: 0 1.5em;
+}

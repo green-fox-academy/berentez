@@ -1,8 +1,8 @@
 const display = document.querySelector('.display');
 const aOne = document.querySelectorAll('#answer');
+const questin = document.querySelector('#question');
 const radio = document.querySelectorAll('.radio');
 const submit = document.querySelector('#submit');
-console.log(radio);
 
 //forms
 const question = document.querySelector('#question');
@@ -57,19 +57,19 @@ const addQuestion = () => {
     answers: [
       {
         answer: answer[0].value,
-        is_correct: radio[0].checked,
+        is_correct: radioCheck(radio[0]),
       },
       {
         answer: answer[1].value,
-        is_correct: radio[1].checked,
+        is_correct: radioCheck(radio[1]),
       },
       {
         answer: answer[2].value,
-        is_correct: radio[2].checked,
+        is_correct: radioCheck(radio[2]),
       },
       {
         answer: answer[3].value,
-        is_correct: radio[3].checked,
+        is_correct: radioCheck(radio[3]),
       },
     ],
   };
@@ -81,8 +81,25 @@ const addQuestion = () => {
   // }
 };
 
+function radioCheck(radio) {
+  if (radio.checked === true) {
+    return 1;
+  } else {
+    return 0;
+  }
+}
+
+function submitValueDelete() {
+  aOne.forEach((answer) => {
+    answer.value = '';
+  });
+  question.value = '';
+}
+
 submit.addEventListener('click', function () {
   addQuestion();
+  submitValueDelete();
+  location.reload();
 });
 
 window.onload = () => {

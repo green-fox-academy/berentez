@@ -3,28 +3,32 @@ let quest: HTMLElement = document.querySelector('.question');
 const score: HTMLElement = document.querySelector('span');
 let questionId = 1;
 
-//Getting current question
+//Getting random question
 /////////////////////////////////////////////////////////
 
-// function getQuestionIdList() {
+// const getQuestionIdList = () => {
 //   let idList: number[] = [];
 //   return fetch('http://localhost:8080/api/questions')
 //     .then((res) => {
 //       return res.json();
 //     })
-//     .then((response) =>
-//       response.forEach((value: any) => {
-//         idList.push(parseInt(value.id));
-//       })
-//     );
+//     .then((question) => {
+//       for (let i: number = 0; i < question.length; i++) {
+//         idList.push(question[i].id);
+//       }
+//       return idList;
+//     });
+// };
+
+// async function getRandomQuestion() {
+//   const QList = await getQuestionIdList();
+//   questionId = Math.ceil(Math.random() * QList.length);
+//   return questionId;
 // }
+// getRandomQuestion();
+// console.log(getRandomQuestion());
 
-// const list: number[] = getQuestionIdList();
-
-// const index: number = Math.floor(Math.random() * list.length);
-// const question = list[index];
-// console.log('question number ', question);
-
+/////////////////////////////////////////////////////////
 function getQuestion() {
   const xhr: XMLHttpRequest = new XMLHttpRequest();
 
@@ -38,34 +42,6 @@ function getQuestion() {
     displayQuestion(question);
   };
 }
-
-// function getQuestion() {
-//   return fetch('http://localhost:8080/api/game/', {
-//     headers: {
-//       id: `${randomNumber()}`,
-//     },
-//   })
-//     .then((res) => res.json())
-//     .then((response) => displayQuestion(response.value.question));
-// }
-
-// function randomNumber() {
-//   const xhr: XMLHttpRequest = new XMLHttpRequest();
-
-//   xhr.open('GET', 'http://localhost:8080/api/count', true);
-//   xhr.setRequestHeader('Content-Type', 'application/json');
-//   xhr.send();
-
-//   xhr.onload = () => {
-//     const count = JSON.parse(xhr.responseText)[0].questions;
-//     randomize(count);
-//   };
-// }
-
-// function randomize(number: number) {
-//   const randomNum = Math.floor(Math.random() * number);
-//   return randomNum;
-// }
 
 //--cant find type for question
 function displayQuestion(question: any): void {
@@ -98,7 +74,6 @@ const checkResult = (index: number) => {
     if (result.answers[index].is_correct === 1) {
       btn[index].setAttribute('style', 'background-color: rgb(97, 152, 100)');
       score.innerText = (parseInt(score.innerText) + 1).toString();
-      console.log('fut');
     } else {
       btn[index].setAttribute('style', 'background-color: red');
     }
