@@ -13,75 +13,47 @@ const getQuestionArray = async () => {
 
   return data;
 };
+
 const getRandomId = () => {
-  getQuestionArray().then((data) => {
-    data.forEach((element: any) => {
-      questList.push(element.id);
+  getQuestionArray()
+    .then((data) => {
+      data.forEach((element: any) => {
+        questList.push(element.id);
+      });
+    })
+    .then(() => {
+      const index: number = Math.floor(Math.random() * questList.length);
+      questionId = questList[index];
     });
-    console.log('questlist ', questList);
-  });
-  const index: number = Math.floor(Math.random() * questList.length);
-  console.log('index: ', index);
-  questionId = questList[index];
-  console.log('id', questionId);
 };
 
-// function getQuestionIdList(): number[] {
-//   const list: number[] = [];
+/////////////////////////////////////////////////
 
-//   const xhr = new XMLHttpRequest();
-//   xhr.open('GET', 'http://localhost:8080/api/questions', true);
+//getQuestionPatch() === getQuestion()
+
+// function getQuestionPatch() {
+//   const xhr: XMLHttpRequest = new XMLHttpRequest();
+
+//   xhr.open('GET', 'http://localhost:8080/api/game', true);
 //   xhr.setRequestHeader('Content-Type', 'application/json');
-//   xhr.send();
+//   xhr.setRequestHeader('id', `${questionId}`);
 
+//   xhr.send();
 //   xhr.onload = () => {
 //     const question = JSON.parse(xhr.responseText);
-//     question.forEach((value: any) => {
-//       list.push(value.id);
-//     });
-//     console.log(list);
+//     displayQuestion(question);
 //   };
-
-//   return list;
 // }
 
-// function getQuestionIdList() {
-//   fetch('http://localhost:8080/api/questions')
-//     .then((response) => {
-//       return response.json();
-//     })
-//     .then((data) => {
-//       return data.forEach((element) => {
-//         questList.push(element.id);
-//       });
-//     });
-// }
-
-// getQuestionIdList();
-// console.log(questList.length);
-
-// function getRandomQuestion() {
-//   const questIdList: number[] = getQuestionIdList();
-//   console.log('questNUM', questIdList.length);
-//   return questIdList[Math.floor(Math.random() * questIdList.length)];
-// }
-
-// getQuestionIdList();
-
-/////////////////////////////////////////////////////////
-function getQuestion() {
-  const xhr: XMLHttpRequest = new XMLHttpRequest();
-
-  xhr.open('GET', 'http://localhost:8080/api/game', true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('id', `${questionId}`);
-  xhr.send();
-
-  xhr.onload = () => {
-    const question = JSON.parse(xhr.responseText);
-    displayQuestion(question);
-  };
-}
+const getQuestion = () => {
+  fetch('http://localhost:8080/api/game', {
+    method: 'GET',
+    headers: { id: `${questionId}` },
+  })
+    .then((res) => res.json())
+    .then((question) => displayQuestion(question))
+    .catch((err) => console.error('Nope', err));
+};
 
 //--cant find type for question
 function displayQuestion(question: any): void {
