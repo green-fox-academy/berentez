@@ -1,11 +1,30 @@
 const btn: NodeListOf<HTMLButtonElement> = document.querySelectorAll('button');
 let quest: HTMLElement = document.querySelector('.question');
 const score: HTMLElement = document.querySelector('span');
-let questionId = 1;
-let questList = [];
+let questionId: number = 1;
+let questList: number[] = [];
 
 //Getting random question
 /////////////////////////////////////////////////////////
+
+const getQuestionArray = async () => {
+  const response = await fetch('http://localhost:8080/api/questions');
+  const data = await response.json();
+
+  return data;
+};
+const getRandomId = () => {
+  getQuestionArray().then((data) => {
+    data.forEach((element: any) => {
+      questList.push(element.id);
+    });
+    console.log('questlist ', questList);
+  });
+  const index: number = Math.floor(Math.random() * questList.length);
+  console.log('index: ', index);
+  questionId = questList[index];
+  console.log('id', questionId);
+};
 
 // function getQuestionIdList(): number[] {
 //   const list: number[] = [];
@@ -26,20 +45,20 @@ let questList = [];
 //   return list;
 // }
 
-function getQuestionIdList() {
-  fetch('http://localhost:8080/api/questions')
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data.forEach((element) => {
-        questList.push(element.id);
-      });
-    });
-}
+// function getQuestionIdList() {
+//   fetch('http://localhost:8080/api/questions')
+//     .then((response) => {
+//       return response.json();
+//     })
+//     .then((data) => {
+//       return data.forEach((element) => {
+//         questList.push(element.id);
+//       });
+//     });
+// }
 
-getQuestionIdList();
-console.log(questList.length);
+// getQuestionIdList();
+// console.log(questList.length);
 
 // function getRandomQuestion() {
 //   const questIdList: number[] = getQuestionIdList();
@@ -47,7 +66,7 @@ console.log(questList.length);
 //   return questIdList[Math.floor(Math.random() * questIdList.length)];
 // }
 
-getQuestionIdList();
+// getQuestionIdList();
 
 /////////////////////////////////////////////////////////
 function getQuestion() {
@@ -98,8 +117,8 @@ const checkResult = (index: number) => {
     } else {
       btn[index].setAttribute('style', 'background-color: red');
     }
-    questionId++;
 
+    getRandomId();
     setTimeout(clearButtons, 2800);
     setTimeout(getQuestion, 3000);
   };
