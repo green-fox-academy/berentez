@@ -1,5 +1,6 @@
 const container = document.querySelector('.posts');
 
+//display post
 function getposts() {
   const httpRequest = new XMLHttpRequest();
 
@@ -7,6 +8,7 @@ function getposts() {
     const posts = JSON.parse(httpRequest.responseText);
     showPost(posts);
   };
+
   httpRequest.open('GET', 'http://localhost:3005/posts', true);
   httpRequest.setRequestHeader('Content-Type', 'application/json');
   httpRequest.setRequestHeader('user', `${localStorage.user}`);
@@ -43,6 +45,7 @@ function createVoteBox(parent, element) {
     down.classList.add('downvote');
   }
 
+  //vote
   up.addEventListener('click', function () {
     vote('upvote', element, up, down, 'downvote');
     askScore(element, score);
@@ -71,6 +74,14 @@ function createContentBox(parent, element) {
   const timestamp = document.createElement('p');
   const update = document.createElement('span');
   const remove = document.createElement('span');
+
+  remove.onclick = () => {
+    if (element.owner === 'Anonymus') {
+      removeAnonymPost(element.id);
+    } else {
+      removePost(element.id);
+    }
+  };
 
   update.classList.add('update');
   remove.classList.add('remove');
@@ -113,6 +124,7 @@ const remove = document.querySelector('.remove');
 //   location.href = 'http://localhost:3005/updatepost';
 // };
 
+///ezen lehetne még dolgozni
 function vote(vote, element, arrow, arrowTwo, voteTwo) {
   const xhr = new XMLHttpRequest();
   xhr.open('PUT', `/posts/${element.id}/${vote}`, true);
@@ -148,4 +160,27 @@ function askScore(element, score) {
 
 window.onload = () => {
   getposts();
+};
+
+//after learning fetch
+
+const removePost = (id) => {
+  return fetch(`http://localhost:3005/posts/${id}`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+      user: `${localStorage.user}`,
+    },
+  }).catch((err) => console.error(err));
+};
+
+const removeAnonymPost = (id) => {
+  return fetch(`http://localhost:3005/posts/${id}/anonymus`, {
+    method: 'DELETE',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+  })
+    .then((res) => console.log(res))
+    .catch((err) => console.error(err));
 };

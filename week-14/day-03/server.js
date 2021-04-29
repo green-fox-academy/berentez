@@ -63,7 +63,7 @@ app.get('/score/:id', function (req, res) {
         return;
       }
       const score = result;
-      console.log(score[0]);
+
       res.send(score[0]);
     }
   );
@@ -81,7 +81,7 @@ app.get('/header', function (request, response) {
       return;
     }
     const username = result[0].username;
-    console.log(username);
+
     response.send();
   });
 });
@@ -239,7 +239,7 @@ app.put('/posts/:id/upvote', (req, res, next) => {
             res.sendStatus(500);
             return;
           }
-          console.log(1);
+
           return res.sendStatus(200);
         });
       }
@@ -277,7 +277,6 @@ app.put('/posts/:id/downvote', (req, res) => {
             res.sendStatus(500);
             return;
           }
-          console.log(0);
           return res.sendStatus(200);
         });
         // 0 => -1
@@ -290,7 +289,6 @@ app.put('/posts/:id/downvote', (req, res) => {
               res.sendStatus(500);
               return;
             }
-            console.log(1);
             return res.sendStatus(200);
           }
         );
@@ -341,6 +339,19 @@ app.delete('/posts/:id', (req, res) => {
   const id = req.params.id;
   conn.query(`DELETE FROM reddit.post p WHERE p.id = ? AND p.owner = ? `, [id, user], (err, result) => {
     if (err) {
+      res.sendStatus(500);
+      return;
+    }
+    return res.sendStatus(200);
+  });
+});
+
+//deleting anonymus
+app.delete('/posts/:id/anonymus', (req, res) => {
+  const id = req.params.id;
+  conn.query(`DELETE FROM reddit.post p WHERE p.id = ? `, [id], (err, result) => {
+    if (err) {
+      console.log(err);
       res.sendStatus(500);
       return;
     }
