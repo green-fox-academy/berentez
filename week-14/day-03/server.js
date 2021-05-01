@@ -72,7 +72,6 @@ app.get('/score/:id', function (req, res) {
 //trying out req.headers
 app.get('/header', function (request, response) {
   const { user } = request.body;
-  console.log(user);
   conn.query(`SELECT username FROM reddit.user  u WHERE userid = ${user}`, (err, result) => {
     if (err) {
       response.status(404).json({
@@ -132,7 +131,7 @@ app.get('/posts', (req, res) => {
     );
   } else {
     conn.query(
-      `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus') AS owner, fs.score, IFNULL(v2.vote, 0) AS vote 
+      `SELECT fs.id, fs.title, fs.url, fs.timestamp, ifnull(u.username, 'Anonymus') AS owner, fs.score, fs.owner AS owner_id, IFNULL(v2.vote, 0) AS vote 
       FROM (SELECT p.id, p.title, p.url, p.timestamp, p.owner, ifNULL(SUM( v.vote ), 0)  AS score 
       FROM reddit.post p 
       LEFT JOIN reddit.vote v on p.id = v.postid 

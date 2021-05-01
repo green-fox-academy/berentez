@@ -78,8 +78,10 @@ function createContentBox(parent, element) {
   remove.onclick = () => {
     if (element.owner === 'Anonymus') {
       removeAnonymPost(element.id);
-    } else {
+      parent.remove();
+    } else if (element.owner_id.toString() === localStorage.user) {
       removePost(element.id);
+      parent.remove();
     }
   };
 
