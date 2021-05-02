@@ -75,4 +75,32 @@ app.delete('/drax/:id', (req, res) => {
   });
 });
 
+app.put('/drax/:id', (req, res) => {
+  const { amount } = req.body;
+  const id = req.params.id;
+
+  conn.query('SELECT * FROM calorie WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      res.status(500).send();
+      return;
+    } else if (result.length === 0) {
+      res.status(404).send('Food is not in database');
+      return;
+    } else {
+      const calorie = parseInt(result[0].calorie / result[0].amount);
+      conn.query(
+        'UPDATE calorie SET amount = ?, calorie = ? * amount WHERE id = ?',
+        [amount, calorie, id],
+        (req, result) => {
+          if (err) {
+            res.status(500).send();
+            return;
+          }
+          res.status(200).send('Updated');
+        }
+      );
+    }
+  });
+});
+
 module.exports = app;
