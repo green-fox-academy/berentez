@@ -28,6 +28,10 @@ app.get('/createpost', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/createPost.html'));
 });
 
+app.get('/updatepost', function (req, res) {
+  res.sendFile(path.join(__dirname, 'dist/edit.html'));
+});
+
 app.get('/login', function (req, res) {
   res.sendFile(path.join(__dirname, 'dist/login.html'));
 });
@@ -37,11 +41,12 @@ app.get('/loginid', function (req, res) {
   const { user } = req.headers;
   conn.query(`SELECT userid FROM reddit.user  u WHERE username = '${user}'`, (err, result) => {
     if (err) {
-      res.status(404).json({
+      res.status(500).json({
         error: err.message,
       });
       return;
     }
+
     const username = result;
 
     res.send(JSON.stringify(username[0]));

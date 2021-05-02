@@ -75,6 +75,13 @@ function createContentBox(parent, element) {
   const update = document.createElement('span');
   const remove = document.createElement('span');
 
+  update.onclick = () => {
+    if (element.owner === 'Anonymus' || element.owner_id.toString() === localStorage.user) {
+      localStorage.setItem('post', `${element.id}`);
+      location.href = 'http://localhost:3005/updatepost';
+    }
+  };
+
   remove.onclick = () => {
     if (element.owner === 'Anonymus') {
       removeAnonymPost(element.id);
@@ -135,7 +142,6 @@ function vote(vote, element, arrow, arrowTwo, voteTwo) {
   xhr.send();
 
   xhr.onload = () => {
-    console.log(vote);
     if (arrow.classList.contains(vote)) {
       arrow.classList.remove(vote);
     } else if (arrowTwo.classList.contains(voteTwo)) {
