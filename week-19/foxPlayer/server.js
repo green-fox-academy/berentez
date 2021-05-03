@@ -58,6 +58,30 @@ app.post('/playlist', (req, res) => {
     }
   });
 });
+
+app.delete('/playlist/:id', (req, res) => {
+  const id = req.params.id;
+  conn.query('SELECT * FROM foxplayer.playlist p WHERE id = ?', [id], (err, result) => {
+    if (err) {
+      res.status(500).send('server error');
+    } else if (result.length === 0) {
+      res.status(404).json({ error: 'Playlist not found' });
+    } else {
+      const system = result[0].system;
+
+      if (system === 1) {
+        res.status(400).send({ error: 'This playlist is not deletable.' });
+      } else {
+        conn.query('DELETE FROM foxplayer.playlist p WHERE p.id = ?', [id], (err, result) => {
+          if (err) {
+            res.status(500).send('server error when trying to delete data');
+          }
+          res.status(204).send('deleted');
+        });
+      }
+    }
+  });
+});
 //////////////////////////////////////////
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
