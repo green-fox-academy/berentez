@@ -24,7 +24,7 @@ app.use(express.json());
 app.use('/', express.static('client/dist'));
 
 //////////////////////////////////////////
-
+//PLAYLIST ENDPOINTS
 //List playlist
 app.get('/playlist', (req, res) => {
   conn.query('SELECT * FROM foxplayer.playlist', (err, result) => {
@@ -59,18 +59,22 @@ app.post('/playlist', (req, res) => {
   });
 });
 
+//delete playlist
 app.delete('/playlist/:id', (req, res) => {
   const id = req.params.id;
   conn.query('SELECT * FROM foxplayer.playlist p WHERE id = ?', [id], (err, result) => {
     if (err) {
       res.status(500).send('server error');
+      return;
     } else if (result.length === 0) {
       res.status(404).json({ error: 'Playlist not found' });
+      return;
     } else {
       const system = result[0].system;
 
       if (system === 1) {
         res.status(400).send({ error: 'This playlist is not deletable.' });
+        return;
       } else {
         conn.query('DELETE FROM foxplayer.playlist p WHERE p.id = ?', [id], (err, result) => {
           if (err) {
@@ -82,6 +86,19 @@ app.delete('/playlist/:id', (req, res) => {
     }
   });
 });
+
+//PLAYLIST TRACKS
+
+app.get('/playlist_tracks/', (req, res) => {
+  conn.query('SELECT * FROM foxplayer.tracks', (err, result) => {
+    if (err) {
+      res.status(500).send();
+      return;
+    }
+    res.status(200).json(result);
+  });
+});
+
 //////////////////////////////////////////
 app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
