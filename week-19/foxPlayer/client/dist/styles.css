@@ -1,0 +1,74 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  height: 100vh;
+  width: 100vw;
+  display: flex;
+}
+
+.right {
+  display: flex;
+  width: 55%;
+  margin: 10px;
+  background-color: grey;
+}
+
+.left {
+  display: grid;
+  grid-template-columns: 3fr, 2fr;
+  grid-template-rows: repeat(1fr);
+  width: 45%;
+  margin: 10px;
+  background-color: grey;
+}
+
+.logo {
+  background-color: white;
+  display: flex;
+  grid-column: 1/2;
+  grid-row: 1/4;
+  max-height: 200px;
+}
+
+.logo img {
+  width: 50%;
+}
+
+.album {
+  background-color: black;
+  grid-column: 2 / 3;
+  grid-row: 1/4;
+  max-height: 200px;
+}
+
+.playlist {
+  background-color: hotpink;
+  grid-column: 1/2;
+  grid-row: 4/5;
+  display: flex;
+}
+
+.category {
+  background-color: indianred;
+  grid-column: 1/3;
+  grid-row: 5/9;
+}
+
+.category p {
+  padding: 2%;
+}
+
+.category p:nth-child(even) {
+  background-color: gray;
+}
+
+.category p:nth-child(odd) {
+  background-color: lightgray;
+}
+
+.category p:focus {
+  background-color: turquoise;
+}
