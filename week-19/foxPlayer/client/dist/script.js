@@ -1,5 +1,6 @@
 const category = document.querySelector('.category');
 const tracks = document.querySelector('.tracks');
+const songs = document.querySelectorAll('.tracks > p');
 
 const displayPlaylist = () => {
   return fetch('http://localhost:3000/playlist')
@@ -12,7 +13,7 @@ function writePlaylist(data) {
   data.forEach((playListElement) => {
     const listElemenet = document.createElement('p');
     listElemenet.innerText = playListElement.title;
-    listElemenet.addEventListener('click', listTracks(playListElement.id));
+    listElemenet.onclick = () => listTracks(playListElement.id);
     category.appendChild(listElemenet);
   });
 }
@@ -25,6 +26,7 @@ const listTracks = (id) => {
 };
 
 function writeTracks(data) {
+  console.log('fut');
   // let counter = 1;
   data.forEach((song) => {
     const track = document.createElement('p');
