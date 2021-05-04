@@ -1,3 +1,4 @@
+const { response } = require('express');
 const express = require('express');
 const mysql = require('mysql');
 const { isReturnStatement } = require('typescript');
@@ -97,6 +98,98 @@ app.get('/playlist_tracks/', (req, res) => {
     }
     res.status(200).json(result);
   });
+});
+
+app.get('/playlist_tracks/:playlist_id', (req, res) => {
+  const { playlist_id } = req.params;
+  conn.query(`SELECT * FROM foxplayer.tracks t WHERE t.playlist_id = ? `, [playlist_id], (err, result) => {
+    if (err) {
+      res.status(500).send();
+      return;
+    } else if (result.length === 0) {
+      res.status(400).json({ error: 'No songs in this playlist' });
+      return;
+    } else {
+      res.status(200).json(result);
+    }
+  });
+});
+
+app.post('/playlist_tracks/:playlist_id', (req, res) => {
+  const { playlist_id } = req.params;
+  const { title, artist, duration, path } = req.body;
+
+  conn.query(`SELECT p.title FROM foxplayer.playlist p WHERE id = ?`, [playlist_id], (err, response) => {
+    if (err) {
+      res.status(500).send();
+      return;
+    } else if (response.length !== 1) {
+      res.status(404).json({ error: 'No playlist found' });
+      return;
+    } else {
+      conn.query(
+        `SELECT t.title FROM foxplayer.tracks t WHERE t.playlist_id = ? AND t.title = ?`,
+        [playlist_id, title],
+        (err, result) => {
+          if (err) {
+            res.status(500).send();
+            return;
+          } else if (result.length !== 0) {
+            res.status(400).json({ error: 'Already in your playlist' });
+            return;
+          } else {
+            conn.query(
+              `INSERT INTO foxplayer.tracks (playlist_id, title, artist, duration, path) VALUES (?, ?, ?, ?, ?)`,
+              [playlist_id, title, artist, duration, path],
+              (err, insertResponse) => {
+                if (err) {
+                  res.status(500);
+                  return;
+                }
+                const resBody = {
+                  id: insertResponse.id,
+                  playlist_id,
+                  title,
+                  artist,
+                  duration,
+                  path,
+                };
+                res.status(200).json(resBody);
+              }
+            );
+          }
+        }
+      );
+    }
+  });
+});
+
+app.delete('/playlist_tracks/:playlist_id/:tracks_id', (req, res) => {
+  const { playlist_id, tracks_id } = req.params;
+
+  conn.query(
+    `SELECT * FROM foxplayer.tracks t WHERE t.playlist_id = ? AND t.id = ?`,
+    [playlist_id, tracks_id],
+    (err, selectRes) => {
+      if (err) {
+        res.status(500).send();
+      } else if (selectRes.length !== 1) {
+        res.status(400).json({ error: 'Not enough information for removing track from playlist' });
+      } else {
+        conn.query(
+          `DELETE FROM foxplayer.tracks t WHERE t.playlist_id = ? AND t.id = ?`,
+          [playlist_id, tracks_id],
+          (err, deleteRes) => {
+            if (err) {
+              res.status(500).send();
+              return;
+            }
+            res.status(200).json({ status: 'deleted' });
+          }
+        );
+      }
+    }
+  );
 });
 
 //////////////////////////////////////////
