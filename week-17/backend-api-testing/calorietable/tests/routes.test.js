@@ -6,7 +6,7 @@ describe('POST/drax', () => {
   it('should return an error 400', (done) => {
     request(app)
       .post('/drax')
-      .send({ name: 'apple', amount: '1', calorie: '95' })
+      .send({ name: 'apple', amount: 1, calorie: 95 })
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(400)
@@ -20,7 +20,7 @@ describe('POST/drax', () => {
   it('should return OK', (done) => {
     request(app)
       .post('/drax')
-      .send({ name: 'carrot', amount: '1', calorie: '25' })
+      .send({ name: 'lemon', amount: 1, calorie: 17 })
       // .set('Accept', 'application/json')
       // .expect('Content-Type', /json/)
       .expect(200)
@@ -30,16 +30,17 @@ describe('POST/drax', () => {
       });
   });
 });
+
 // failing
 describe('PUT/drax', () => {
   it('response should be Updated', (done) => {
     request(app)
-      .put('/drax/?id=1')
-      .send({ amount: '2' })
+      .put('/drax/1')
+      .send({ amount: 2 })
       .expect(200)
       .end((err, res) => {
         // expect(err).to.be.null;
-        expect(res).to.equal('Updated');
+        expect(res.status).to.equal(200);
         done();
       });
   });
@@ -50,7 +51,7 @@ describe('PUT/drax', () => {
 describe('DELETE/drax', () => {
   it('status should be 204', (done) => {
     request(app)
-      .delete('/drax/id=3')
+      .delete('/drax/4')
       .expect(204)
       .end((err, res) => {
         expect(err).to.be.null;
