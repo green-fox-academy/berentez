@@ -1,7 +1,5 @@
-const { response } = require('express');
 const express = require('express');
 const mysql = require('mysql');
-const { isReturnStatement } = require('typescript');
 
 const app = express();
 const PORT = 3000;

@@ -3,16 +3,25 @@
   padding: 0;
 }
 
-.container {
-  height: 100vh;
+body {
   width: 100vw;
+  height: 100vh;
   display: flex;
+  flex-direction: column;
+}
+
+.container {
+  height: 60%;
+  width: 70%;
+  display: flex;
+  margin: 0 auto;
+  margin-top: 5%;
 }
 
 .right {
   display: flex;
   width: 55%;
-  margin: 10px;
+  /* margin: 10px; */
   background-color: grey;
 }
 
@@ -21,7 +30,7 @@
   grid-template-columns: 3fr, 2fr;
   grid-template-rows: repeat(1fr);
   width: 45%;
-  margin: 10px;
+  /* margin: 10px; */
   background-color: grey;
 }
 
@@ -62,14 +71,29 @@
   padding: 2%;
 }
 
+.category p:focus {
+  background-color: royalblue;
+}
+
 .category p:nth-child(even) {
-  background-color: gray;
+  background-color: rgb(245, 245, 245);
 }
 
 .category p:nth-child(odd) {
-  background-color: lightgray;
+  background-color: rgb(234, 234, 234);
 }
 
 .category p:focus {
   background-color: turquoise;
+}
+
+footer {
+  width: 70%;
+  height: 10%;
+  background-color: gold;
+  margin: 0 auto;
+}
+
+.album {
+  background: url('img/music-placeholder.png') no-repeat center/100%;
 }
