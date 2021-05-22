@@ -89,5 +89,10 @@ nav > img {
 .beerTile:hover {
   background-color: grey;
   cursor: pointer;
-  box-shadow: 0px 5px 10px 0px rgb(216, 187, 57);
+  box-shadow: 0px 5px 10px 0px rgb(240, 239, 233);
+}
+
+.beerTile p {
+  font-size: x-small;
+  padding: 1.2em;
 }
