@@ -115,3 +115,7 @@ p.descript {
 a {
   cursor: pointer;
 }
+
+.pagination {
+  margin: 20px;
+}
