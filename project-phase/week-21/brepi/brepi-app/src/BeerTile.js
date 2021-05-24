@@ -10,7 +10,6 @@ const BeerTile = (props) => {
 
   const toggleClick = () => {
     descriptionON ? setDesc(false) : setDesc(true);
-    console.log(descriptionON);
   };
 
   return (
