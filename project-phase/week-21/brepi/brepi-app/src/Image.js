@@ -1,12 +1,10 @@
 const Image = (props) => {
-  const handleClick = (e) => {
-    console.log(props.name);
-  };
+  const { image_url, name, onClick } = props;
 
   return (
-    <div className="beerTile">
-      <img src={`${props.image_url}`} alt="beer" onClick={props.handleClick} />
-      <h5>{props.name}</h5>
+    <div className="beerTile" onClick={onClick}>
+      <img src={`${image_url}`} alt="beer" />
+      <h5>{name}</h5>
     </div>
   );
 };
