@@ -94,7 +94,8 @@ nav > img {
 
 .beerTile p {
   font-size: x-small;
-  padding: 1.2em;
+  padding: 1.1rem;
+  text-align: justify;
 }
 
 p.descript {

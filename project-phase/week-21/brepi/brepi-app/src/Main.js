@@ -10,7 +10,7 @@ const Main = () => {
 
   const { data: beers, isPending, error } = UseFetch(`https://api.punkapi.com/v2/beers?page=${currentPage}&per_page=6`);
 
-  const handleClick = (page, pageSize) => {
+  const handleClick = (page) => {
     setPage(page);
   };
 
@@ -26,7 +26,7 @@ const Main = () => {
         {beers && <BeerList beers={beers} />}
       </div>
       <div className="pagination">
-        <Pagination defaultCurrent={1} defaultPageSize={6} total={50} showQuickJumper={true} onChange={handleClick} />
+        <Pagination defaultCurrent={1} defaultPageSize={6} total={50} onChange={handleClick} />
       </div>
     </>
   );
