@@ -4,10 +4,11 @@ import BeerTile from './BeerTile';
 
 const BeerList = (props) => {
   const { beers } = props;
+  const [descriptionON, setDesc] = useState(undefined);
 
   return beers.map((beer) => (
     <div key={beer.id}>
-      <BeerTile beer={beer} />
+      <BeerTile id={beer.id} beer={beer} descriptionON={descriptionON} setDesc={setDesc} />
     </div>
   ));
 };

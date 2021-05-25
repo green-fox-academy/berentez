@@ -26,7 +26,7 @@ const Main = () => {
         {beers && <BeerList beers={beers} />}
       </div>
       <div className="pagination">
-        <Pagination defaultCurrent={1} defaultPageSize={6} total={50} onChange={handleClick} />
+        <Pagination defaultCurrent={1} defaultPageSize={10} total={200} onChange={handleClick} />
       </div>
     </>
   );

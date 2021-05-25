@@ -4,18 +4,20 @@ import Description from './Description';
 import Image from './Image';
 
 const BeerTile = (props) => {
-  const { beer } = props;
-
-  let [descriptionON, setDesc] = useState(false);
+  const { beer, descriptionON, setDesc, id } = props;
 
   const toggleClick = () => {
-    descriptionON ? setDesc(false) : setDesc(true);
+    setDesc(id);
+  };
+
+  const handleClick = () => {
+    setDesc(undefined);
   };
 
   return (
-    <div key={beer.id}>
-      {descriptionON ? (
-        <Description description={beer.description} onClick={() => toggleClick()} />
+    <div key={id}>
+      {descriptionON === id ? (
+        <Description description={beer.description} onClick={() => handleClick()} />
       ) : (
         <Image image_url={beer.image_url} name={beer.name} onClick={() => toggleClick()} />
       )}
