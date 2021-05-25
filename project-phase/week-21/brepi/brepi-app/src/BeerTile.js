@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import Description from './Description';
 import Image from './Image';
 
