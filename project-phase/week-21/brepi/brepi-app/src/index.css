@@ -23,12 +23,14 @@ code {
   margin: 0 auto;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   background-color: rgb(77, 74, 74);
+  display: flex;
+  flex-direction: column;
 }
 
 nav {
   display: flex;
   justify-content: space-around;
-  border-bottom: 5px rgb(53, 53, 35) solid;
+  border-bottom: 2rem rgb(125, 234, 202) solid;
   background-color: white;
 }
 
@@ -42,10 +44,8 @@ nav > img {
   height: 150px;
 }
 .content {
-  width: 50%;
-  height: 50%;
   margin: 0 auto;
-  margin-top: 8%;
+  margin-top: 3%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -78,6 +78,10 @@ nav > img {
   height: 80%;
 }
 
+.beerTile img:hover {
+  transform: rotateY(-180deg);
+}
+
 .beerTile h5 {
   margin: 0 auto;
   margin-bottom: 4%;
@@ -99,7 +103,7 @@ nav > img {
 }
 
 p.descript {
-  font-size: 1rem;
+  font-size: inherit;
   font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
 }
 
@@ -118,5 +122,5 @@ a {
 }
 
 .pagination {
-  margin: 20px;
+  margin-top: 2%;
 }
