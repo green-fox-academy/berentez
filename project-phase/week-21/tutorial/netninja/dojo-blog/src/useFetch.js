@@ -1,13 +1,17 @@
 import { useState, useEffect } from 'react';
 
-const UseFetch = (url) => {
+//This is a custom hook
+
+const useFetch = (url) => {
   const [data, setData] = useState(null);
   const [isPending, setIsPending] = useState(true);
   const [error, setError] = useState(null);
 
   //runs at every render
   useEffect(() => {
-    fetch(url)
+    const abortCont = new AbortController();
+
+    fetch(url, { signal: abortCont.signal })
       .then((res) => {
         if (!res.ok) {
           throw Error('could not fetch the data for that resource');
@@ -20,9 +24,15 @@ const UseFetch = (url) => {
         setError(null);
       })
       .catch((err) => {
-        setIsPending(false);
-        setError(err.message);
+        if (err.name === 'AbortError') {
+          console.log('fetch abotred');
+        } else {
+          setIsPending(false);
+          setError(err.message);
+        }
       });
+
+    return () => abortCont.abort();
   }, [url]);
 
   return {
@@ -32,4 +42,4 @@ const UseFetch = (url) => {
   };
 };
 
-export default UseFetch;
+export default useFetch;
